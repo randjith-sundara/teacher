@@ -113,3 +113,32 @@ def get_user_stats(course_id: Optional[str] = None) -> Dict[str, Any]:
             "exercise_stats": ex_stat,
             "recent_exams": exams
         }
+
+def get_course_exercise_progress(course_id: str) -> Dict[str, Any]:
+    """Récupère l'état d'avancement de tous les exercices résolus pour un cours donné."""
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT 
+                module_id,
+                exercise_id,
+                user_answer,
+                is_correct,
+                created_at
+            FROM exercise_history
+            WHERE course_id = ? AND is_correct = 1
+            ORDER BY id ASC
+        """, (course_id,))
+        rows = cursor.fetchall()
+        
+        progress = {}
+        for r in rows:
+            progress[r["exercise_id"]] = {
+                "module_id": r["module_id"],
+                "exercise_id": r["exercise_id"],
+                "is_correct": True,
+                "user_answer": r["user_answer"],
+                "completed_at": r["created_at"]
+            }
+        return progress
+

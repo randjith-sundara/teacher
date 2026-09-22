@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MathView from './MathView';
 import {
   Check,
@@ -14,6 +14,8 @@ export default function ExerciseTab({
   courseId,
   moduleId,
   exercises = [],
+  courseProgress = {},
+  onExerciseCompleted,
   onOpenTutorWithContext,
   onOpenScratchpad
 }) {
@@ -25,6 +27,26 @@ export default function ExerciseTab({
   const [revealedSolutions, setRevealedSolutions] = useState({});
   const inputRef = useRef(null);
 
+  // Réinitialiser l'index à 0 lors du changement de chapitre
+  useEffect(() => {
+    setActiveExIndex(0);
+  }, [moduleId]);
+
+  // Pré-remplir automatiquement les réponses depuis le cache / BDD si l'utilisateur ne l'a pas déjà fait
+  useEffect(() => {
+    setAnswers((prev) => {
+      let changed = false;
+      const next = { ...prev };
+      exercises.forEach((ex) => {
+        if (next[ex.id] === undefined && courseProgress[ex.id]?.user_answer !== undefined) {
+          next[ex.id] = courseProgress[ex.id].user_answer;
+          changed = true;
+        }
+      });
+      return changed ? next : prev;
+    });
+  }, [exercises, courseProgress]);
+
   if (!exercises || exercises.length === 0) {
     return (
       <div className="text-center py-12 text-slate-500 bg-white rounded-2xl border border-slate-200 shadow-xs">
@@ -35,10 +57,17 @@ export default function ExerciseTab({
 
   const currentEx = exercises[activeExIndex];
   const exId = currentEx.id;
-  const currentAnswer = answers[exId] || '';
+  const currentAnswer = answers[exId] !== undefined ? answers[exId] : '';
   const currentVerif = verifications[exId];
   const hintsRevealedCount = revealedHints[exId] || 0;
   const isSolutionRevealed = !!revealedSolutions[exId];
+
+  // Vérification effective : soit la vérification en cours, soit l'état validé en base/cache
+  const effectiveVerif =
+    currentVerif ||
+    (courseProgress[exId]?.is_correct
+      ? { correct: true, message: 'Exercice validé avec succès.' }
+      : null);
 
   const handleVerify = async () => {
     if (!currentAnswer.trim() || loadingVerify) return;
@@ -62,6 +91,11 @@ export default function ExerciseTab({
         ...prev,
         [exId]: data,
       }));
+
+      // Si l'exercice est réussi, sauvegarder dans la base et le cache
+      if (data.correct && onExerciseCompleted) {
+        onExerciseCompleted(exId, currentAnswer);
+      }
     } catch (err) {
       setVerifications((prev) => ({
         ...prev,
@@ -126,7 +160,7 @@ export default function ExerciseTab({
       <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
         {exercises.map((ex, idx) => {
           const v = verifications[ex.id];
-          const isDone = v && v.correct;
+          const isDone = (v && v.correct) || (courseProgress[ex.id]?.is_correct);
           const isFailed = v && !v.correct;
           return (
             <button
@@ -135,11 +169,19 @@ export default function ExerciseTab({
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 activeExIndex === idx
                   ? 'bg-slate-900 text-white shadow-xs'
+                  : isDone
+                  ? 'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100/70'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
               }`}
             >
               <span>Exercice {idx + 1}</span>
-              {isDone && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+              {isDone && (
+                <Check
+                  className={`w-3.5 h-3.5 ${
+                    activeExIndex === idx ? 'text-emerald-400' : 'text-emerald-600'
+                  }`}
+                />
+              )}
               {isFailed && <X className="w-3.5 h-3.5 text-rose-400" />}
             </button>
           );
@@ -231,26 +273,26 @@ export default function ExerciseTab({
           </div>
         </div>
 
-        {/* Résultat SymPy */}
-        {currentVerif && (
+        {/* Résultat SymPy ou état validé */}
+        {effectiveVerif && (
           <div
             className={`p-4 rounded-xl border flex items-start gap-3 transition-all ${
-              currentVerif.correct
+              effectiveVerif.correct
                 ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
                 : 'bg-rose-50 border-rose-300 text-rose-950'
             }`}
           >
-            {currentVerif.correct ? (
+            {effectiveVerif.correct ? (
               <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
             ) : (
               <X className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
             )}
             <div className="text-sm">
               <span className="font-bold block">
-                {currentVerif.correct ? 'Bravo ! Réponse exacte.' : 'Ce n\'est pas tout à fait ça.'}
+                {effectiveVerif.correct ? 'Bravo ! Réponse exacte.' : 'Ce n\'est pas tout à fait ça.'}
               </span>
               <span className="text-xs text-slate-700">
-                {currentVerif.details || currentVerif.message}
+                {effectiveVerif.details || effectiveVerif.message}
               </span>
             </div>
           </div>

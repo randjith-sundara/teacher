@@ -13,6 +13,7 @@ from backend.database import (
     record_exercise_attempt,
     record_exam_result,
     get_user_stats,
+    get_course_exercise_progress,
 )
 from backend.curriculum import (
     get_all_courses,
@@ -85,6 +86,10 @@ def get_module_details(course_id: str, module_id: str):
     if not module:
         raise HTTPException(status_code=404, detail="Module introuvable")
     return module
+
+@app.get("/api/courses/{course_id}/progress")
+def get_course_progress(course_id: str):
+    return get_course_exercise_progress(course_id)
 
 @app.post("/api/verify")
 def verify_answer(req: VerifyRequest):
@@ -219,6 +224,13 @@ def get_stats(course_id: Optional[str] = None):
 def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
+        {
+            "version": "1.7.0",
+            "date": "2026-09-22",
+            "title": "Persistance Hybride (BDD SQLite & Cache Local) des Exercices",
+            "tag": "Persistance & Données",
+            "description": "Sauvegarde et synchronisation continue de l'avancement : conservation immédiate dans le cache du navigateur (localStorage) et rechargement automatique depuis la base SQLite (/api/courses/{course_id}/progress). Maintien des coches vertes (✓), des réponses exactes et de l'état des exercices lors des rafraîchissements de page et de la navigation entre cours."
+        },
         {
             "version": "1.6.0",
             "date": "2026-09-22",
