@@ -31,7 +31,11 @@ jobs:
             cd /var/www/teacher
 
             if [ ! -d ".git" ]; then
-              git clone git@github.com:randjith-sundara/teacher.git .
+              git init
+              git remote add origin git@github.com:randjith-sundara/teacher.git || git remote set-url origin git@github.com:randjith-sundara/teacher.git
+              git fetch origin main
+              git reset --hard origin/main
+              git branch -M main
             else
               git fetch origin main
               git reset --hard origin/main
