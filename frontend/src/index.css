@@ -3,6 +3,7 @@
 
 :root {
   color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
   color: #1e293b;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Custom scrollbar */
@@ -33,4 +35,26 @@ body {
 .katex {
   font-size: 1.05em;
   color: #0f172a;
+}
+
+/* Ergonomie iPad & Tactile */
+input[type="text"] {
+  font-size: 16px; /* Empêche le zoom automatique forcé de Safari iOS */
+}
+
+input[type="range"] {
+  touch-action: pan-x;
+  height: 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  touch-action: manipulation;
 }

@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.3.0",
+            "date": "2026-09-22",
+            "title": "Optimisation Ergonomique iPad, Apple Pencil & Mode PWA",
+            "tag": "Expérience Tactile & iPad",
+            "description": "Adaptation complète pour tablettes iPad et stylet : zones de frappe tactiles élargies (cibles 40px+ avec zone active 44px min), boutons de raccourcis mathématiques surélevés avec feedback tactile instantané, neutralisation du zoom automatique iOS Safari sur les champs de saisie, et métadonnées PWA pour une utilisation plein écran fluide."
+        },
+        {
             "version": "1.2.0",
             "date": "2026-09-22",
             "title": "Refonte Complète : Thème Clair & Parcours Pas-à-Pas (Style Brilliant)",
