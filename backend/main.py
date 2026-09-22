@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.5.0",
+            "date": "2026-09-22",
+            "title": "Programme Universitaire Intégral : 100 Exercices & Théorie Approfondie",
+            "tag": "Contenu & Pédagogie Universitaire",
+            "description": "Refonte pédagogique majeure pour la préparation aux prérequis universitaires : passage de 26 à 100 exercices interactifs progressifs avec indices graduels et solutions formelles vérifiées par SymPy. Théorie exhaustive et méthodes pas-à-pas sur les 16 modules des 4 cours : FOND-0100 (fondations algébriques complètes), MAT-0130 (algèbre vectorielle, plans 3D, déterminants et systèmes de Gauss), MAT-0150 (limites, dérivées formelles, règle de chaîne, dérivation implicite et optimisation) et MAT-0250 (primitives avec conditions initiales, intégrales définies, substitution, par parties avec règle LIATE et lois de probabilités)."
+        },
+        {
             "version": "1.4.0",
             "date": "2026-09-22",
             "title": "Laboratoire Parabole & Refonte Pédagogique FOND-0100 (Cours 2, 3, 4)",

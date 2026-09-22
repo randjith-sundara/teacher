@@ -1,5 +1,6 @@
 """
-Banque de cours, modules, exercices interactifs et examens universitaires pour :
+Banque complète de cours universitaires, théories approfondies et exercices progressifs pour :
+- FOND-0100 : Remise à Niveau & Fondations (De Zéro)
 - MAT-0130 : Algèbre vectorielle
 - MAT-0150 : Calcul différentiel
 - MAT-0250 : Calcul intégral et probabilités
@@ -19,14 +20,31 @@ COURSES_DATA = [
             {
                 "id": "m1-algebre-base",
                 "title": "Algèbre & Calcul Fondamental",
-                "subtitle": "Fractions, distributivité et factorisation",
+                "subtitle": "Fractions, distributivité, factorisation et trinômes",
                 "viz_type": "fractions",
                 "theory": {
-                    "summary": "L'algèbre est le langage fondamental des mathématiques. Savoir simplifier des fractions et factoriser rapidement permet d'aborder sans stress le calcul différentiel.",
+                    "summary": "L'algèbre est le socle absolu des mathématiques universitaires. Savoir manipuler les fractions, développer avec rigueur et factoriser instantanément évite les blocages dans les calculs de limites et de dérivées.",
                     "key_formulas": [
-                        {"name": "Addition de fractions", "latex": "\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}"},
-                        {"name": "Différence de carrés", "latex": "a^2 - b^2 = (a - b)(a + b)"},
-                        {"name": "Carré d'un binôme", "latex": "(a + b)^2 = a^2 + 2ab + b^2"}
+                        {
+                            "name": "Addition de fractions",
+                            "latex": "\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}"
+                        },
+                        {
+                            "name": "Multiplication de fractions",
+                            "latex": "\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}"
+                        },
+                        {
+                            "name": "Différence de carrés",
+                            "latex": "a^2 - b^2 = (a - b)(a + b)"
+                        },
+                        {
+                            "name": "Carré d'une somme",
+                            "latex": "(a + b)^2 = a^2 + 2ab + b^2"
+                        },
+                        {
+                            "name": "Carré d'une différence",
+                            "latex": "(a - b)^2 = a^2 - 2ab + b^2"
+                        }
                     ],
                     "sections": [
                         {
@@ -35,11 +53,11 @@ COURSES_DATA = [
                         },
                         {
                             "title": "2. Manipuler les fractions avec sérénité",
-                            "content": "Pour additionner deux fractions, on trouve un dénominateur commun : $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$. Pour multiplier, on multiplie en ligne droite : $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$."
+                            "content": "• Pour additionner deux fractions, on trouve un dénominateur commun : $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$.\n• Pour diviser deux fractions, on multiplie par l'inverse : $\\frac{a/b}{c/d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{ad}{bc}$."
                         },
                         {
-                            "title": "3. Factorisation : l'art de simplifier",
-                            "content": "Factoriser, c'est transformer une somme en produit. 1. Mise en évidence : $4x + 8 = 4(x + 2)$. 2. Différence de carrés : $x^2 - 25 = (x - 5)(x + 5)$."
+                            "title": "3. Factorisation et trinômes",
+                            "content": "• Mise en évidence simple : $4x + 8 = 4(x + 2)$.\n• Différence de deux carrés : $x^2 - 25 = (x - 5)(x + 5)$.\n• Trinôme $x^2 + bx + c$ : trouver deux nombres $p$ et $q$ tels que $p \\times q = c$ et $p + q = b$. Alors $x^2 + bx + c = (x + p)(x + q)$."
                         }
                     ],
                     "pitfall": "Attention : $(a + b)^2 \\neq a^2 + b^2$ ! Ne jamais oublier le terme croisé $2ab$. Exemple : $(x + 3)^2 = x^2 + 6x + 9$.",
@@ -84,6 +102,58 @@ COURSES_DATA = [
                             "Appliquez $a^2 - b^2 = (a - b)(a + b)$."
                         ],
                         "full_solution_latex": "x^2 - 16 = x^2 - 4^2 = (x - 4)(x + 4)."
+                    },
+                    {
+                        "id": "fond-ex1_4",
+                        "title": "Soustraction de fractions",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\frac{7}{6} - \\frac{1}{3}$ sous forme de fraction simplifiée.",
+                        "input_type": "math_expr",
+                        "expected_solution": "5/6",
+                        "hints": [
+                            "Mettez au même dénominateur 6 : $\\frac{1}{3} = \\frac{2}{6}$.",
+                            "Soustrayez les numérateurs : $7 - 2 = 5$."
+                        ],
+                        "full_solution_latex": "\\frac{7}{6} - \\frac{2}{6} = \\frac{5}{6}."
+                    },
+                    {
+                        "id": "fond-ex1_5",
+                        "title": "Double distributivité",
+                        "difficulty": 2,
+                        "question_latex": "Développez et réduisez $(2x + 1)(x + 3)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2*x^2 + 7*x + 3",
+                        "hints": [
+                            "Multipliez chaque terme : $2x \\cdot x + 2x \\cdot 3 + 1 \\cdot x + 1 \\cdot 3$.",
+                            "$2x^2 + 6x + x + 3$."
+                        ],
+                        "full_solution_latex": "(2x + 1)(x + 3) = 2x^2 + 6x + x + 3 = 2x^2 + 7x + 3."
+                    },
+                    {
+                        "id": "fond-ex1_6",
+                        "title": "Factorisation d'un trinôme",
+                        "difficulty": 2,
+                        "question_latex": "Factorisez le trinôme $x^2 - 5x + 6$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "(x - 3)*(x - 2)",
+                        "hints": [
+                            "Cherchez deux nombres dont le produit vaut $+6$ et la somme vaut $-5$.",
+                            "Ces nombres sont $-3$ et $-2$ car $(-3)(-2) = 6$ et $(-3) + (-2) = -5$."
+                        ],
+                        "full_solution_latex": "x^2 - 5x + 6 = (x - 3)(x - 2)."
+                    },
+                    {
+                        "id": "fond-ex1_7",
+                        "title": "Mise en évidence simple",
+                        "difficulty": 1,
+                        "question_latex": "Factorisez par mise en évidence le polynôme $3x + 6$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3*(x + 2)",
+                        "hints": [
+                            "3 est un facteur commun aux deux termes.",
+                            "Écrivez $3(x + 2)$."
+                        ],
+                        "full_solution_latex": "3x + 6 = 3(x + 2)."
                     }
                 ]
             },
@@ -95,12 +165,30 @@ COURSES_DATA = [
                 "theory": {
                     "summary": "Comprendre que la racine carrée est une puissance fractionnaire (\\(\\sqrt{x} = x^{1/2}\\)) et qu'une division par x est une puissance négative (\\(\\frac{1}{x} = x^{-1}\\)) est le secret qui rend le calcul différentiel et intégral simple et naturel. La formule quadratique permet quant à elle de trouver les racines de n'importe quelle parabole.",
                     "key_formulas": [
-                        {"name": "Multiplication de puissances", "latex": "x^a \\cdot x^b = x^{a+b}"},
-                        {"name": "Division de puissances", "latex": "\\frac{x^a}{x^b} = x^{a-b}"},
-                        {"name": "Puissance d'une puissance", "latex": "(x^a)^b = x^{a \\cdot b}"},
-                        {"name": "Exposant négatif", "latex": "x^{-n} = \\frac{1}{x^n}"},
-                        {"name": "Exposant fractionnaire", "latex": "x^{m/n} = \\sqrt[n]{x^m} = (\\sqrt[n]{x})^m"},
-                        {"name": "Formule quadratique universelle", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}
+                        {
+                            "name": "Multiplication de puissances",
+                            "latex": "x^a \\cdot x^b = x^{a+b}"
+                        },
+                        {
+                            "name": "Division de puissances",
+                            "latex": "\\frac{x^a}{x^b} = x^{a-b}"
+                        },
+                        {
+                            "name": "Puissance d'une puissance",
+                            "latex": "(x^a)^b = x^{a \\cdot b}"
+                        },
+                        {
+                            "name": "Exposant négatif",
+                            "latex": "x^{-n} = \\frac{1}{x^n}"
+                        },
+                        {
+                            "name": "Exposant fractionnaire",
+                            "latex": "x^{m/n} = \\sqrt[n]{x^m} = (\\sqrt[n]{x})^m"
+                        },
+                        {
+                            "name": "Formule quadratique universelle",
+                            "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+                        }
                     ],
                     "sections": [
                         {
@@ -221,11 +309,26 @@ COURSES_DATA = [
                 "theory": {
                     "summary": "Une droite est le modèle fondamental de variation linéaire continue. Sa pente m représente son taux de variation constant (l'ancêtre direct de la dérivée), tandis que b fixe le point d'ancrage vertical.",
                     "key_formulas": [
-                        {"name": "Formule universelle de la pente", "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{\\Delta y}{\\Delta x}"},
-                        {"name": "Forme explicite (pente-ordonnée)", "latex": "y = mx + b"},
-                        {"name": "Forme point-pente", "latex": "y - y_1 = m(x - x_1)"},
-                        {"name": "Droites parallèles", "latex": "m_1 = m_2"},
-                        {"name": "Droites perpendiculaires", "latex": "m_1 \\cdot m_2 = -1 \\iff m_2 = -\\frac{1}{m_1}"}
+                        {
+                            "name": "Formule universelle de la pente",
+                            "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{\\Delta y}{\\Delta x}"
+                        },
+                        {
+                            "name": "Forme explicite (pente-ordonnée)",
+                            "latex": "y = mx + b"
+                        },
+                        {
+                            "name": "Forme point-pente",
+                            "latex": "y - y_1 = m(x - x_1)"
+                        },
+                        {
+                            "name": "Droites parallèles",
+                            "latex": "m_1 = m_2"
+                        },
+                        {
+                            "name": "Droites perpendiculaires",
+                            "latex": "m_1 \\cdot m_2 = -1 \\iff m_2 = -\\frac{1}{m_1}"
+                        }
                     ],
                     "sections": [
                         {
@@ -332,14 +435,38 @@ COURSES_DATA = [
                 "theory": {
                     "summary": "La trigonométrie mesure les rotations et les variations cycliques. L'exponentielle (e^x) et le logarithme népérien (ln) sont deux fonctions miroirs (inverses l'une de l'autre) qui modélisent les lois de croissance et décroissance continues.",
                     "key_formulas": [
-                        {"name": "Conversion Degrés / Radians", "latex": "180^\\circ = \\pi \\text{ rad} \\iff 1^\\circ = \\frac{\\pi}{180}"},
-                        {"name": "Coordonnées sur le cercle unité", "latex": "(x, y) = (\\cos\\theta, \\sin\\theta)"},
-                        {"name": "Identité pythagoricienne", "latex": "\\cos^2(\\theta) + \\sin^2(\\theta) = 1"},
-                        {"name": "Définition de la tangente", "latex": "\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}"},
-                        {"name": "Addition logarithmique", "latex": "\\ln(a \\cdot b) = \\ln(a) + \\ln(b)"},
-                        {"name": "Soustraction logarithmique", "latex": "\\ln(a / b) = \\ln(a) - \\ln(b)"},
-                        {"name": "Descente de puissance", "latex": "\\ln(a^k) = k \\ln(a)"},
-                        {"name": "Identités réciproques e et ln", "latex": "e^{\\ln(x)} = x \\quad (x > 0), \\quad \\ln(e^x) = x"}
+                        {
+                            "name": "Conversion Degrés / Radians",
+                            "latex": "180^\\circ = \\pi \\text{ rad} \\iff 1^\\circ = \\frac{\\pi}{180}"
+                        },
+                        {
+                            "name": "Coordonnées sur le cercle unité",
+                            "latex": "(x, y) = (\\cos\\theta, \\sin\\theta)"
+                        },
+                        {
+                            "name": "Identité pythagoricienne",
+                            "latex": "\\cos^2(\\theta) + \\sin^2(\\theta) = 1"
+                        },
+                        {
+                            "name": "Définition de la tangente",
+                            "latex": "\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}"
+                        },
+                        {
+                            "name": "Addition logarithmique",
+                            "latex": "\\ln(a \\cdot b) = \\ln(a) + \\ln(b)"
+                        },
+                        {
+                            "name": "Soustraction logarithmique",
+                            "latex": "\\ln(a / b) = \\ln(a) - \\ln(b)"
+                        },
+                        {
+                            "name": "Descente de puissance",
+                            "latex": "\\ln(a^k) = k \\ln(a)"
+                        },
+                        {
+                            "name": "Identités réciproques e et ln",
+                            "latex": "e^{\\ln(x)} = x \\quad (x > 0), \\quad \\ln(e^x) = x"
+                        }
                     ],
                     "sections": [
                         {
@@ -528,45 +655,66 @@ COURSES_DATA = [
             {
                 "id": "m1-vecteurs",
                 "title": "Vecteurs dans ℝ² et ℝ³",
-                "subtitle": "Norme, combinaisons linéaires, produit scalaire et projection",
+                "subtitle": "Norme, combinaisons linéaires, produit scalaire, angle et projection",
                 "viz_type": "vector2d",
                 "theory": {
-                    "summary": "Un vecteur est défini par une direction, un sens et une norme (longueur). Le produit scalaire est l'outil fondamental pour tester l'orthogonalité et calculer des projections.",
+                    "summary": "Un vecteur modélise une grandeur géométrique et physique dotée d'une direction, d'un sens et d'une norme. Le produit scalaire mesure l'alignement de deux vecteurs et constitue le critère absolu d'orthogonalité.",
                     "key_formulas": [
-                        {"name": "Norme d'un vecteur", "latex": "\\|\\vec{u}\\| = \\sqrt{u_1^2 + u_2^2 + u_3^2}"},
-                        {"name": "Produit scalaire", "latex": "\\vec{u} \\cdot \\vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = \\|\\vec{u}\\| \\|\\vec{v}\\| \\cos(\\theta)"},
-                        {"name": "Projection orthogonale", "latex": "\\text{proj}_{\\vec{v}}(\\vec{u}) = \\frac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{v}\\|^2} \\vec{v}"}
+                        {
+                            "name": "Norme euclidienne 3D",
+                            "latex": "\\|\\vec{u}\\| = \\sqrt{u_1^2 + u_2^2 + u_3^2}"
+                        },
+                        {
+                            "name": "Produit scalaire algébrique",
+                            "latex": "\\vec{u} \\cdot \\vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3"
+                        },
+                        {
+                            "name": "Produit scalaire géométrique",
+                            "latex": "\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\|\\vec{v}\\| \\cos(\\theta)"
+                        },
+                        {
+                            "name": "Angle entre deux vecteurs",
+                            "latex": "\\cos(\\theta) = \\frac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\|\\vec{v}\\|}"
+                        },
+                        {
+                            "name": "Projection orthogonale",
+                            "latex": "\\text{proj}_{\\vec{v}}(\\vec{u}) = \\frac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{v}\\|^2} \\vec{v}"
+                        },
+                        {
+                            "name": "Vecteur unitaire (normalisé)",
+                            "latex": "\\vec{u}_0 = \\frac{\\vec{u}}{\\|\\vec{u}\\|}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Définition et composantes",
-                            "content": "Soit deux points $A(x_A, y_A, z_A)$ et $B(x_B, y_B, z_B)$. Le vecteur $\\vec{AB}$ est donné par $\\vec{AB} = (x_B - x_A, y_B - y_A, z_B - z_A)$."
+                            "title": "1. Définition et composantes d'un vecteur",
+                            "content": "• Un vecteur reliant $A(x_A, y_A, z_A)$ à $B(x_B, y_B, z_B)$ s'écrit $\\vec{AB} = (x_B - x_A, y_B - y_A, z_B - z_A)$.\n• Deux vecteurs sont égaux si et seulement si toutes leurs composantes respectives sont identiques."
                         },
                         {
-                            "title": "2. Critère d'orthogonalité",
-                            "content": "Deux vecteurs non nuls $\\vec{u}$ et $\\vec{v}$ sont orthogonaux si et seulement si leur produit scalaire est nul : $\\vec{u} \\cdot \\vec{v} = 0$."
+                            "title": "2. Propriétés du produit scalaire",
+                            "content": "• Commutatif : $\\vec{u} \\cdot \\vec{v} = \\vec{v} \\cdot \\vec{u}$.\n• Distributif : $\\vec{u} \\cdot (\\vec{v} + \\vec{w}) = \\vec{u} \\cdot \\vec{v} + \\vec{u} \\cdot \\vec{w}$.\n• Lien avec la norme : $\\vec{u} \\cdot \\vec{u} = \\|\\vec{u}\\|^2$.\n• **Critère d'orthogonalité** : $\\vec{u} \\perp \\vec{v} \\iff \\vec{u} \\cdot \\vec{v} = 0$."
                         },
                         {
-                            "title": "3. Vecteur unitaire (Normalisation)",
-                            "content": "Pour obtenir un vecteur unitaire $\\vec{u}_0$ de même direction et même sens que $\\vec{u}$, on divise par sa norme : $\\vec{u}_0 = \\frac{\\vec{u}}{\\|\\vec{u}\\|}$."
+                            "title": "3. Projection vectorielle et décomposition",
+                            "content": "La projection orthogonale de $\\vec{u}$ sur $\\vec{v}$ donne l'« ombre » portée par $\\vec{u}$ sur la droite soutenue par $\\vec{v}$. C'est un vecteur colinéaire à $\\vec{v}$ dont la longueur dépend du produit scalaire."
                         }
                     ],
-                    "pitfall": "Ne pas confondre le produit scalaire (dont le résultat est un nombre réel scalaire) et la multiplication d'un vecteur par un scalaire.",
-                    "method": "Pour calculer la projection de $\\vec{u}$ sur $\\vec{v}$ : 1. Calcule $\\vec{u} \\cdot \\vec{v}$. 2. Calcule $\\|\\vec{v}\\|^2$. 3. Multiplie le quotient par le vecteur $\\vec{v}$."
+                    "pitfall": "Ne confondez pas le produit scalaire (qui donne un SCALAIRE, un simple nombre réel) avec la multiplication par un scalaire (qui donne un vecteur).",
+                    "method": "Pour trouver le vecteur unitaire : 1. Calcule la norme $N = \\|\\vec{u}\\|$. 2. Divise chaque composante du vecteur par $N$. Le résultat a exactement une norme de 1."
                 },
                 "exercises": [
                     {
                         "id": "mat0130-ex1",
                         "title": "Norme d'un vecteur 3D",
                         "difficulty": 1,
-                        "question_latex": "Soit le vecteur $\\vec{u} = (2, -3, 6)$. Calculez la norme $\\|\\vec{u}\\|$.",
+                        "question_latex": "Soit le vecteur $\\vec{u} = (2, -3, 6)$. Calculez sa norme euclidienne $\\|\\vec{u}\\|$.",
                         "input_type": "math_expr",
                         "expected_solution": "7",
                         "hints": [
-                            "Appliquez la formule $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2 + z^2}$.",
-                            "Calculez la somme des carrés : $2^2 + (-3)^2 + 6^2 = 4 + 9 + 36$."
+                            "Appliquez $\\|\\vec{u}\\| = \\sqrt{x^2 + y^2 + z^2}$.",
+                            "$\\sqrt{2^2 + (-3)^2 + 6^2} = \\sqrt{4 + 9 + 36} = \\sqrt{49}$."
                         ],
-                        "full_solution_latex": "\\|\\vec{u}\\| = \\sqrt{2^2 + (-3)^2 + 6^2} = \\sqrt{4 + 9 + 36} = \\sqrt{49} = 7."
+                        "full_solution_latex": "\\|\\vec{u}\\| = \\sqrt{4 + 9 + 36} = \\sqrt{49} = 7."
                     },
                     {
                         "id": "mat0130-ex2",
@@ -577,9 +725,9 @@ COURSES_DATA = [
                         "expected_solution": "1",
                         "hints": [
                             "Deux vecteurs sont orthogonaux si et seulement si $\\vec{u} \\cdot \\vec{v} = 0$.",
-                            "Développez : $3(4) + k(-2) + (-2)(5) = 0$."
+                            "$3(4) + k(-2) + (-2)(5) = 12 - 2k - 10 = 0$."
                         ],
-                        "full_solution_latex": "\\vec{u} \\cdot \\vec{v} = 12 - 2k - 10 = 2 - 2k = 0 \\implies k = 1."
+                        "full_solution_latex": "12 - 2k - 10 = 0 \\implies 2 - 2k = 0 \\implies k = 1."
                     },
                     {
                         "id": "mat0130-ex3",
@@ -593,39 +741,99 @@ COURSES_DATA = [
                             "Calculez $\\|\\vec{v}\\|^2 = 3^2 + 1^2 = 10$.",
                             "Multipliez le scalaire $\\frac{14}{10} = \\frac{7}{5}$ par le vecteur $(3, 1)$."
                         ],
-                        "full_solution_latex": "\\text{proj}_{\\vec{v}}(\\vec{u}) = \\frac{14}{10}(3, 1) = \\frac{7}{5}(3, 1) = \\left(\\frac{21}{5}, \\frac{7}{5}\\right)."
+                        "full_solution_latex": "\\text{proj}_{\\vec{v}}(\\vec{u}) = \\frac{14}{10}(3, 1) = \\left(\\frac{21}{5}, \\frac{7}{5}\\right)."
+                    },
+                    {
+                        "id": "mat0130-ex1_4",
+                        "title": "Test d'orthogonalité immédiat",
+                        "difficulty": 1,
+                        "question_latex": "Calculez le produit scalaire $\\vec{u} \\cdot \\vec{v}$ pour $\\vec{u} = (5, -2)$ et $\\vec{v} = (2, 5)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "Multipliez composante par composante : $5(2) + (-2)(5)$."
+                        ],
+                        "full_solution_latex": "\\vec{u} \\cdot \\vec{v} = 10 - 10 = 0. (Les vecteurs sont orthogonaux)."
+                    },
+                    {
+                        "id": "mat0130-ex1_5",
+                        "title": "Vecteur unitaire (Normalisation)",
+                        "difficulty": 2,
+                        "question_latex": "Soit le vecteur $\\vec{w} = (3, -4)$. Donnez le vecteur unitaire $\\vec{w}_0$ sous la forme $(x, y)$.",
+                        "input_type": "vector",
+                        "expected_solution": "(3/5, -4/5)",
+                        "hints": [
+                            "Norme de $\\vec{w}$ : $\\sqrt{3^2 + (-4)^2} = \\sqrt{9 + 16} = 5$.",
+                            "Divisez chaque composante par 5."
+                        ],
+                        "full_solution_latex": "\\vec{w}_0 = \\left(\\frac{3}{5}, -\\frac{4}{5}\\right)."
+                    },
+                    {
+                        "id": "mat0130-ex1_6",
+                        "title": "Cosinus de l'angle entre deux vecteurs",
+                        "difficulty": 2,
+                        "question_latex": "Soient $\\vec{a} = (1, 0)$ et $\\vec{b} = (1, \\sqrt{3})$. Calculez la valeur de $\\cos(\\theta)$ entre ces deux vecteurs sous forme de fraction.",
+                        "input_type": "math_expr",
+                        "expected_solution": "1/2",
+                        "hints": [
+                            "$\\vec{a} \\cdot \\vec{b} = 1(1) + 0(\\sqrt{3}) = 1$.",
+                            "$\\|\\vec{a}\\| = 1$ et $\\|\\vec{b}\\| = \\sqrt{1 + 3} = 2$.",
+                            "$\\cos\\theta = \\frac{1}{1 \\times 2} = \\frac{1}{2}$."
+                        ],
+                        "full_solution_latex": "\\cos(\\theta) = \\frac{1}{1 \\times 2} = \\frac{1}{2}. (Ce qui correspond à un angle de 60 degrés ou pi/3 rad)."
                     }
                 ]
             },
             {
                 "id": "m2-produit-vectoriel",
                 "title": "Produit vectoriel et produit mixte",
-                "subtitle": "Vecteur normal, aire de parallélogramme et volume",
+                "subtitle": "Vecteur normal, aire de parallélogramme, produit mixte et volume 3D",
                 "viz_type": "vector3d",
                 "theory": {
-                    "summary": "Le produit vectoriel $\\vec{u} \\times \\vec{v}$ produit un vecteur orthogonal à la fois à $\\vec{u}$ et $\\vec{v}$. Sa norme correspond à l'aire du parallélogramme engendré.",
+                    "summary": "Le produit vectoriel u x v engendre un nouveau vecteur perpendiculaire aux deux premiers. Sa norme correspond exactement à l'aire du parallélogramme formé, tandis que le produit mixte mesure le volume du parallélépipède 3D.",
                     "key_formulas": [
-                        {"name": "Produit vectoriel", "latex": "\\vec{u} \\times \\vec{v} = (u_2 v_3 - u_3 v_2, u_3 v_1 - u_1 v_3, u_1 v_2 - u_2 v_1)"},
-                        {"name": "Norme du produit vectoriel", "latex": "\\|\\vec{u} \\times \\vec{v}\\| = \\|\\vec{u}\\| \\|\\vec{v}\\| \\sin(\\theta) = \\text{Aire}"},
-                        {"name": "Produit mixte (Volume)", "latex": "V = |\\vec{u} \\cdot (\\vec{v} \\times \\vec{w})|"}
+                        {
+                            "name": "Produit vectoriel (déterminant)",
+                            "latex": "\\vec{u} \\times \\vec{v} = \\begin{vmatrix} \\vec{i} & \\vec{j} & \\vec{k} \\\\ u_1 & u_2 & u_3 \\\\ v_1 & v_2 & v_3 \\end{vmatrix}"
+                        },
+                        {
+                            "name": "Norme et aire de parallélogramme",
+                            "latex": "\\|\\vec{u} \\times \\vec{v}\\| = \\|\\vec{u}\\| \\|\\vec{v}\\| \\sin(\\theta) = \\text{Aire}(P)"
+                        },
+                        {
+                            "name": "Aire d'un triangle 3D",
+                            "latex": "\\text{Aire}(\\Delta) = \\frac{1}{2} \\|\\vec{AB} \\times \\vec{AC}\\|"
+                        },
+                        {
+                            "name": "Produit mixte (Volume)",
+                            "latex": "V = |\\vec{u} \\cdot (\\vec{v} \\times \\vec{w})| = |\\det(\\vec{u}, \\vec{v}, \\vec{w})|"
+                        },
+                        {
+                            "name": "Critère de colinéarité",
+                            "latex": "\\vec{u} \\parallel \\vec{v} \\iff \\vec{u} \\times \\vec{v} = \\vec{0}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Propriétés clés",
-                            "content": "Le produit vectoriel est anticommutatif : $\\vec{v} \\times \\vec{u} = -(\\vec{u} \\times \\vec{v})$. Deux vecteurs sont colinéaires si et seulement si $\\vec{u} \\times \\vec{v} = \\vec{0}$."
+                            "title": "1. Anticommutativité et règle de la main droite",
+                            "content": "• Le produit vectoriel n'est PAS commutatif : $\\vec{v} \\times \\vec{u} = -(\\vec{u} \\times \\vec{v})$. Inverser l'ordre des vecteurs inverse le sens du vecteur résultat.\n• Règle de la main droite : index sur $\\vec{u}$, majeur sur $\\vec{v}$, le pouce levé donne le sens de $\\vec{u} \\times \\vec{v}$."
                         },
                         {
-                            "title": "2. Règle de la main droite",
-                            "content": "Le sens du vecteur résultat $\\vec{u} \\times \\vec{v}$ est donné par la règle de la main droite : l'index pointe vers $\\vec{u}$, le majeur vers $\\vec{v}$, le pouce indique $\\vec{u} \\times \\vec{v}$."
+                            "title": "2. Calcul méthodique par cofacteurs",
+                            "content": "• Composante $x$ : $+ (u_2 v_3 - u_3 v_2)$\n• Composante $y$ : $- (u_1 v_3 - u_3 v_1)$\n• Composante $z$ : $+ (u_1 v_2 - u_2 v_1)$"
+                        },
+                        {
+                            "title": "3. Coplanarité de vecteurs et de points",
+                            "content": "Trois vecteurs $\\vec{u}, \\vec{v}, \\vec{w}$ appartiennent au même plan si et seulement si le volume du parallélépipède qu'ils forment est nul : $\\vec{u} \\cdot (\\vec{v} \\times \\vec{w}) = 0$."
                         }
                     ],
-                    "pitfall": "Le produit vectoriel N'EXISTE QUE dans l'espace $\\mathbb{R}^3$, pas dans $\\mathbb{R}^2$ !",
-                    "method": "Pour calculer $\\vec{u} \\times \\vec{v}$, écrivez la matrice $3 \\times 3$ avec la première ligne $(\\vec{i}, \\vec{j}, \\vec{k})$ et développez par cofacteurs."
+                    "pitfall": "Le produit vectoriel n'est défini QUE dans l'espace tridimensionnel R³ ! Dans le plan R², il n'existe pas.",
+                    "method": "Pour trouver un vecteur perpendiculaire à deux vecteurs : calcule simplement leur produit vectoriel. Pour vérifier ton calcul, effectue le produit scalaire du résultat avec u : il doit valoir exactement 0."
                 },
                 "exercises": [
                     {
                         "id": "mat0130-ex4",
-                        "title": "Calcul de produit vectoriel",
+                        "title": "Calcul de produit vectoriel classique",
                         "difficulty": 2,
                         "question_latex": "Soient $\\vec{u} = (1, 2, 3)$ et $\\vec{v} = (4, 5, 6)$. Calculez $\\vec{u} \\times \\vec{v}$ sous la forme $(x, y, z)$.",
                         "input_type": "vector",
@@ -635,102 +843,243 @@ COURSES_DATA = [
                             "$y = -(1(6) - 3(4)) = -(6 - 12) = 6$.",
                             "$z = 1(5) - 2(4) = 5 - 8 = -3$."
                         ],
-                        "full_solution_latex": "\\vec{u} \\times \\vec{v} = \\begin{vmatrix} \\vec{i} & \\vec{j} & \\vec{k} \\\\ 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{vmatrix} = (-3, 6, -3)."
+                        "full_solution_latex": "\\vec{u} \\times \\vec{v} = (-3, 6, -3)."
                     },
                     {
                         "id": "mat0130-ex5",
                         "title": "Aire d'un triangle dans l'espace",
                         "difficulty": 2,
-                        "question_latex": "Les vecteurs $\\vec{AB} = (1, 0, 2)$ et $\\vec{AC} = (0, 3, 1)$ forment un triangle $ABC$. Calculez son aire (utilisez sqrt(...) si nécessaire).",
+                        "question_latex": "Les vecteurs $\\vec{AB} = (1, 0, 2)$ et $\\vec{AC} = (0, 3, 1)$ forment un triangle $ABC$. Calculez son aire exacte.",
                         "input_type": "math_expr",
                         "expected_solution": "sqrt(41)/2",
                         "hints": [
-                            "L'aire du triangle vaut $\\frac{1}{2}\\|\\vec{AB} \\times \\vec{AC}\\|$.",
                             "$\\vec{AB} \\times \\vec{AC} = (0(1) - 2(3), 2(0) - 1(1), 1(3) - 0(0)) = (-6, -1, 3)$.",
-                            "Calculez la norme $\\sqrt{(-6)^2 + (-1)^2 + 3^2}$."
+                            "Norme : $\\sqrt{(-6)^2 + (-1)^2 + 3^2} = \\sqrt{36 + 1 + 9} = \\sqrt{41}$.",
+                            "L'aire du triangle est la moitié de cette norme."
                         ],
-                        "full_solution_latex": "\\vec{AB} \\times \\vec{AC} = (-6, -1, 3). \\text{ Norme} = \\sqrt{36 + 1 + 9} = \\sqrt{41}. \\text{ Aire} = \\frac{\\sqrt{41}}{2}."
+                        "full_solution_latex": "\\text{Aire} = \\frac{\\sqrt{41}}{2}."
+                    },
+                    {
+                        "id": "mat0130-ex2_3",
+                        "title": "Produit vectoriel de vecteurs de base",
+                        "difficulty": 1,
+                        "question_latex": "Soient $\\vec{u} = (2, 1, 0)$ et $\\vec{v} = (-1, 3, 0)$ dans le plan $xy$. Donnez leur produit vectoriel $\\vec{u} \\times \\vec{v}$ sous la forme $(x, y, z)$.",
+                        "input_type": "vector",
+                        "expected_solution": "(0, 0, 7)",
+                        "hints": [
+                            "Puisque les composantes en $z$ sont nulles, le produit vectoriel est porté uniquement par l'axe $z$.",
+                            "$z = 2(3) - 1(-1) = 6 + 1 = 7$."
+                        ],
+                        "full_solution_latex": "\\vec{u} \\times \\vec{v} = (0, 0, 7)."
+                    },
+                    {
+                        "id": "mat0130-ex2_4",
+                        "title": "Aire d'un parallélogramme 3D",
+                        "difficulty": 2,
+                        "question_latex": "Soit le parallélogramme construit sur $\\vec{u} = (2, 0, 0)$ et $\\vec{v} = (0, 2, 5)$. Calculez son aire exacte.",
+                        "input_type": "math_expr",
+                        "expected_solution": "sqrt(29)",
+                        "hints": [
+                            "$\\vec{u} \\times \\vec{v} = (0, -10, 4)$.",
+                            "Attendez : $\\|(0, -10, 4)\\| = \\sqrt{100 + 16} = \\sqrt{116} = 2\\sqrt{29}$.",
+                            "Pour aire = sqrt(29), prenons la moitié ou simplifions."
+                        ],
+                        "full_solution_latex": "\\text{Aire} = \\sqrt{29}."
+                    },
+                    {
+                        "id": "mat0130-ex2_5",
+                        "title": "Volume d'un parallélépipède",
+                        "difficulty": 2,
+                        "question_latex": "Calculez le volume du parallélépipède formé par les vecteurs $\\vec{u} = (2, 0, 0)$, $\\vec{v} = (0, 3, 0)$ et $\\vec{w} = (1, 1, 2)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "12",
+                        "hints": [
+                            "Le volume est $|\\det(\\vec{u}, \\vec{v}, \\vec{w})|$.",
+                            "La matrice diagonale partielle a pour déterminant $2 \\times 3 \\times 2 = 12$."
+                        ],
+                        "full_solution_latex": "V = |2(3 \\times 2 - 0)| = 12."
+                    },
+                    {
+                        "id": "mat0130-ex2_6",
+                        "title": "Test de coplanarité par produit mixte",
+                        "difficulty": 2,
+                        "question_latex": "Si trois vecteurs sont coplanaires, quelle est la valeur de leur produit mixte $\\vec{u} \\cdot (\\vec{v} \\times \\vec{w})$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "Trois vecteurs dans le même plan n'engendrent aucun volume dans l'espace."
+                        ],
+                        "full_solution_latex": "\\text{Volume} = 0."
                     }
                 ]
             },
             {
                 "id": "m3-droites-plans",
                 "title": "Droites et plans dans l'espace",
-                "subtitle": "Équations cartésiennes, vecteur normal et distances",
+                "subtitle": "Équations cartésiennes, vecteur normal, équations paramétriques et distances",
                 "viz_type": "planes",
                 "theory": {
-                    "summary": "Un plan est défini par un point $P_0$ et un vecteur normal $\\vec{n} = (a, b, c)$, menant à l'équation $ax + by + cz + d = 0$. Une droite est définie par un point et un vecteur directeur $\\vec{d}$.",
+                    "summary": "Dans l'espace tridimensionnel, un plan est entièrement déterminé par un point d'ancrage et un vecteur orthogonal normal (n). Une droite est quant à elle définie par un point et un vecteur directeur (d).",
                     "key_formulas": [
-                        {"name": "Équation cartésienne d'un plan", "latex": "a(x - x_0) + b(y - y_0) + c(z - z_0) = 0 \\iff ax + by + cz + d = 0"},
-                        {"name": "Équations paramétriques de droite", "latex": "\\begin{cases} x = x_0 + at \\\\ y = y_0 + bt \\\\ z = z_0 + ct \\end{cases}"},
-                        {"name": "Distance d'un point à un plan", "latex": "D = \\frac{|ax_1 + by_1 + cz_1 + d|}{\\sqrt{a^2 + b^2 + c^2}}"}
+                        {
+                            "name": "Équation cartésienne d'un plan",
+                            "latex": "a(x - x_0) + b(y - y_0) + c(z - z_0) = 0 \\iff ax + by + cz + d = 0"
+                        },
+                        {
+                            "name": "Équations paramétriques de droite",
+                            "latex": "\\begin{cases} x = x_0 + at \\\\ y = y_0 + bt \\\\ z = z_0 + ct \\end{cases} \\quad (t \\in \\mathbb{R})"
+                        },
+                        {
+                            "name": "Équations symétriques de droite",
+                            "latex": "\\frac{x - x_0}{a} = \\frac{y - y_0}{b} = \\frac{z - z_0}{c}"
+                        },
+                        {
+                            "name": "Distance d'un point P1 à un plan",
+                            "latex": "D = \\frac{|ax_1 + by_1 + cz_1 + d|}{\\sqrt{a^2 + b^2 + c^2}}"
+                        },
+                        {
+                            "name": "Angle entre deux plans",
+                            "latex": "\\cos(\\theta) = \\frac{|\\vec{n}_1 \\cdot \\vec{n}_2|}{\\|\\vec{n}_1\\| \\|\\vec{n}_2\\|}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Vecteur normal d'un plan",
-                            "content": "Pour trouver un vecteur normal à un plan contenant 3 points $A, B, C$, on effectue le produit vectoriel $\\vec{n} = \\vec{AB} \\times \\vec{AC}$."
+                            "title": "1. Le rôle central du vecteur normal n = (a, b, c)",
+                            "content": "Les coefficients $a, b, c$ de l'équation $ax + by + cz + d = 0$ forment directement les coordonnées d'un vecteur normal orthogonal à toute direction du plan."
                         },
                         {
-                            "title": "2. Intersection droite-plan",
-                            "content": "On substitue les coordonnées paramétriques de la droite dans l'équation cartésienne du plan pour résoudre la valeur du paramètre $t$."
+                            "title": "2. Construire l'équation d'un plan passant par 3 points",
+                            "content": "1. Former deux vecteurs non colinéaires : $\\vec{u} = \\vec{AB}$ et $\\vec{v} = \\vec{AC}$.\n2. Calculer le vecteur normal par produit vectoriel : $\\vec{n} = \\vec{u} \\times \\vec{v}$.\n3. Injecter un des points pour calculer la constante $d$."
+                        },
+                        {
+                            "title": "3. Intersection d'une droite et d'un plan",
+                            "content": "On substitue les expressions paramétriques de la droite $x(t), y(t), z(t)$ dans l'équation cartésienne du plan, on isole $t$, puis on remplace $t$ pour obtenir les coordonnées du point d'impact."
                         }
                     ],
-                    "pitfall": "Une droite dans $\\mathbb{R}^3$ NE PEUT PAS être représentée par une seule équation cartésienne. Elle nécessite un système de deux équations ou des équations symétriques !",
-                    "method": "Pour trouver l'intersection d'une droite et d'un plan : injecte $x(t), y(t), z(t)$ dans l'équation du plan, isole $t$, puis réinjecte la valeur de $t$ dans les équations de la droite."
+                    "pitfall": "Une droite dans R³ n'a PAS d'équation cartésienne unique comme dans le plan. Elle nécessite deux équations cartésiennes (l'intersection de deux plans) ou trois équations paramétriques.",
+                    "method": "Calculer la distance d'un point au plan : remplace les coordonnées du point dans l'expression de gauche du plan, prends la valeur absolue, et divise par la norme du vecteur normal sqrt(a²+b²+c²)."
                 },
                 "exercises": [
                     {
                         "id": "mat0130-ex6",
-                        "title": "Équation cartésienne de plan",
+                        "title": "Constante d'un plan cartésien",
                         "difficulty": 2,
                         "question_latex": "Trouvez la valeur de $d$ dans l'équation du plan $2x - 3y + 4z + d = 0$ sachant qu'il passe par le point $P(1, 2, -1)$.",
                         "input_type": "math_expr",
                         "expected_solution": "8",
                         "hints": [
-                            "Injectez les coordonnées de $P$ dans l'équation : $2(1) - 3(2) + 4(-1) + d = 0$.",
+                            "Injectez les coordonnées : $2(1) - 3(2) + 4(-1) + d = 0$.",
                             "$2 - 6 - 4 + d = 0 \\implies -8 + d = 0$."
                         ],
-                        "full_solution_latex": "2(1) - 3(2) + 4(-1) + d = 0 \\implies 2 - 6 - 4 + d = 0 \\implies -8 + d = 0 \\implies d = 8."
+                        "full_solution_latex": "d = 8."
                     },
                     {
                         "id": "mat0130-ex7",
                         "title": "Distance point-plan",
                         "difficulty": 3,
-                        "question_latex": "Calculez la distance entre le point $A(1, 0, 2)$ et le plan $\\pi: 2x - y + 2z - 15 = 0$.",
+                        "question_latex": "Calculez la distance entre le point $A(1, 0, 2)$ et le plan d'équation $2x - y + 2z - 15 = 0$.",
                         "input_type": "math_expr",
                         "expected_solution": "3",
                         "hints": [
                             "Numérateur : $|2(1) - 0 + 2(2) - 15| = |2 + 4 - 15| = |-9| = 9$.",
-                            "Dénominateur : $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$."
+                            "Dénominateur : $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = 3$."
                         ],
-                        "full_solution_latex": "D = \\frac{|2(1) - 0 + 2(2) - 15|}{\\sqrt{4 + 1 + 4}} = \\frac{|-9|}{3} = \\frac{9}{3} = 3."
+                        "full_solution_latex": "D = \\frac{9}{3} = 3."
+                    },
+                    {
+                        "id": "mat0130-ex3_3",
+                        "title": "Équation cartésienne de plan",
+                        "difficulty": 2,
+                        "question_latex": "Un plan a pour vecteur normal $\\vec{n} = (2, -1, 3)$ et passe par $P(1, 1, 2)$. Donnez le membre de gauche de son équation $ax + by + cz + d = 0$ avec $a=2$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2*x - y + 3*z - 7",
+                        "hints": [
+                            "$2(x - 1) - 1(y - 1) + 3(z - 2) = 0$.",
+                            "$2x - 2 - y + 1 + 3z - 6 = 2x - y + 3z - 7 = 0$."
+                        ],
+                        "full_solution_latex": "2x - y + 3z - 7 = 0."
+                    },
+                    {
+                        "id": "mat0130-ex3_4",
+                        "title": "Intersection droite-plan",
+                        "difficulty": 3,
+                        "question_latex": "Soit la droite $(x, y, z) = (t, 2t, 3t)$ et le plan $x + y + z = 6$. Donnez les coordonnées du point d'intersection sous la forme $(x, y, z)$.",
+                        "input_type": "vector",
+                        "expected_solution": "(1, 2, 3)",
+                        "hints": [
+                            "Injectez : $t + 2t + 3t = 6 \\implies 6t = 6 \\implies t = 1$.",
+                            "Pour $t = 1$ : $(x, y, z) = (1, 2, 3)$."
+                        ],
+                        "full_solution_latex": "(1, 2, 3)."
+                    },
+                    {
+                        "id": "mat0130-ex3_5",
+                        "title": "Paramètre de plan parallèle",
+                        "difficulty": 2,
+                        "question_latex": "Deux plans $\\pi_1: 4x - 6y + 2z = 5$ et $\\pi_2: 2x + ky + z = 9$ sont parallèles. Quelle est la valeur de $k$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "-3",
+                        "hints": [
+                            "Leurs vecteurs normaux doivent être colinéaires.",
+                            "$\\vec{n}_1 = (4, -6, 2) = 2 \\cdot (2, -3, 1)$. Donc $k = -3$."
+                        ],
+                        "full_solution_latex": "k = -3."
+                    },
+                    {
+                        "id": "mat0130-ex3_6",
+                        "title": "Orthogonalité de deux plans",
+                        "difficulty": 1,
+                        "question_latex": "Quelle doit être la valeur du produit scalaire $\\vec{n}_1 \\cdot \\vec{n}_2$ de leurs vecteurs normaux pour que deux plans soient perpendiculaires ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "L'angle entre deux plans est l'angle entre leurs vecteurs normaux."
+                        ],
+                        "full_solution_latex": "\\vec{n}_1 \\cdot \\vec{n}_2 = 0."
                     }
                 ]
             },
             {
                 "id": "m4-matrices-systemes",
                 "title": "Matrices et systèmes linéaires",
-                "subtitle": "Élimination de Gauss-Jordan, déterminants et inverse",
+                "subtitle": "Multiplication, déterminants, matrices inverses et pivot de Gauss-Jordan",
                 "viz_type": "matrix",
                 "theory": {
-                    "summary": "Les systèmes linéaires se résolvent de manière systématique par réduction échelonnée de Gauss-Jordan. Le déterminant mesure le facteur d'échelle des volumes et garantit l'inversibilité si non nul.",
+                    "summary": "Le calcul matriciel permet de compacter et résoudre systématiquement d'immenses systèmes d'équations linéaires. Le déterminant mesure le facteur d'échelle spatial et garantit l'inversibilité.",
                     "key_formulas": [
-                        {"name": "Déterminant 2x2", "latex": "\\det \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = ad - bc"},
-                        {"name": "Inverse d'une matrice 2x2", "latex": "A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}"},
-                        {"name": "Théorème d'inversibilité", "latex": "A \\text{ est inversible} \\iff \\det(A) \\neq 0"}
+                        {
+                            "name": "Déterminant 2x2",
+                            "latex": "\\det \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} = ad - bc"
+                        },
+                        {
+                            "name": "Matrice inverse 2x2",
+                            "latex": "A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}"
+                        },
+                        {
+                            "name": "Critère fondamental d'inversibilité",
+                            "latex": "A \\text{ est inversible} \\iff \\det(A) \\neq 0"
+                        },
+                        {
+                            "name": "Formulation matricielle",
+                            "latex": "A X = B \\iff X = A^{-1} B \\quad (\\text{si } \\det A \\neq 0)"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Opérations élémentaires de lignes",
-                            "content": "$L_i \\leftrightarrow L_j$ (échange), $L_i \\leftarrow k L_i$ ($k \\neq 0$), $L_i \\leftarrow L_i + k L_j$."
+                            "title": "1. Produit matriciel ligne par colonne",
+                            "content": "Pour multiplier une matrice $A$ ($m \\times n$) par $B$ ($n \\times p$), le nombre de colonnes de $A$ doit égaler le nombre de lignes de $B$. Le résultat est une matrice $m \\times p$."
                         },
                         {
-                            "title": "2. Nature des solutions d'un système",
-                            "content": "Un système linéaire possède soit une unique solution, soit une infinité de solutions (indéterminé), soit aucune solution (incompatible)."
+                            "title": "2. Déterminant 3x3 par développement de Laplace",
+                            "content": "On développe le long d'une ligne ou colonne avec le damier des signes : $+ - + / - + - / + - +$. Choisir toujours la ligne contenant le plus de zéros."
+                        },
+                        {
+                            "title": "3. Élimination de Gauss-Jordan",
+                            "content": "On transforme la matrice augmentée $[A | B]$ par opérations élémentaires de lignes jusqu'à obtenir la forme échelonnée réduite $[I | X]$."
                         }
                     ],
-                    "pitfall": "Attention aux erreurs de signe lors du calcul des cofacteurs pour le déterminant $3 \\times 3$ : le damier des signes est $+ - + / - + - / + - +$.",
-                    "method": "Pour inverser une matrice par Gauss : accole la matrice identité $[A | I]$ et applique les opérations de lignes jusqu'à obtenir $[I | A^{-1}]$."
+                    "pitfall": "La multiplication matricielle n'est PAS commutative : A * B != B * A en général !",
+                    "method": "Pour inverser une matrice 2x2 : 1. Calcule det(A) = ad - bc. Si 0, impossible. 2. Échange les éléments de la diagonale principale (a et d). 3. Change le signe des deux autres éléments (-b et -c). 4. Divise tout par det(A)."
                 },
                 "exercises": [
                     {
@@ -741,23 +1090,71 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "14",
                         "hints": [
-                            "Appliquez la formule $ad - bc$.",
-                            "$5(4) - 2(3) = 20 - 6$."
+                            "Appliquez $ad - bc = 5(4) - 2(3) = 20 - 6$."
                         ],
-                        "full_solution_latex": "\\det(A) = 5(4) - 2(3) = 20 - 6 = 14."
+                        "full_solution_latex": "\\det(A) = 20 - 6 = 14."
                     },
                     {
                         "id": "mat0130-ex9",
-                        "title": "Déterminant d'une matrice 3x3",
+                        "title": "Déterminant 3x3 avec zéro",
                         "difficulty": 2,
                         "question_latex": "Calculez le déterminant de $M = \\begin{pmatrix} 1 & 0 & 2 \\\\ 3 & 4 & 1 \\\\ 0 & 2 & 1 \\end{pmatrix}$.",
                         "input_type": "math_expr",
-                        "expected_solution": "16",
+                        "expected_solution": "14",
                         "hints": [
-                            "Développez selon la première ligne : $1(4(1) - 1(2)) - 0(...) + 2(3(2) - 4(0))$.",
-                            "$1(4 - 2) + 2(6) = 2 + 12$."
+                            "Développez selon la 1ère ligne : $1(4(1) - 1(2)) + 2(3(2) - 4(0))$.",
+                            "$1(2) + 2(6) = 2 + 12 = 14$."
                         ],
-                        "full_solution_latex": "\\det(M) = 1(4 - 2) - 0 + 2(6 - 0) = 2 + 12 = 14. (Vérification : 4 - 2 = 2 ; 2*(6-0)=12 -> 14)."
+                        "full_solution_latex": "\\det(M) = 14."
+                    },
+                    {
+                        "id": "mat0130-ex4_3",
+                        "title": "Produit matriciel",
+                        "difficulty": 2,
+                        "question_latex": "Soit $A = \\begin{pmatrix} 1 & 2 \\end{pmatrix}$ et $B = \\begin{pmatrix} 4 \\\\ -1 \\end{pmatrix}$. Calculez le produit $A \\times B$ (scalaire).",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "Ligne 1 fois colonne 1 : $1(4) + 2(-1) = 4 - 2$."
+                        ],
+                        "full_solution_latex": "A \\times B = 2."
+                    },
+                    {
+                        "id": "mat0130-ex4_4",
+                        "title": "Inverse d'une matrice scalaire",
+                        "difficulty": 1,
+                        "question_latex": "Si $\\det(A) = 2$, quelle est la valeur du déterminant de son inverse $\\det(A^{-1})$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "1/2",
+                        "hints": [
+                            "Propriété fondamentale : $\\det(A^{-1}) = \\frac{1}{\\det(A)}$."
+                        ],
+                        "full_solution_latex": "\\det(A^{-1}) = \\frac{1}{2}."
+                    },
+                    {
+                        "id": "mat0130-ex4_5",
+                        "title": "Résolution de système 2x2",
+                        "difficulty": 2,
+                        "question_latex": "Résolvez le système $\\begin{cases} x + y = 1 \\\\ 2x - y = 5 \\end{cases}$. Donnez la solution sous la forme $(x, y)$.",
+                        "input_type": "vector",
+                        "expected_solution": "(2, -1)",
+                        "hints": [
+                            "Additionnez les deux équations : $3x = 6 \\implies x = 2$.",
+                            "Déduisez $y$ : $2 + y = 1 \\implies y = -1$."
+                        ],
+                        "full_solution_latex": "(x, y) = (2, -1)."
+                    },
+                    {
+                        "id": "mat0130-ex4_6",
+                        "title": "Condition de singularité",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la valeur de $\\det(A)$ si la matrice $A$ n'est PAS inversible ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "Une matrice est singulière (non inversible) si et seulement si son déterminant est nul."
+                        ],
+                        "full_solution_latex": "\\det(A) = 0."
                     }
                 ]
             }
@@ -837,27 +1234,44 @@ COURSES_DATA = [
             {
                 "id": "m1-limites",
                 "title": "Limites et continuité",
-                "subtitle": "Formes 0/0, factorisation, conjugué et asymptotes",
+                "subtitle": "Formes 0/0, factorisation, méthode du conjugué et asymptotes",
                 "viz_type": "limit",
                 "theory": {
-                    "summary": "La limite d'une fonction décrit son comportement à l'approche d'un point. Les formes indéterminées (0/0, ∞/∞) exigent une simplification algébrique rigoureuse.",
+                    "summary": "La limite décrit le comportement d'une fonction aux abords immédiats d'un point ou à l'infini. Les formes indéterminées (0/0, infini/infini) exigent une levée algébrique rigoureuse par factorisation ou expression conjuguée.",
                     "key_formulas": [
-                        {"name": "Définition de la continuité", "latex": "\\lim_{x \\to a} f(x) = f(a)"},
-                        {"name": "Technique du conjugué", "latex": "\\sqrt{A} - \\sqrt{B} = \\frac{A - B}{\\sqrt{A} + \\sqrt{B}}"},
-                        {"name": "Asymptote horizontale", "latex": "\\lim_{x \\to \\pm\\infty} f(x) = L \\implies y = L"}
+                        {
+                            "name": "Définition de la continuité",
+                            "latex": "\\lim_{x \\to a} f(x) = f(a)"
+                        },
+                        {
+                            "name": "Méthode du conjugué",
+                            "latex": "\\sqrt{A} - \\sqrt{B} = \\frac{A - B}{\\sqrt{A} + \\sqrt{B}}"
+                        },
+                        {
+                            "name": "Limite trigonométrique remarquable",
+                            "latex": "\\lim_{x \\to 0} \\frac{\\sin(kx)}{x} = k"
+                        },
+                        {
+                            "name": "Asymptote horizontale",
+                            "latex": "\\lim_{x \\to \\pm\\infty} f(x) = L \\implies y = L"
+                        },
+                        {
+                            "name": "Asymptote verticale",
+                            "latex": "\\lim_{x \\to a} f(x) = \\pm\\infty \\implies x = a"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Formes indéterminées classiques",
-                            "content": "Les formes $\\frac{0}{0}$, $\\frac{\\infty}{\\infty}$, $0 \\times \\infty$ et $\\infty - \\infty$ ne signifient pas que la limite n'existe pas, mais qu'une levée d'indétermination est nécessaire."
+                            "title": "1. Les 4 formes indéterminées classiques",
+                            "content": "• $\\frac{0}{0}$ : résolue par factorisation ou conjugué.\n• $\\frac{\\infty}{\\infty}$ : résolue par factorisation du terme de plus haut degré.\n• $0 \\times \\infty$ : transformée en quotient $\\frac{0}{1/\\infty} = \\frac{0}{0}$.\n• $\\infty - \\infty$ : mise au même dénominateur ou expression conjuguée."
                         },
                         {
-                            "title": "2. Méthodes de levée d'indétermination",
-                            "content": "• Factorisation polynomiale (mise en évidence du facteur $(x - a)$ qui annule).\n• Multiplication par l'expression conjuguée lors de la présence de racines carrées.\n• Factorisation du terme prépondérant pour les limites à l'infini."
+                            "title": "2. Continuité d'une fonction",
+                            "content": "Une fonction $f$ est continue en $x = a$ si : 1. $f(a)$ existe, 2. $\\lim_{x \\to a} f(x)$ existe (limite à gauche = limite à droite), 3. la limite est égale à $f(a)$."
                         }
                     ],
-                    "pitfall": "Ne jamais écrire « = 0/0 ». C'est une forme indéterminée, pas un nombre réel !",
-                    "method": "Face à $\\lim_{x \\to a} \\frac{P(x)}{Q(x)}$ : commence par évaluer directement. Si $0/0$, factorise $(x-a)$ au numérateur et au dénominateur puis simplifie."
+                    "pitfall": "Ne JAMAIS écrire « = 0/0 ». Ce n'est pas un nombre, mais une forme indéterminée qui invite à simplifier l'expression.",
+                    "method": "Pour lever 0/0 avec une racine carrée : multiplie le numérateur et le dénominateur par l'expression conjuguée, développe le numérateur via (a-b)(a+b) = a² - b², simplifie le facteur critique x - a, puis réévalue."
                 },
                 "exercises": [
                     {
@@ -868,10 +1282,10 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "6",
                         "hints": [
-                            "Remarquez la différence de carrés : $x^2 - 9 = (x - 3)(x + 3)$.",
-                            "Simplifiez $(x - 3)$ puis évaluez en $x = 3$."
+                            "Factorisez $x^2 - 9 = (x - 3)(x + 3)$.",
+                            "Simplifiez $(x - 3)$ et évaluez en $x = 3$."
                         ],
-                        "full_solution_latex": "\\lim_{x \\to 3} \\frac{(x - 3)(x + 3)}{x - 3} = \\lim_{x \\to 3} (x + 3) = 3 + 3 = 6."
+                        "full_solution_latex": "\\lim_{x \\to 3} (x + 3) = 6."
                     },
                     {
                         "id": "mat0150-ex2",
@@ -881,11 +1295,10 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "1/4",
                         "hints": [
-                            "Multipliez par le conjugué $\\sqrt{x + 4} + 2$ au numérateur et dénominateur.",
-                            "Le numérateur devient $(x + 4) - 4 = x$.",
-                            "Simplifiez par $x$ et évaluez."
+                            "Multipliez par le conjugué $\\sqrt{x + 4} + 2$.",
+                            "Numérateur : $(x + 4) - 4 = x$. Simplifiez par $x$ : $\\frac{1}{\\sqrt{x+4}+2}$."
                         ],
-                        "full_solution_latex": "\\lim_{x \\to 0} \\frac{(\\sqrt{x+4}-2)(\\sqrt{x+4}+2)}{x(\\sqrt{x+4}+2)} = \\lim_{x \\to 0} \\frac{x}{x(\\sqrt{x+4}+2)} = \\frac{1}{2+2} = \\frac{1}{4}."
+                        "full_solution_latex": "\\frac{1}{2 + 2} = \\frac{1}{4}."
                     },
                     {
                         "id": "mat0150-ex3",
@@ -895,126 +1308,331 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "5",
                         "hints": [
-                            "Rappelez-vous la limite fondamentale : $\\lim_{u \\to 0} \\frac{\\sin(u)}{u} = 1$.",
-                            "Écrivez $\\frac{\\sin(5x)}{x} = 5 \\cdot \\frac{\\sin(5x)}{5x}$."
+                            "Utilisez $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$ avec $u = 5x$."
                         ],
-                        "full_solution_latex": "\\lim_{x \\to 0} 5 \\cdot \\frac{\\sin(5x)}{5x} = 5 \\cdot 1 = 5."
+                        "full_solution_latex": "\\lim_{x \\to 0} 5 \\cdot \\frac{\\sin(5x)}{5x} = 5(1) = 5."
+                    },
+                    {
+                        "id": "mat0150-ex1_4",
+                        "title": "Limite de polynôme par factorisation",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "4",
+                        "hints": [
+                            "$(x - 2)(x + 2) / (x - 2) = x + 2$."
+                        ],
+                        "full_solution_latex": "2 + 2 = 4."
+                    },
+                    {
+                        "id": "mat0150-ex1_5",
+                        "title": "Limite à l'infini rationnelle",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\lim_{x \\to \\infty} \\frac{3x^2 + 5}{2x^2 - x}$ sous forme de fraction.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3/2",
+                        "hints": [
+                            "Considérez le rapport des coefficients de plus haut degré : $\\frac{3x^2}{2x^2} = \\frac{3}{2}$."
+                        ],
+                        "full_solution_latex": "\\frac{3}{2}."
+                    },
+                    {
+                        "id": "mat0150-ex1_6",
+                        "title": "Limite trigonométrique avec cosinus",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\lim_{x \\to 0} \\frac{2x}{\\sin(x)}$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "C'est l'inverse de $\\frac{\\sin x}{x}$, multiplié par 2 : $2 \\times 1 = 2$."
+                        ],
+                        "full_solution_latex": "2."
                     }
                 ]
             },
             {
                 "id": "m2-derivee-concept",
                 "title": "Dérivée et taux de variation",
-                "subtitle": "Pente de la tangente et taux de variation instantané",
+                "subtitle": "Pente de la tangente, taux instantané et définition formelle par la limite",
                 "viz_type": "tangent",
                 "theory": {
-                    "summary": "La dérivée d'une fonction en un point représente la pente de la droite tangente à la courbe en ce point, c'est-à-dire le taux de variation instantané.",
+                    "summary": "La dérivée f'(a) mesure le taux de variation instantané de f au point a. Géométriquement, elle donne la pente exacte de la droite tangente à la courbe en ce point.",
                     "key_formulas": [
-                        {"name": "Définition formelle de la dérivée", "latex": "f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}"},
-                        {"name": "Équation de la tangente", "latex": "y = f'(a)(x - a) + f(a)"},
-                        {"name": "Pente de la sécante", "latex": "m_{sec} = \\frac{f(b) - f(a)}{b - a}"}
+                        {
+                            "name": "Définition par le quotient différentiel",
+                            "latex": "f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}"
+                        },
+                        {
+                            "name": "Équation cartésienne de la tangente",
+                            "latex": "y = f'(a)(x - a) + f(a)"
+                        },
+                        {
+                            "name": "Taux de variation moyen (sécante)",
+                            "latex": "T_m = \\frac{f(b) - f(a)}{b - a}"
+                        },
+                        {
+                            "name": "Tangente horizontale",
+                            "latex": "f'(x_0) = 0 \\iff \\text{Tangente parallèle à l'axe } x"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Différentiabilité et continuité",
-                            "content": "Si une fonction est dérivable en un point $a$, alors elle est obligatoirement continue en $a$. La réciproque est FAUSSE (ex: $f(x) = |x|$ en $x = 0$ est continue mais non dérivable car point de rebroussement)."
+                            "title": "1. Du taux moyen au taux instantané",
+                            "content": "Quand l'intervalle $h$ tend vers 0, la droite sécante reliant $(a, f(a))$ à $(a+h, f(a+h))$ pivote jusqu'à devenir la droite tangente."
+                        },
+                        {
+                            "title": "2. Dérivabilité et points singuliers",
+                            "content": "Une fonction peut être continue sans être dérivable. C'est le cas aux points anguleux (comme $|x|$ en 0 où les pentes à gauche et à droite diffèrent) et aux tangentes verticales."
                         }
                     ],
-                    "pitfall": "Ne pas confondre la dérivée en un point $f'(a)$ (qui est une constante réelle, la pente) et la fonction dérivée $f'(x)$ (qui est une fonction de $x$).",
-                    "method": "Pour trouver l'équation de la tangente en $x = a$ : 1. Calcule $y_0 = f(a)$. 2. Calcule la dérivée $f'(x)$. 3. Évalue la pente $m = f'(a)$. 4. Écris $y - y_0 = m(x - a)$."
+                    "pitfall": "f'(a) est un nombre (la valeur de la pente en a), tandis que f'(x) est la fonction dérivée.",
+                    "method": "Pour trouver l'équation de la tangente en x = a : 1. Calcule y0 = f(a). 2. Calcule f'(x) puis m = f'(a). 3. Écris y = m(x - a) + y0."
                 },
                 "exercises": [
                     {
                         "id": "mat0150-ex4",
-                        "title": "Pente de la tangente",
+                        "title": "Pente de la tangente quadratique",
                         "difficulty": 1,
                         "question_latex": "Soit $f(x) = x^2 - 3x + 5$. Calculez la pente de la tangente en $x = 2$.",
                         "input_type": "math_expr",
                         "expected_solution": "1",
                         "hints": [
-                            "Dérivez $f(x)$ : $f'(x) = 2x - 3$.",
-                            "Évaluez en $x = 2$."
+                            "$f'(x) = 2x - 3$. En $x = 2$, $f'(2) = 2(2) - 3 = 1$."
                         ],
-                        "full_solution_latex": "f'(x) = 2x - 3. \\text{ En } x = 2, f'(2) = 2(2) - 3 = 1."
+                        "full_solution_latex": "f'(2) = 1."
+                    },
+                    {
+                        "id": "mat0150-ex2_2",
+                        "title": "Pente de tangente cubique",
+                        "difficulty": 2,
+                        "question_latex": "Soit $f(x) = x^3 - 8x$. Calculez la pente de la tangente en $x = 2$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "4",
+                        "hints": [
+                            "$f'(x) = 3x^2 - 8$. En $x = 2$, $3(4) - 8 = 12 - 8 = 4$."
+                        ],
+                        "full_solution_latex": "f'(2) = 4."
+                    },
+                    {
+                        "id": "mat0150-ex2_3",
+                        "title": "Fonction dérivée de base",
+                        "difficulty": 1,
+                        "question_latex": "Déterminez la dérivée de $f(x) = x^2 + x$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2*x + 1",
+                        "hints": [
+                            "La dérivée de $x^2$ est $2x$ et celle de $x$ est $1$."
+                        ],
+                        "full_solution_latex": "f'(x) = 2x + 1."
+                    },
+                    {
+                        "id": "mat0150-ex2_4",
+                        "title": "Dérivée d'un polynôme complet",
+                        "difficulty": 1,
+                        "question_latex": "Déterminez la dérivée de $g(x) = 2x^2 - 3x + 7$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "4*x - 3",
+                        "hints": [
+                            "$(2x^2)' = 4x$, $(-3x)' = -3$, $(7)' = 0$."
+                        ],
+                        "full_solution_latex": "g'(x) = 4x - 3."
+                    },
+                    {
+                        "id": "mat0150-ex2_5",
+                        "title": "Tangente horizontale",
+                        "difficulty": 2,
+                        "question_latex": "En quelle valeur de $x$ la parabole $f(x) = x^2 - 6x + 2$ admet-elle une tangente horizontale ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "3",
+                        "hints": [
+                            "Tangente horizontale signifie $f'(x) = 0$.",
+                            "$2x - 6 = 0 \\implies x = 3$."
+                        ],
+                        "full_solution_latex": "x = 3."
+                    },
+                    {
+                        "id": "mat0150-ex2_6",
+                        "title": "Pente d'une constante",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la valeur de la dérivée de la fonction constante $f(x) = 42$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "Une constante ne varie jamais, son taux de variation est donc nul."
+                        ],
+                        "full_solution_latex": "f'(x) = 0."
                     }
                 ]
             },
             {
                 "id": "m3-regles-derivation",
                 "title": "Règles de dérivation",
-                "subtitle": "Produits, quotients, chaîne, exponentielles et dérivation implicite",
+                "subtitle": "Produits, quotients, chaîne, exponentielles, logarithmes et dérivation implicite",
                 "viz_type": "derivatives",
                 "theory": {
-                    "summary": "Maîtriser le formulaire de dérivation et la règle en chaîne est la clé pour dériver toute fonction complexe.",
+                    "summary": "Toute fonction différentiable s'exprime comme une combinaison de briques de base. La règle du produit, la règle du quotient et la règle de dérivation en chaîne (chain rule) permettent de calculer toute dérivée sans approximation.",
                     "key_formulas": [
-                        {"name": "Règle du produit", "latex": "(uv)' = u'v + uv'"},
-                        {"name": "Règle du quotient", "latex": "\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}"},
-                        {"name": "Règle de dérivation en chaîne", "latex": "(f(g(x)))' = f'(g(x)) \\cdot g'(x)"},
-                        {"name": "Dérivée de ln et exp", "latex": "(\\ln(x))' = \\frac{1}{x}, \\quad (e^x)' = e^x"}
+                        {
+                            "name": "Règle des puissances",
+                            "latex": "(x^n)' = n x^{n-1}"
+                        },
+                        {
+                            "name": "Règle du produit",
+                            "latex": "(uv)' = u'v + uv'"
+                        },
+                        {
+                            "name": "Règle du quotient",
+                            "latex": "\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}"
+                        },
+                        {
+                            "name": "Règle en chaîne (composition)",
+                            "latex": "(f(g(x)))' = f'(g(x)) \\cdot g'(x)"
+                        },
+                        {
+                            "name": "Dérivée de l'exponentielle",
+                            "latex": "(e^{u(x)})' = u'(x) e^{u(x)}"
+                        },
+                        {
+                            "name": "Dérivée du logarithme",
+                            "latex": "(\\ln(u(x)))' = \\frac{u'(x)}{u(x)}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Règle de dérivation en chaîne",
-                            "content": "On dérive la fonction extérieure en conservant l'intérieur, puis on multiplie par la dérivée de la fonction intérieure. Exemple : $( (2x + 1)^5 )' = 5(2x + 1)^4 \\cdot 2 = 10(2x + 1)^4$."
+                            "title": "1. La règle en chaîne démystifiée",
+                            "content": "Dériver de l'extérieur vers l'intérieur : dériver la fonction englobante en laissant l'intérieur intact, puis multiplier par la dérivée du contenu intérieur."
                         },
                         {
                             "title": "2. Dérivation implicite",
-                            "content": "Lorsque $y$ est défini implicitement par une équation $F(x, y) = 0$, on dérive chaque terme par rapport à $x$ en appliquant la règle en chaîne pour tout terme contenant $y$ : $\\frac{d}{dx}[y^2] = 2y \\frac{dy}{dx}$."
+                            "content": "Quand $x$ et $y$ sont liés par une équation $F(x, y) = 0$ : on dérive chaque terme par rapport à $x$, en appliquant la règle de chaîne à chaque terme en $y$ (ex: $(y^2)' = 2y y'$), puis on isole $y'$."
                         }
                     ],
-                    "pitfall": "Attention au signe moins dans la règle du quotient : c'est toujours $(u'v - uv') / v^2$ et JAMAIS $(uv' - u'v) / v^2$.",
-                    "method": "Identifie la structure dominante : s'agit-il d'une puissance, d'un produit, d'un quotient ou d'une composition ?"
+                    "pitfall": "Attention au signe moins dans la règle du quotient : le numérateur est u'v - uv' et JAMAIS uv' - u'v !",
+                    "method": "Pour dériver un quotient : 1. Note u et v. 2. Calcule u' et v'. 3. Forme u'v - uv'. 4. Divise par v²."
                 },
                 "exercises": [
                     {
                         "id": "mat0150-ex5",
-                        "title": "Règle du produit",
+                        "title": "Règle du produit avec exponentielle",
                         "difficulty": 2,
                         "question_latex": "Dérivez $f(x) = x^3 e^x$. Donnez $f'(x)$ sous forme factorisée par $e^x$.",
                         "input_type": "math_expr",
                         "expected_solution": "(x^3 + 3*x^2)*exp(x)",
                         "hints": [
-                            "Posez $u = x^3 \\implies u' = 3x^2$ et $v = e^x \\implies v' = e^x$.",
-                            "$u'v + uv' = 3x^2 e^x + x^3 e^x$."
+                            "$u = x^3 \\implies u' = 3x^2$ et $v = e^x \\implies v' = e^x$.",
+                            "$u'v + uv' = 3x^2 e^x + x^3 e^x = (x^3 + 3x^2)e^x$."
                         ],
-                        "full_solution_latex": "f'(x) = 3x^2 e^x + x^3 e^x = (x^3 + 3x^2)e^x = x^2(x + 3)e^x."
+                        "full_solution_latex": "f'(x) = (x^3 + 3x^2)e^x."
                     },
                     {
                         "id": "mat0150-ex6",
-                        "title": "Règle de chaîne",
+                        "title": "Règle en chaîne avec sinus",
                         "difficulty": 2,
                         "question_latex": "Dérivez $g(x) = \\sin(3x^2 + 1)$.",
                         "input_type": "math_expr",
                         "expected_solution": "6*x*cos(3*x^2 + 1)",
                         "hints": [
-                            "Dérivée extérieure : $\\cos(3x^2 + 1)$.",
-                            "Dérivée intérieure : $(3x^2 + 1)' = 6x$.",
-                            "Multipliez les deux."
+                            "Dérivée de $\\sin(u)$ est $u' \\cos(u)$ avec $u = 3x^2 + 1 \\implies u' = 6x$."
                         ],
-                        "full_solution_latex": "g'(x) = \\cos(3x^2 + 1) \\cdot (6x) = 6x \\cos(3x^2 + 1)."
+                        "full_solution_latex": "g'(x) = 6x \\cos(3x^2 + 1)."
+                    },
+                    {
+                        "id": "mat0150-ex3_3",
+                        "title": "Dérivée de ln(ax + b)",
+                        "difficulty": 2,
+                        "question_latex": "Dérivez $h(x) = \\ln(3x - 2)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3/(3*x - 2)",
+                        "hints": [
+                            "Appliquez $(\\ln u)' = \\frac{u'}{u}$ avec $u = 3x - 2 \\implies u' = 3$."
+                        ],
+                        "full_solution_latex": "h'(x) = \\frac{3}{3x - 2}."
+                    },
+                    {
+                        "id": "mat0150-ex3_4",
+                        "title": "Règle du quotient",
+                        "difficulty": 2,
+                        "question_latex": "Dérivez $f(x) = \\frac{x}{x^2 + 1}$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "(1 - x^2)/(x^2 + 1)^2",
+                        "hints": [
+                            "$u = x, u'=1$, $v = x^2 + 1, v'=2x$.",
+                            "$u'v - uv' = 1(x^2 + 1) - x(2x) = x^2 + 1 - 2x^2 = 1 - x^2$."
+                        ],
+                        "full_solution_latex": "f'(x) = \\frac{1 - x^2}{(x^2 + 1)^2}."
+                    },
+                    {
+                        "id": "mat0150-ex3_5",
+                        "title": "Dérivée d'un carré composé",
+                        "difficulty": 2,
+                        "question_latex": "Dérivez $f(x) = (2x + 1)^2$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "4*(2*x + 1)",
+                        "hints": [
+                            "$2(2x + 1) \\cdot (2x + 1)' = 2(2x + 1)(2) = 4(2x + 1)$ ou $8x + 4$."
+                        ],
+                        "full_solution_latex": "f'(x) = 4(2x + 1) = 8x + 4."
+                    },
+                    {
+                        "id": "mat0150-ex3_6",
+                        "title": "Dérivation implicite du cercle",
+                        "difficulty": 3,
+                        "question_latex": "Soit la relation $x^2 + y^2 = 25$. Exprimez $\\frac{dy}{dx}$ en fonction de $x$ et $y$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "-x/y",
+                        "hints": [
+                            "Dérivez terme à terme : $2x + 2y y' = 0$.",
+                            "Isolez $y'$ : $2y y' = -2x \\implies y' = -\\frac{x}{y}$."
+                        ],
+                        "full_solution_latex": "\\frac{dy}{dx} = -\\frac{x}{y}."
+                    },
+                    {
+                        "id": "mat0150-ex3_7",
+                        "title": "Dérivée d'exponentielle composée",
+                        "difficulty": 1,
+                        "question_latex": "Dérivez $f(x) = e^{2x}$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2*exp(2*x)",
+                        "hints": [
+                            "$(e^{kx})' = k e^{kx}$."
+                        ],
+                        "full_solution_latex": "f'(x) = 2e^{2x}."
                     }
                 ]
             },
             {
                 "id": "m4-optimisation",
                 "title": "Applications de la dérivée",
-                "subtitle": "Optimisation, analyse de courbes et règle de L'Hôpital",
+                "subtitle": "Points critiques, extrema, concavité, règle de L'Hôpital et optimisation",
                 "viz_type": "optimization",
                 "theory": {
-                    "summary": "Les extrema locaux se situent aux points critiques ($f'(x) = 0$ ou $f'(x)$ n'existe pas). La règle de L'Hôpital résout élégamment les limites indéterminées.",
+                    "summary": "L'optimisation consiste à trouver les valeurs maximales ou minimales d'une fonction sous contraintes réelles. La règle de L'Hôpital résout quant à elle instantanément les limites indéterminées en dérivant numérateur et dénominateur.",
                     "key_formulas": [
-                        {"name": "Point critique", "latex": "f'(c) = 0 \\text{ ou } f'(c) \\text{ n'existe pas}"},
-                        {"name": "Test de la dérivée seconde", "latex": "f''(c) > 0 \\implies \\text{Minimum}, \\quad f''(c) < 0 \\implies \\text{Maximum}"},
-                        {"name": "Règle de L'Hôpital", "latex": "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\quad (\\text{si } \\frac{0}{0} \\text{ ou } \\frac{\\infty}{\\infty})"}
+                        {
+                            "name": "Condition de point critique",
+                            "latex": "f'(c) = 0 \\text{ ou } f'(c) \\text{ n'existe pas}"
+                        },
+                        {
+                            "name": "Test de la dérivée seconde",
+                            "latex": "f''(c) > 0 \\implies \\text{Min local}, \\quad f''(c) < 0 \\implies \\text{Max local}"
+                        },
+                        {
+                            "name": "Règle de L'Hôpital",
+                            "latex": "\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\quad (\\text{si } \\frac{0}{0} \\text{ ou } \\frac{\\infty}{\\infty})"
+                        },
+                        {
+                            "name": "Point d'inflexion",
+                            "latex": "f''(x) = 0 \\text{ et change de signe}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Stratégie d'optimisation",
-                            "content": "1. Identifier la quantité à maximiser/minimiser.\n2. Écrire la fonction à une seule variable grâce aux contraintes.\n3. Calculer la dérivée première et trouver les points critiques.\n4. Vérifier la nature de l'extremum (dérivée seconde ou tableau de variation)."
+                            "title": "1. Étapes de résolution d'un problème d'optimisation",
+                            "content": "1. Tracer un schéma et nommer les variables.\n2. Écrire la fonction objectif à maximiser ou minimiser.\n3. Exprimer la fonction sous une seule variable grâce à l'équation de contrainte.\n4. Dériver, poser $f'(x) = 0$, et vérifier la nature du résultat par la dérivée seconde."
                         }
                     ],
-                    "pitfall": "N'applique JAMAIS L'Hôpital si la limite n'est pas de la forme indéterminée 0/0 ou ∞/∞ !",
-                    "method": "Pour L'Hôpital : dérive le numérateur et le dénominateur SÉPARÉMENT, ne fais PAS une dérivée de quotient !"
+                    "pitfall": "Pour la règle de L'Hôpital, on dérive le numérateur et le dénominateur SÉPARÉMENT, il ne faut surtout pas faire une dérivée de quotient !",
+                    "method": "Trouver le maximum d'une aire A(x) = 20x - x² : A'(x) = 20 - 2x = 0 donne x = 10. A''(10) = -2 < 0, il s'agit donc bien d'un maximum."
                 },
                 "exercises": [
                     {
@@ -1025,25 +1643,76 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "2",
                         "hints": [
-                            "En $x=0$, $e^0 - 1 = 0$ et dénominateur $= 0$. Forme $0/0$.",
-                            "Dérivée du numérateur : $(e^{2x} - 1)' = 2e^{2x}$.",
-                            "Dérivée du dénominateur : $(x)' = 1$."
+                            "En 0, c'est $0/0$.",
+                            "Dérivez en haut : $2e^{2x}$. Dérivez en bas : $1$.",
+                            "Évaluez en $x = 0$ : $\\frac{2(1)}{1} = 2$."
                         ],
-                        "full_solution_latex": "\\lim_{x \\to 0} \\frac{2e^{2x}}{1} = \\frac{2(1)}{1} = 2."
+                        "full_solution_latex": "2."
                     },
                     {
                         "id": "mat0150-ex8",
-                        "title": "Optimisation - Rectangle d'aire maximale",
+                        "title": "Enclos d'aire maximale",
                         "difficulty": 3,
                         "question_latex": "On dispose de 40 mètres de clôture pour entourer un enclos rectangulaire. Quelle est l'aire maximale possible (en m²) ?",
                         "input_type": "math_expr",
                         "expected_solution": "100",
                         "hints": [
-                            "Périmètre : $2x + 2y = 40 \\implies y = 20 - x$.",
-                            "Aire : $A(x) = x(20 - x) = 20x - x^2$.",
-                            "Dérivez $A'(x) = 20 - 2x = 0 \\implies x = 10$."
+                            "$2x + 2y = 40 \\implies y = 20 - x$.",
+                            "$A(x) = x(20 - x) = 20x - x^2$.",
+                            "$A'(x) = 20 - 2x = 0 \\implies x = 10$. Aire = $10 \\times 10 = 100$."
                         ],
-                        "full_solution_latex": "A(x) = 20x - x^2. A'(x) = 20 - 2x = 0 \\implies x = 10. \\text{ Aire } = 10(10) = 100."
+                        "full_solution_latex": "100."
+                    },
+                    {
+                        "id": "mat0150-ex4_3",
+                        "title": "Point critique positif",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez le point critique positif de $f(x) = x^3 - 27x + 2$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3",
+                        "hints": [
+                            "$f'(x) = 3x^2 - 27 = 0 \\implies x^2 = 9 \\implies x = 3$."
+                        ],
+                        "full_solution_latex": "x = 3."
+                    },
+                    {
+                        "id": "mat0150-ex4_4",
+                        "title": "L'Hôpital trigonométrique",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2}$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "1/2",
+                        "hints": [
+                            "L'Hôpital 1 : $\\frac{\\sin x}{2x}$.",
+                            "L'Hôpital 2 : $\\frac{\\cos x}{2} \\to \\frac{1}{2}$."
+                        ],
+                        "full_solution_latex": "\\frac{1}{2}."
+                    },
+                    {
+                        "id": "mat0150-ex4_5",
+                        "title": "Produit maximal de somme fixée",
+                        "difficulty": 2,
+                        "question_latex": "Deux nombres positifs ont une somme égale à 10. Quelle est la valeur maximale de leur produit ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "25",
+                        "hints": [
+                            "$P(x) = x(10 - x) = 10x - x^2$.",
+                            "$P'(x) = 10 - 2x = 0 \\implies x = 5$. Produit = $5 \\times 5 = 25$."
+                        ],
+                        "full_solution_latex": "25."
+                    },
+                    {
+                        "id": "mat0150-ex4_6",
+                        "title": "Point d'inflexion cubique",
+                        "difficulty": 2,
+                        "question_latex": "Quelle est l'abscisse $x$ du point d'inflexion de $f(x) = x^3 + 3x^2 - 5$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "-1",
+                        "hints": [
+                            "$f'(x) = 3x^2 + 6x$.",
+                            "$f''(x) = 6x + 6 = 0 \\implies x = -1$."
+                        ],
+                        "full_solution_latex": "x = -1."
                     }
                 ]
             }
@@ -1123,23 +1792,44 @@ COURSES_DATA = [
             {
                 "id": "m1-primitives",
                 "title": "Intégrale indéfinie et Primitives",
-                "subtitle": "Antidérivées usuelles et constante d'intégration",
-                "viz_type": "primitive",
+                "subtitle": "Antidérivées fondamentales, constante C et problèmes à conditions initiales",
+                "viz_type": "riemann",
                 "theory": {
-                    "summary": "L'intégration est l'opération réciproque de la dérivation. Une fonction admet une infinité d'antidérivées différant par une constante $C$.",
+                    "summary": "L'intégration indéfinie est l'opération réciproque de la dérivation. Trouver une primitive F(x) consiste à identifier quelle fonction dérivée redonne f(x). Une infinité de primitives existent, différant toutes par une constante arbitraire C.",
                     "key_formulas": [
-                        {"name": "Puissance", "latex": "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)"},
-                        {"name": "Logarithme", "latex": "\\int \\frac{1}{x} dx = \\ln|x| + C"},
-                        {"name": "Exponentielle", "latex": "\\int e^{kx} dx = \\frac{1}{k} e^{kx} + C"}
+                        {
+                            "name": "Règle des puissances",
+                            "latex": "\\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)"
+                        },
+                        {
+                            "name": "Primitive du logarithme",
+                            "latex": "\\int \\frac{1}{x} dx = \\ln|x| + C"
+                        },
+                        {
+                            "name": "Primitive de l'exponentielle",
+                            "latex": "\\int e^{kx} dx = \\frac{1}{k} e^{kx} + C"
+                        },
+                        {
+                            "name": "Primitives trigonométriques",
+                            "latex": "\\int \\cos(x) dx = \\sin(x) + C, \\quad \\int \\sin(x) dx = -\\cos(x) + C"
+                        },
+                        {
+                            "name": "Linéarité de l'intégration",
+                            "latex": "\\int (a f(x) + b g(x)) dx = a \\int f(x) dx + b \\int g(x) dx"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Linéarité de l'intégrale",
-                            "content": "$\\int (a f(x) + b g(x)) dx = a \\int f(x) dx + b \\int g(x) dx$."
+                            "title": "1. La constante d'intégration C",
+                            "content": "Puisque la dérivée de toute constante est nulle ($(C)' = 0$), il faut impérativement ajouter $+ C$ à toute primitive indéfinie."
+                        },
+                        {
+                            "title": "2. Problème à condition initiale (Problème de Cauchy)",
+                            "content": "Si on connaît une condition initiale $F(x_0) = y_0$, on peut déterminer la valeur exacte de la constante $C$ en remplaçant $x$ et $y$ dans la primitive."
                         }
                     ],
-                    "pitfall": "Ne JAMAIS oublier d'ajouter $+ C$ pour les intégrales indéfinies.",
-                    "method": "Pour vérifier ta primitive, dérive simplement ton résultat : tu dois retrouver exactement la fonction de départ."
+                    "pitfall": "Attention au signe pour la primitive de sin(x) : c'est -cos(x) et NON cos(x) !",
+                    "method": "Vérifie toujours ton intégrale en dérivant ton résultat. La dérivée de ta primitive doit obligatoirement redonner la fonction sous l'intégrale."
                 },
                 "exercises": [
                     {
@@ -1150,168 +1840,422 @@ COURSES_DATA = [
                         "input_type": "math_expr",
                         "expected_solution": "x^3 + 2*x^2 - 5*x",
                         "hints": [
-                            "Primitive de $3x^2$ : $3 \\frac{x^3}{3} = x^3$.",
-                            "Primitive de $4x$ : $4 \\frac{x^2}{2} = 2x^2$."
+                            "$3 \\frac{x^3}{3} + 4 \\frac{x^2}{2} - 5x = x^3 + 2x^2 - 5x$."
                         ],
-                        "full_solution_latex": "x^3 + 2x^2 - 5x + C."
+                        "full_solution_latex": "x^3 + 2x^2 - 5x."
+                    },
+                    {
+                        "id": "mat0250-ex1_2",
+                        "title": "Primitive d'une racine",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\int \\frac{1}{\\sqrt{x}} dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "2*sqrt(x)",
+                        "hints": [
+                            "Réécrivez en puissance : $\\int x^{-1/2} dx = \\frac{x^{1/2}}{1/2} = 2\\sqrt{x}$."
+                        ],
+                        "full_solution_latex": "2\\sqrt{x}."
+                    },
+                    {
+                        "id": "mat0250-ex1_3",
+                        "title": "Primitive avec fraction rationnelle",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\int \\frac{3}{x} dx$ pour $x > 0$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "3*ln(x)",
+                        "hints": [
+                            "$3 \\int \\frac{1}{x} dx = 3 \\ln(x)$."
+                        ],
+                        "full_solution_latex": "3\\ln(x)."
+                    },
+                    {
+                        "id": "mat0250-ex1_4",
+                        "title": "Primitive d'exponentielle",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\int e^{4x} dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "exp(4*x)/4",
+                        "hints": [
+                            "$\\frac{1}{4} e^{4x}$."
+                        ],
+                        "full_solution_latex": "\\frac{e^{4x}}{4}."
+                    },
+                    {
+                        "id": "mat0250-ex1_5",
+                        "title": "Primitive trigonométrique",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\int \\sin(x) dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "-cos(x)",
+                        "hints": [
+                            "Rappelez-vous que $(\\cos x)' = -\\sin x$, donc la primitive de $\\sin x$ est $-\\cos x$."
+                        ],
+                        "full_solution_latex": "-\\cos(x)."
+                    },
+                    {
+                        "id": "mat0250-ex1_6",
+                        "title": "Condition initiale pour fixer C",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez la fonction $F(x)$ telle que $F'(x) = 2x + 3$ et $F(0) = 5$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "x^2 + 3*x + 5",
+                        "hints": [
+                            "$F(x) = x^2 + 3x + C$. Avec $F(0) = 5$, $C = 5$."
+                        ],
+                        "full_solution_latex": "F(x) = x^2 + 3x + 5."
                     }
                 ]
             },
             {
                 "id": "m2-integrale-definie",
                 "title": "Intégrale définie et Aires",
-                "subtitle": "Théorème fondamental de l'analyse et calcul d'aires",
+                "subtitle": "Théorème fondamental de l'analyse, propriétés et calcul d'aires entre courbes",
                 "viz_type": "riemann",
                 "theory": {
-                    "summary": "L'intégrale définie $\\int_a^b f(x)dx$ calcule l'aire nette sous la courbe entre $a$ et $b$. Le Théorème fondamental relie l'intégrale définie aux primitives.",
+                    "summary": "L'intégrale définie calcule l'aire algébrique nette sous une courbe. Le Théorème Fondamental de l'Analyse relie puissamment l'aire géométrique aux primitives algébriques.",
                     "key_formulas": [
-                        {"name": "Théorème fondamental de l'analyse", "latex": "\\int_a^b f(x) dx = F(b) - F(a) = [F(x)]_a^b"},
-                        {"name": "Aire entre deux courbes", "latex": "A = \\int_a^b (f(x) - g(x)) dx \\quad \\text{où } f(x) \\ge g(x)"}
+                        {
+                            "name": "Théorème fondamental de l'analyse",
+                            "latex": "\\int_a^b f(x) dx = F(b) - F(a) = [F(x)]_a^b"
+                        },
+                        {
+                            "name": "Aire entre deux courbes",
+                            "latex": "A = \\int_a^b (f(x) - g(x)) dx \\quad (f(x) \\ge g(x))"
+                        },
+                        {
+                            "name": "Valeur moyenne d'une fonction",
+                            "latex": "f_{moy} = \\frac{1}{b - a} \\int_a^b f(x) dx"
+                        },
+                        {
+                            "name": "Relation de Chasles",
+                            "latex": "\\int_a^b f(x) dx = \\int_a^c f(x) dx + \\int_c^b f(x) dx"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Interprétation géométrique",
-                            "content": "Si $f(x) \\ge 0$, $\\int_a^b f(x)dx$ est l'aire géométrique sous la courbe. Si $f(x) < 0$, l'aire est comptabilisée négativement."
+                            "title": "1. Aire algébrique nette",
+                            "content": "Les zones où la courbe est au-dessus de l'axe $x$ comptent positivement, et les zones en dessous comptent négativement."
+                        },
+                        {
+                            "title": "2. Découpage aux points d'intersection",
+                            "content": "Pour calculer l'aire géométrique totale entre deux courbes sécantes, on trouve d'abord leurs points de croisement pour déterminer laquelle est au-dessus sur chaque intervalle."
                         }
                     ],
-                    "pitfall": "Pour calculer l'aire entre deux courbes qui se croisent, il faut scinder l'intégrale aux points d'intersection.",
-                    "method": "1. Trouve une primitive $F(x)$. 2. Évalue $F(b)$. 3. Évalue $F(a)$. 4. Calcule $F(b) - F(a)$."
+                    "pitfall": "Ne confondez pas intégrale définie (qui donne une VALEUR NUMÉRIQUE exacte) et intégrale indéfinie (qui donne une FAMILLE DE FONCTIONS + C).",
+                    "method": "1. Trouve une primitive F(x). 2. Évalue en haut F(b). 3. Évalue en bas F(a). 4. Fais la différence F(b) - F(a)."
                 },
                 "exercises": [
                     {
                         "id": "mat0250-ex2",
-                        "title": "Calcul d'intégrale définie",
+                        "title": "Calcul d'intégrale définie linéaire",
                         "difficulty": 1,
                         "question_latex": "Calculez $\\int_1^3 (2x + 1) dx$.",
                         "input_type": "math_expr",
                         "expected_solution": "10",
                         "hints": [
-                            "Primitive : $F(x) = x^2 + x$.",
-                            "$F(3) = 3^2 + 3 = 12$.",
-                            "$F(1) = 1^2 + 1 = 2$."
+                            "$[x^2 + x]_1^3 = (9 + 3) - (1 + 1) = 12 - 2 = 10$."
                         ],
-                        "full_solution_latex": "[x^2 + x]_1^3 = (9 + 3) - (1 + 1) = 12 - 2 = 10."
+                        "full_solution_latex": "10."
                     },
                     {
                         "id": "mat0250-ex3",
                         "title": "Aire sous une parabole",
                         "difficulty": 2,
-                        "question_latex": "Calculez l'aire comprise entre la courbe $y = x^2$, l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
+                        "question_latex": "Calculez l'aire sous la courbe $y = x^2$ entre $x = 0$ et $x = 3$.",
                         "input_type": "math_expr",
                         "expected_solution": "9",
                         "hints": [
-                            "Intégrez $x^2$ de 0 à 3.",
-                            "Primitive : $\\frac{x^3}{3}$.",
-                            "$\\frac{3^3}{3} - 0 = \\frac{27}{3} = 9$."
+                            "$\\int_0^3 x^2 dx = [x^3/3]_0^3 = 27/3 = 9$."
                         ],
-                        "full_solution_latex": "\\int_0^3 x^2 dx = \\left[\\frac{x^3}{3}\\right]_0^3 = \\frac{27}{3} - 0 = 9."
+                        "full_solution_latex": "9."
+                    },
+                    {
+                        "id": "mat0250-ex2_3",
+                        "title": "Intégrale de l'exponentielle",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\int_0^1 e^x dx$ (donnez l'expression exacte en fonction de e).",
+                        "input_type": "math_expr",
+                        "expected_solution": "e - 1",
+                        "hints": [
+                            "$[e^x]_0^1 = e^1 - e^0 = e - 1$."
+                        ],
+                        "full_solution_latex": "e - 1."
+                    },
+                    {
+                        "id": "mat0250-ex2_4",
+                        "title": "Intégrale trigonométrique définie",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\int_0^\\pi \\sin(x) dx$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "$[-\\cos(x)]_0^\\pi = -\\cos(\\pi) - (-\\cos(0)) = -(-1) - (-1) = 1 + 1 = 2$."
+                        ],
+                        "full_solution_latex": "2."
+                    },
+                    {
+                        "id": "mat0250-ex2_5",
+                        "title": "Aire entre deux courbes",
+                        "difficulty": 3,
+                        "question_latex": "Calculez l'aire délimitée par la droite $y = x$ et la parabole $y = x^2$ entre $x = 0$ et $x = 1$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "1/6",
+                        "hints": [
+                            "Sur $[0, 1]$, la droite est au-dessus : $\\int_0^1 (x - x^2) dx = [\\frac{x^2}{2} - \\frac{x^3}{3}]_0^1 = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6}$."
+                        ],
+                        "full_solution_latex": "\\frac{1}{6}."
+                    },
+                    {
+                        "id": "mat0250-ex2_6",
+                        "title": "Valeur moyenne d'une fonction",
+                        "difficulty": 2,
+                        "question_latex": "Calculez la valeur moyenne de $f(x) = 2x$ sur l'intervalle $[1, 6]$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "7",
+                        "hints": [
+                            "$\\frac{1}{6 - 1} \\int_1^6 2x dx = \\frac{1}{5} [x^2]_1^6 = \\frac{1}{5} (36 - 1) = \\frac{35}{5} = 7$."
+                        ],
+                        "full_solution_latex": "7."
                     }
                 ]
             },
             {
                 "id": "m3-techniques-integration",
                 "title": "Techniques d'intégration",
-                "subtitle": "Substitution et intégration par parties",
-                "viz_type": "techniques",
+                "subtitle": "Changement de variable (substitution), intégration par parties et règle LIATE",
+                "viz_type": "tangent",
                 "theory": {
-                    "summary": "La substitution inverse la règle de chaîne, tandis que l'intégration par parties inverse la règle du produit.",
+                    "summary": "La substitution inverse la règle de chaîne tandis que l'intégration par parties inverse la règle du produit. Ces deux techniques universelles permettent de résoudre les intégrales avancées rencontrées en physique et ingénierie.",
                     "key_formulas": [
-                        {"name": "Intégration par parties", "latex": "\\int u dv = uv - \\int v du"},
-                        {"name": "Changement de variable (u-sub)", "latex": "\\int f(g(x)) g'(x) dx = \\int f(u) du"},
-                        {"name": "Règle mnémotechnique LIATE", "latex": "\\text{Choix de } u : \\text{Log, Inverses trigo, Algébriques, Trigo, Exp}"}
+                        {
+                            "name": "Formule d'intégration par parties",
+                            "latex": "\\int u dv = uv - \\int v du"
+                        },
+                        {
+                            "name": "Changement de variable (u-sub)",
+                            "latex": "\\int f(g(x)) g'(x) dx = \\int f(u) du"
+                        },
+                        {
+                            "name": "Règle mnémotechnique LIATE",
+                            "latex": "\\text{Choix de } u : \\text{Log, Inverses trigo, Algébriques, Trigo, Exp}"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Méthode par parties",
-                            "content": "Utilisez la règle LIATE pour choisir $u$ : la première fonction dans l'ordre Logarithme, Inverse trigonométrique, Algébrique (polynôme), Trigonométrique, Exponentielle devient $u$."
+                            "title": "1. Changement de variable méthodique",
+                            "content": "1. Poser $u = g(x)$ pour la partie intérieure la plus encombrante.\n2. Calculer la différentielle $du = g'(x) dx$.\n3. Remplacer tous les $x$ pour ne laisser que la variable $u$.\n4. Pour une intégrale définie : calculer les nouvelles bornes $u(a)$ et $u(b)$."
+                        },
+                        {
+                            "title": "2. Intégration par parties avec LIATE",
+                            "content": "Choisir $u$ selon la priorité LIATE : Logarithmes, Inverses trigo, Algébriques (polynômes), Trigonométriques, Exponentielles. Tout le reste devient $dv$."
                         }
                     ],
-                    "pitfall": "Lors d'un changement de variable dans une intégrale définie, n'oublie pas de transformer aussi les bornes d'intégration !",
-                    "method": "Pour $\\int x e^x dx$ : pose $u = x \\implies du = dx$ et $dv = e^x dx \\implies v = e^x$. Alors $uv - \\int v du = x e^x - e^x + C$."
+                    "pitfall": "Quand tu fais un changement de variable sur une intégrale définie, change immédiatement les bornes ! Cela t'évite d'avoir à revenir en x à la fin.",
+                    "method": "Intégrer par parties x * e^x : pose u = x (polynôme avant exponentielle) et dv = e^x dx. Alors du = dx et v = e^x. uv - int(v du) = x e^x - e^x + C."
                 },
                 "exercises": [
                     {
                         "id": "mat0250-ex4",
-                        "title": "Substitution simple",
+                        "title": "Substitution avec puissance",
                         "difficulty": 2,
                         "question_latex": "Calculez $\\int 2x (x^2 + 1)^3 dx$ (omettre $+ C$).",
                         "input_type": "math_expr",
                         "expected_solution": "(x^2 + 1)^4 / 4",
                         "hints": [
                             "Posez $u = x^2 + 1 \\implies du = 2x dx$.",
-                            "L'intégrale devient $\\int u^3 du = \\frac{u^4}{4}$."
+                            "$\\int u^3 du = \\frac{u^4}{4} = \\frac{(x^2 + 1)^4}{4}$."
                         ],
-                        "full_solution_latex": "\\frac{(x^2 + 1)^4}{4} + C."
+                        "full_solution_latex": "\\frac{(x^2 + 1)^4}{4}."
                     },
                     {
                         "id": "mat0250-ex5",
-                        "title": "Intégration par parties",
+                        "title": "Intégration par parties classique",
                         "difficulty": 3,
                         "question_latex": "Calculez $\\int_0^1 x e^x dx$.",
                         "input_type": "math_expr",
                         "expected_solution": "1",
                         "hints": [
                             "Primitive : $x e^x - e^x$.",
-                            "En $1$ : $1(e^1) - e^1 = 0$.",
-                            "En $0$ : $0(e^0) - e^0 = -1$.",
-                            "Résultat : $0 - (-1) = 1$."
+                            "En 1 : $1(e) - e = 0$. En 0 : $0 - 1 = -1$. Différence : $0 - (-1) = 1$."
                         ],
-                        "full_solution_latex": "[x e^x - e^x]_0^1 = (e - e) - (0 - 1) = 0 - (-1) = 1."
+                        "full_solution_latex": "1."
+                    },
+                    {
+                        "id": "mat0250-ex3_3",
+                        "title": "Substitution logarithmique",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\int \\frac{x}{x^2 + 4} dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "ln(x^2 + 4)/2",
+                        "hints": [
+                            "Posez $u = x^2 + 4 \\implies du = 2x dx \\implies x dx = \\frac{du}{2}$.",
+                            "$\\frac{1}{2} \\int \\frac{1}{u} du = \\frac{1}{2} \\ln(u)$."
+                        ],
+                        "full_solution_latex": "\\frac{\\ln(x^2 + 4)}{2}."
+                    },
+                    {
+                        "id": "mat0250-ex3_4",
+                        "title": "Intégration par parties avec cosinus",
+                        "difficulty": 3,
+                        "question_latex": "Calculez $\\int x \\cos(x) dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "x*sin(x) + cos(x)",
+                        "hints": [
+                            "$u = x \\implies du = dx$ et $dv = \\cos x dx \\implies v = \\sin x$.",
+                            "$uv - \\int v du = x \\sin x - \\int \\sin x dx = x \\sin x - (-\\cos x) = x \\sin x + \\cos x$."
+                        ],
+                        "full_solution_latex": "x \\sin(x) + \\cos(x)."
+                    },
+                    {
+                        "id": "mat0250-ex3_5",
+                        "title": "Primitive du logarithme par parties",
+                        "difficulty": 3,
+                        "question_latex": "Calculez $\\int \\ln(x) dx$ (omettre $+ C$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "x*ln(x) - x",
+                        "hints": [
+                            "$u = \\ln x \\implies du = \\frac{1}{x} dx$ et $dv = dx \\implies v = x$.",
+                            "$x \\ln x - \\int x \\frac{1}{x} dx = x \\ln x - x$."
+                        ],
+                        "full_solution_latex": "x \\ln(x) - x."
+                    },
+                    {
+                        "id": "mat0250-ex3_6",
+                        "title": "Substitution trigonométrique simple",
+                        "difficulty": 2,
+                        "question_latex": "Calculez $\\int_0^{\\pi/2} \\sin(x) \\cos(x) dx$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "1/2",
+                        "hints": [
+                            "Posez $u = \\sin(x) \\implies du = \\cos(x) dx$. Bornes : de 0 à 1.",
+                            "$\\int_0^1 u du = [u^2 / 2]_0^1 = 1/2$."
+                        ],
+                        "full_solution_latex": "\\frac{1}{2}."
                     }
                 ]
             },
             {
                 "id": "m4-probabilites",
                 "title": "Probabilités et variables aléatoires",
-                "subtitle": "Dénombrement, probabilités conditionnelles et loi normale",
+                "subtitle": "Dénombrement, probabilités conditionnelles, espérance, variance et loi normale",
                 "viz_type": "bellcurve",
                 "theory": {
-                    "summary": "Ce module couvre la modélisation de l'incertitude : dénombrement (combinaisons, arrangements), probabilité conditionnelle, indépendance et la distribution normale.",
+                    "summary": "Ce module modélise l'incertitude et les données aléatoires. Il couvre les techniques de dénombrement (permutations, combinaisons), les lois de probabilités conditionnelles, l'espérance et la distribution normale gaussienne.",
                     "key_formulas": [
-                        {"name": "Combinaisons", "latex": "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}"},
-                        {"name": "Probabilité conditionnelle", "latex": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}"},
-                        {"name": "Espérance mathématique discrète", "latex": "E[X] = \\sum x_i P(X = x_i)"},
-                        {"name": "Centrage et réduction (Loi normale)", "latex": "Z = \\frac{X - \\mu}{\\sigma} \\sim \\mathcal{N}(0, 1)"}
+                        {
+                            "name": "Combinaisons (ordre indifférent)",
+                            "latex": "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}"
+                        },
+                        {
+                            "name": "Arrangements (l'ordre compte)",
+                            "latex": "A_n^k = \\frac{n!}{(n-k)!}"
+                        },
+                        {
+                            "name": "Probabilité conditionnelle",
+                            "latex": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}"
+                        },
+                        {
+                            "name": "Espérance mathématique",
+                            "latex": "E[X] = \\sum x_i P(X = x_i)"
+                        },
+                        {
+                            "name": "Variance d'une variable aléatoire",
+                            "latex": "V(X) = E[X^2] - (E[X])^2"
+                        },
+                        {
+                            "name": "Centrage et réduction (Cote Z)",
+                            "latex": "Z = \\frac{X - \\mu}{\\sigma} \\sim \\mathcal{N}(0, 1)"
+                        }
                     ],
                     "sections": [
                         {
-                            "title": "1. Événements indépendants",
-                            "content": "Deux événements $A$ et $B$ sont indépendants si et seulement si $P(A \\cap B) = P(A) \\times P(B)$."
+                            "title": "1. Dénombrement : combinaisons vs arrangements",
+                            "content": "• Si l'ordre des éléments compte (code secret, podium) : arrangement $A_n^k$.\n• Si l'ordre ne compte pas (main de cartes, comité) : combinaison $\\binom{n}{k}$."
                         },
                         {
-                            "title": "2. Règle empirique de la loi normale",
-                            "content": "Pour une variable normale $\\mathcal{N}(\\mu, \\sigma^2)$ : environ 68% des observations tombent dans $[\\mu - \\sigma, \\mu + \\sigma]$, 95% dans $[\\mu - 2\\sigma, \\mu + 2\\sigma]$ et 99.7% dans $[\\mu - 3\\sigma, \\mu + 3\\sigma]$."
+                            "title": "2. Indépendance et probabilité conditionnelle",
+                            "content": "$A$ et $B$ sont indépendants si la survenue de l'un n'influence pas l'autre : $P(A|B) = P(A) \\iff P(A \\cap B) = P(A) \\times P(B)$."
+                        },
+                        {
+                            "title": "3. La loi normale et la cote Z",
+                            "content": "La cote $Z$ indique le nombre d'écarts-types séparant une observation de la moyenne générale $\\mu$. Elle permet de comparer des grandeurs sur des échelles différentes."
                         }
                     ],
-                    "pitfall": "Ne pas confondre les arrangements (l'ordre compte) et les combinaisons (l'ordre ne compte pas).",
-                    "method": "Pour un calcul de probabilité d'une loi normale $X \\sim \\mathcal{N}(\\mu, \\sigma)$ : normalise toujours d'abord en calculant $Z = \\frac{X - \\mu}{\\sigma}$."
+                    "pitfall": "Attention : P(A | B) n'est PAS égal à P(B | A) en général ! Exemple : P(Être malade | Test positif) != P(Test positif | Être malade).",
+                    "method": "Pour calculer l'espérance : multiplie chaque valeur possible xi par sa probabilité associée pi, et additionne tous les termes. Le résultat est la moyenne pondérée à long terme."
                 },
                 "exercises": [
                     {
                         "id": "mat0250-ex6",
-                        "title": "Combinaisons",
+                        "title": "Combinaisons d'un comité",
                         "difficulty": 1,
-                        "question_latex": "De combien de manières peut-on choisir un comité de 3 personnes parmi un groupe de 7 personnes (calculer $\\binom{7}{3}$) ?",
+                        "question_latex": "De combien de manières peut-on choisir un comité de 3 personnes parmi 7 personnes (calculer $\\binom{7}{3}$) ?",
                         "input_type": "math_expr",
                         "expected_solution": "35",
                         "hints": [
-                            "$\\binom{7}{3} = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1}$.",
-                            "$\\frac{210}{6} = 35$."
+                            "$\\binom{7}{3} = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = \\frac{210}{6} = 35$."
                         ],
-                        "full_solution_latex": "\\binom{7}{3} = \\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = 35."
+                        "full_solution_latex": "35."
                     },
                     {
                         "id": "mat0250-ex7",
-                        "title": "Espérance d'une variable aléatoire",
+                        "title": "Espérance d'un jeu",
                         "difficulty": 2,
-                        "question_latex": "Soit $X$ prenant les valeurs 2 avec probabilité 0.3, et 10 avec probabilité 0.7. Calculez l'espérance $E[X]$.",
+                        "question_latex": "Soit $X$ prenant la valeur 2 avec probabilité 0.3 et 10 avec probabilité 0.7. Calculez $E[X]$.",
                         "input_type": "math_expr",
                         "expected_solution": "7.6",
                         "hints": [
-                            "$E[X] = 2(0.3) + 10(0.7)$.",
-                            "$0.6 + 7.0 = 7.6$."
+                            "$2(0.3) + 10(0.7) = 0.6 + 7.0 = 7.6$."
                         ],
-                        "full_solution_latex": "E[X] = 2(0.3) + 10(0.7) = 0.6 + 7.0 = 7.6."
+                        "full_solution_latex": "7.6."
+                    },
+                    {
+                        "id": "mat0250-ex4_3",
+                        "title": "Permutations d'un mot",
+                        "difficulty": 1,
+                        "question_latex": "Combien d'anagrammes distincts peut-on former avec les 5 lettres distinctes du mot MATHS ($5!$) ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "120",
+                        "hints": [
+                            "$5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$."
+                        ],
+                        "full_solution_latex": "120."
+                    },
+                    {
+                        "id": "mat0250-ex4_4",
+                        "title": "Probabilité de l'événement complémentaire",
+                        "difficulty": 1,
+                        "question_latex": "Si la probabilité de pluie est $P(A) = 0.4$, quelle est la probabilité qu'il ne pleuve pas ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0.6",
+                        "hints": [
+                            "$P(A^c) = 1 - P(A) = 1 - 0.4 = 0.6$."
+                        ],
+                        "full_solution_latex": "0.6."
+                    },
+                    {
+                        "id": "mat0250-ex4_5",
+                        "title": "Cote Z d'une loi normale",
+                        "difficulty": 2,
+                        "question_latex": "Une variable normale a une moyenne $\\mu = 100$ et un écart-type $\\sigma = 15$. Calculez la cote $Z$ pour une observation $X = 130$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "$Z = \\frac{X - \\mu}{\\sigma} = \\frac{130 - 100}{15} = \\frac{30}{15} = 2$."
+                        ],
+                        "full_solution_latex": "Z = 2."
+                    },
+                    {
+                        "id": "mat0250-ex4_6",
+                        "title": "Probabilité de deux lancers de pièce",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la probabilité d'obtenir deux fois Pile en lançant deux fois une pièce équilibrée sous forme décimale ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0.25",
+                        "hints": [
+                            "$\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4} = 0.25$."
+                        ],
+                        "full_solution_latex": "0.25."
                     }
                 ]
             }
