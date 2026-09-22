@@ -8,10 +8,11 @@ import {
   XCircle,
   RotateCcw,
   Send,
-  ChevronRight
+  ChevronRight,
+  PenLine
 } from 'lucide-react';
 
-export default function ExamTab({ courseId, courseTitle }) {
+export default function ExamTab({ courseId, courseTitle, onOpenScratchpad }) {
   const [examData, setExamData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [examStarted, setExamStarted] = useState(false);
@@ -267,15 +268,28 @@ export default function ExamTab({ courseId, courseTitle }) {
           </span>
         </div>
 
-        <div
-          className={`flex items-center gap-2 px-3 py-1.5 rounded-xl font-mono text-sm font-bold border ${
-            timeLeft < 300
-              ? 'bg-rose-50 text-rose-700 border-rose-300 animate-pulse'
-              : 'bg-slate-100 text-slate-800 border-slate-200'
-          }`}
-        >
-          <Clock className="w-4 h-4 text-indigo-600" />
-          <span>{formatTime(timeLeft)}</span>
+        <div className="flex items-center gap-2">
+          {onOpenScratchpad && (
+            <button
+              onClick={onOpenScratchpad}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 text-indigo-700 font-medium text-xs shadow-xs transition-colors cursor-pointer"
+              title="Ouvrir le brouillon manuscrit"
+            >
+              <PenLine className="w-3.5 h-3.5" />
+              <span>Brouillon</span>
+            </button>
+          )}
+
+          <div
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl font-mono text-sm font-bold border ${
+              timeLeft < 300
+                ? 'bg-rose-50 text-rose-700 border-rose-300 animate-pulse'
+                : 'bg-slate-100 text-slate-800 border-slate-200'
+            }`}
+          >
+            <Clock className="w-4 h-4 text-indigo-600" />
+            <span>{formatTime(timeLeft)}</span>
+          </div>
         </div>
       </div>
 

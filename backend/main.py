@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.6.0",
+            "date": "2026-09-22",
+            "title": "Brouillon Manuscrit (Apple Pencil) & Maintien du Clavier iPad",
+            "tag": "Ergonomie Tactile & iPad",
+            "description": "Intégration d'un espace de brouillon manuscrit haute précision optimisé pour iPad et Apple Pencil (détection de pression, lissage quadratique fluide, grille de cahier de calcul optionnelle, palette de couleurs, gomme et historique annuler/rétablir). Correction ergonomique sur tablette : neutralisation de la fermeture intempestive du clavier virtuel iPadOS lors de l'appui sur les touches de raccourcis mathématiques (^, sqrt, pi, fractions)."
+        },
+        {
             "version": "1.5.0",
             "date": "2026-09-22",
             "title": "Programme Universitaire Intégral : 100 Exercices & Théorie Approfondie",

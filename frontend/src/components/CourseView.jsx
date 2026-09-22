@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import TheoryTab from './TheoryTab';
 import ExerciseTab from './ExerciseTab';
 import ExamTab from './ExamTab';
+import Scratchpad from './Scratchpad';
 import {
   ArrowLeft,
   BookOpen,
   Dumbbell,
   Award,
   MessageSquare,
-  ChevronRight
+  ChevronRight,
+  PenLine
 } from 'lucide-react';
 
 export default function CourseView({
@@ -18,6 +20,7 @@ export default function CourseView({
 }) {
   const [activeTab, setActiveTab] = useState('theory'); // 'theory' | 'exercises' | 'exam'
   const [activeModuleId, setActiveModuleId] = useState(course.modules[0]?.id);
+  const [scratchpadOpen, setScratchpadOpen] = useState(false);
 
   const activeModule = course.modules.find((m) => m.id === activeModuleId) || course.modules[0];
 
@@ -40,17 +43,28 @@ export default function CourseView({
           </div>
         </div>
 
-        <button
-          onClick={() =>
-            onOpenTutorWithContext(
-              `Cours : ${course.title} (${course.code}). Module : ${activeModule?.title}.`
-            )
-          }
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
-        >
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>Aide Professeur</span>
-        </button>
+        <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
+          <button
+            onClick={() => setScratchpadOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 text-xs font-semibold transition-colors cursor-pointer"
+            title="Ouvrir le brouillon pour calculs manuscrits"
+          >
+            <PenLine className="w-3.5 h-3.5 text-indigo-600" />
+            <span>Brouillon</span>
+          </button>
+
+          <button
+            onClick={() =>
+              onOpenTutorWithContext(
+                `Cours : ${course.title} (${course.code}). Module : ${activeModule?.title}.`
+              )
+            }
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Aide Professeur</span>
+          </button>
+        </div>
       </div>
 
       {/* Modes : Comprendre, Pratiquer, Valider */}
@@ -139,11 +153,22 @@ export default function CourseView({
             moduleId={activeModuleId}
             exercises={activeModule?.exercises || []}
             onOpenTutorWithContext={onOpenTutorWithContext}
+            onOpenScratchpad={() => setScratchpadOpen(true)}
           />
         ) : (
-          <ExamTab courseId={course.id} courseTitle={course.title} />
+          <ExamTab
+            courseId={course.id}
+            courseTitle={course.title}
+            onOpenScratchpad={() => setScratchpadOpen(true)}
+          />
         )}
       </div>
+
+      {/* Modal Brouillon (Plein écran / Volet pour iPad & Apple Pencil) */}
+      <Scratchpad
+        isOpen={scratchpadOpen}
+        onClose={() => setScratchpadOpen(false)}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import MathView from './MathView';
 import {
   Check,
@@ -6,16 +6,24 @@ import {
   HelpCircle,
   Eye,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  PenLine
 } from 'lucide-react';
 
-export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpenTutorWithContext }) {
+export default function ExerciseTab({
+  courseId,
+  moduleId,
+  exercises = [],
+  onOpenTutorWithContext,
+  onOpenScratchpad
+}) {
   const [activeExIndex, setActiveExIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [verifications, setVerifications] = useState({});
   const [loadingVerify, setLoadingVerify] = useState(false);
   const [revealedHints, setRevealedHints] = useState({});
   const [revealedSolutions, setRevealedSolutions] = useState({});
+  const inputRef = useRef(null);
 
   if (!exercises || exercises.length === 0) {
     return (
@@ -80,11 +88,36 @@ export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpen
     }));
   };
 
-  const appendSymbol = (sym) => {
+  const insertSymbol = (sym, e) => {
+    // Empêche le bouton de voler le focus de l'input et de fermer le clavier virtuel sur iPad
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const input = inputRef.current;
+    const currentVal = answers[exId] || '';
+
+    let start = currentVal.length;
+    let end = currentVal.length;
+
+    if (input) {
+      start = input.selectionStart ?? currentVal.length;
+      end = input.selectionEnd ?? currentVal.length;
+    }
+
+    const nextVal = currentVal.slice(0, start) + sym + currentVal.slice(end);
     setAnswers((prev) => ({
       ...prev,
-      [exId]: (prev[exId] || '') + sym,
+      [exId]: nextVal,
     }));
+
+    if (input) {
+      // Maintient le focus et le curseur immédiatement après le symbole inséré
+      requestAnimationFrame(() => {
+        input.focus();
+        input.setSelectionRange(start + sym.length, start + sym.length);
+      });
+    }
   };
 
   return (
@@ -123,6 +156,17 @@ export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpen
             </span>
             <h2 className="text-base font-bold text-slate-900">{currentEx.title}</h2>
           </div>
+
+          {onOpenScratchpad && (
+            <button
+              onClick={onOpenScratchpad}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 text-xs font-semibold transition-colors cursor-pointer"
+              title="Ouvrir le brouillon pour écrire à la main"
+            >
+              <PenLine className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Brouillon</span>
+            </button>
+          )}
         </div>
 
         {/* Énoncé avec KaTeX */}
@@ -136,13 +180,19 @@ export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpen
             Ta réponse :
           </label>
 
-          {/* Raccourcis symboles tactiles pour iPad */}
+          {/* Raccourcis symboles tactiles pour iPad (garde le clavier ouvert) */}
           <div className="flex flex-wrap gap-2 pb-1">
             {['sqrt(', '^2', '^', 'pi', 'e', '/', '*', '+', '-', '(', ')', ', '].map((sym) => (
               <button
                 key={sym}
-                onClick={() => appendSymbol(sym)}
-                className="min-h-[40px] px-3.5 py-2 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-mono text-sm font-semibold rounded-xl border border-slate-200 transition-all cursor-pointer shadow-2xs"
+                type="button"
+                onMouseDown={(e) => insertSymbol(sym, e)}
+                onTouchStart={(e) => insertSymbol(sym, e)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  insertSymbol(sym, e);
+                }}
+                className="min-h-[40px] px-3.5 py-2 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-mono text-sm font-semibold rounded-xl border border-slate-200 transition-all cursor-pointer shadow-2xs select-none"
               >
                 {sym}
               </button>
@@ -151,6 +201,7 @@ export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpen
 
           <div className="flex flex-col sm:flex-row gap-2.5">
             <input
+              ref={inputRef}
               type="text"
               value={currentAnswer}
               onChange={(e) => setAnswers({ ...answers, [exId]: e.target.value })}
