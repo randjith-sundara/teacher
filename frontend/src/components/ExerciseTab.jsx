@@ -118,23 +118,11 @@ export default function ExerciseTab({ courseId, moduleId, exercises = [], onOpen
         {/* En-tête */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              {activeExIndex + 1} sur {exercises.length}
+            <span className="text-xs font-mono text-slate-400">
+              {activeExIndex + 1}/{exercises.length}
             </span>
             <h2 className="text-base font-bold text-slate-900">{currentEx.title}</h2>
           </div>
-
-          <span
-            className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${
-              currentEx.difficulty === 1
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                : currentEx.difficulty === 2
-                ? 'bg-amber-50 text-amber-800 border-amber-200'
-                : 'bg-rose-50 text-rose-800 border-rose-200'
-            }`}
-          >
-            Niveau {currentEx.difficulty}
-          </span>
         </div>
 
         {/* Énoncé avec KaTeX */}
