@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.2.0",
+            "date": "2026-09-22",
+            "title": "Refonte Complète : Thème Clair & Parcours Pas-à-Pas (Style Brilliant)",
+            "tag": "Design & Expérience Utilisateur",
+            "description": "Transformation complète de l'interface : passage au thème clair et chaleureux, page d'accueil épurée sans aucun cours pré-ouvert, focus sur une seule matière à la fois, navigation simplifiée (Comprendre, Pratiquer, Valider) et suppression de tout encombrement visuel."
+        },
+        {
             "version": "1.1.0",
             "date": "2026-09-22",
             "title": "Cours FOND-0100 : Remise à Niveau & Fondations (De Zéro)",

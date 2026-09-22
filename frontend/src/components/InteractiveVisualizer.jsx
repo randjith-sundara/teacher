@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import MathView from './MathView';
-import { Sliders, RotateCcw } from 'lucide-react';
+import { Sliders } from 'lucide-react';
 
 export default function InteractiveVisualizer({ type }) {
   // Mode Droite (FOND-0100)
@@ -38,16 +38,17 @@ export default function InteractiveVisualizer({ type }) {
     const width = canvas.width;
     const height = canvas.height;
 
-    ctx.clearRect(0, 0, width, height);
+    // Fond blanc propre
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
 
     if (type === 'line' || type === 'fractions') {
-      // Visualisation de la droite y = mx + b
       const cx = width / 2;
       const cy = height / 2;
       const scale = 28;
 
-      // Grille
-      ctx.strokeStyle = '#1e293b';
+      // Grille claire
+      ctx.strokeStyle = '#f1f5f9';
       ctx.lineWidth = 1;
       for (let x = cx % scale; x < width; x += scale) {
         ctx.beginPath();
@@ -62,8 +63,8 @@ export default function InteractiveVisualizer({ type }) {
         ctx.stroke();
       }
 
-      // Axes
-      ctx.strokeStyle = '#475569';
+      // Axes gris soutenu
+      ctx.strokeStyle = '#94a3b8';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, cy);
@@ -73,8 +74,8 @@ export default function InteractiveVisualizer({ type }) {
       ctx.stroke();
 
       // Droite y = m*x + b
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 3;
       ctx.beginPath();
       const xLeft = -8;
       const xRight = 8;
@@ -85,21 +86,21 @@ export default function InteractiveVisualizer({ type }) {
       ctx.stroke();
 
       // Point ordonnée à l'origine (0, b)
-      ctx.fillStyle = '#f43f5e';
+      ctx.fillStyle = '#e11d48';
       ctx.beginPath();
-      ctx.arc(cx, cy - interceptB * scale, 5, 0, Math.PI * 2);
+      ctx.arc(cx, cy - interceptB * scale, 5.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Point en x = 1 (1, m + b) pour visualiser la pente
+      // Point en x = 1 (1, m + b)
       const x1 = 1;
       const y1 = slopeM * x1 + interceptB;
-      ctx.fillStyle = '#34d399';
+      ctx.fillStyle = '#059669';
       ctx.beginPath();
-      ctx.arc(cx + x1 * scale, cy - y1 * scale, 5, 0, Math.PI * 2);
+      ctx.arc(cx + x1 * scale, cy - y1 * scale, 5.5, 0, Math.PI * 2);
       ctx.fill();
 
       // Triangle de pente
-      ctx.strokeStyle = '#fbbf24';
+      ctx.strokeStyle = '#d97706';
       ctx.setLineDash([3, 3]);
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -109,13 +110,11 @@ export default function InteractiveVisualizer({ type }) {
       ctx.stroke();
       ctx.setLineDash([]);
     } else if (type === 'trigcircle') {
-      // Cercle trigonométrique unitaire
       const cx = width / 2;
       const cy = height / 2;
       const radius = 90;
 
-      // Axes
-      ctx.strokeStyle = '#475569';
+      ctx.strokeStyle = '#94a3b8';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, cy);
@@ -124,7 +123,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx, height);
       ctx.stroke();
 
-      // Cercle de rayon 1
       ctx.strokeStyle = '#64748b';
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -138,52 +136,50 @@ export default function InteractiveVisualizer({ type }) {
       const px = cx + cosVal * radius;
       const py = cy - sinVal * radius;
 
-      // Projection Cosinus (horizontal en cyan)
-      ctx.strokeStyle = '#38bdf8';
+      // Cosinus (cyan)
+      ctx.strokeStyle = '#0284c7';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(px, cy);
       ctx.stroke();
 
-      // Projection Sinus (vertical en émeraude)
-      ctx.strokeStyle = '#34d399';
+      // Sinus (émeraude)
+      ctx.strokeStyle = '#059669';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(px, cy);
       ctx.lineTo(px, py);
       ctx.stroke();
 
-      // Rayon vers le point (ambre)
-      ctx.strokeStyle = '#fbbf24';
+      // Rayon (ambre)
+      ctx.strokeStyle = '#d97706';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(px, py);
       ctx.stroke();
 
-      // Point sur le cercle
-      ctx.fillStyle = '#f43f5e';
+      // Point
+      ctx.fillStyle = '#e11d48';
       ctx.beginPath();
-      ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.arc(px, py, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Arc d'angle
-      ctx.strokeStyle = '#e2e8f0';
-      ctx.lineWidth = 1;
+      // Arc
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(cx, cy, 25, 0, -rad, rad > 0 ? true : false);
       ctx.stroke();
     } else if (type === 'parabola') {
-      // Parabole y = ax^2 + c
       const cx = width / 2;
       const cy = height / 2 + 30;
       const scaleX = 40;
       const scaleY = 20;
 
-      // Axes
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, cy);
       ctx.lineTo(width, cy);
@@ -191,9 +187,8 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx, height);
       ctx.stroke();
 
-      // Tracé y = a*x^2 + c
-      ctx.strokeStyle = '#f59e0b';
-      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#d97706';
+      ctx.lineWidth = 3;
       ctx.beginPath();
       for (let px = 0; px < width; px += 2) {
         const x = (px - cx) / scaleX;
@@ -204,18 +199,16 @@ export default function InteractiveVisualizer({ type }) {
       }
       ctx.stroke();
 
-      // Sommet (0, c)
-      ctx.fillStyle = '#f43f5e';
+      ctx.fillStyle = '#e11d48';
       ctx.beginPath();
-      ctx.arc(cx, cy - quadC * scaleY, 5, 0, Math.PI * 2);
+      ctx.arc(cx, cy - quadC * scaleY, 6, 0, Math.PI * 2);
       ctx.fill();
     } else if (type === 'vector2d' || type === 'vector3d' || type === 'planes') {
       const cx = width / 2;
       const cy = height / 2;
       const scale = 32;
 
-      // Grille
-      ctx.strokeStyle = '#1e293b';
+      ctx.strokeStyle = '#f1f5f9';
       ctx.lineWidth = 1;
       for (let x = cx % scale; x < width; x += scale) {
         ctx.beginPath();
@@ -230,8 +223,7 @@ export default function InteractiveVisualizer({ type }) {
         ctx.stroke();
       }
 
-      // Axes
-      ctx.strokeStyle = '#475569';
+      ctx.strokeStyle = '#94a3b8';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, cy);
@@ -262,11 +254,11 @@ export default function InteractiveVisualizer({ type }) {
 
       const vEndX = cx + vx * scale;
       const vEndY = cy - vy * scale;
-      drawArrow(cx, cy, vEndX, vEndY, '#38bdf8', 3);
+      drawArrow(cx, cy, vEndX, vEndY, '#0284c7', 3);
 
       const uEndX = cx + ux * scale;
       const uEndY = cy - uy * scale;
-      drawArrow(cx, cy, uEndX, uEndY, '#34d399', 3);
+      drawArrow(cx, cy, uEndX, uEndY, '#059669', 3);
 
       const dot = ux * vx + uy * vy;
       const normVSq = vx * vx + vy * vy;
@@ -277,7 +269,7 @@ export default function InteractiveVisualizer({ type }) {
         const pEndX = cx + px * scale;
         const pEndY = cy - py * scale;
 
-        ctx.strokeStyle = '#94a3b8';
+        ctx.strokeStyle = '#64748b';
         ctx.setLineDash([4, 4]);
         ctx.lineWidth = 1.5;
         ctx.beginPath();
@@ -286,7 +278,7 @@ export default function InteractiveVisualizer({ type }) {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        drawArrow(cx, cy, pEndX, pEndY, '#fbbf24', 3);
+        drawArrow(cx, cy, pEndX, pEndY, '#d97706', 3);
       }
     } else if (type === 'tangent' || type === 'limit' || type === 'derivatives' || type === 'optimization') {
       const cx = width / 2;
@@ -294,8 +286,8 @@ export default function InteractiveVisualizer({ type }) {
       const scaleX = 70;
       const scaleY = 35;
 
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, cy);
       ctx.lineTo(width, cy);
@@ -306,8 +298,8 @@ export default function InteractiveVisualizer({ type }) {
       const f = (x) => 0.5 * Math.pow(x, 3) - 2 * x;
       const fPrime = (x) => 1.5 * Math.pow(x, 2) - 2;
 
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 3;
       ctx.beginPath();
       for (let px = 0; px < width; px += 2) {
         const x = (px - cx) / scaleX;
@@ -322,8 +314,8 @@ export default function InteractiveVisualizer({ type }) {
       const y0 = f(x0);
       const m = fPrime(x0);
 
-      ctx.strokeStyle = '#f43f5e';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#e11d48';
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
       const xLeft = -3;
       const xRight = 3;
@@ -336,11 +328,11 @@ export default function InteractiveVisualizer({ type }) {
 
       const ptX = cx + x0 * scaleX;
       const ptY = cy - y0 * scaleY;
-      ctx.fillStyle = '#f43f5e';
+      ctx.fillStyle = '#e11d48';
       ctx.beginPath();
-      ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
+      ctx.arc(ptX, ptY, 6, 0, Math.PI * 2);
       ctx.fill();
-    } else if (type === 'riemann' || type === 'primitive' || type === 'techniques') {
+    } else {
       const originX = 60;
       const originY = height - 50;
       const scaleX = 80;
@@ -351,8 +343,8 @@ export default function InteractiveVisualizer({ type }) {
       const b = 3.5;
       const dx = (b - a) / riemannN;
 
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(originX - 20, originY);
       ctx.lineTo(width - 20, originY);
@@ -360,9 +352,9 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(originX, originY + 20);
       ctx.stroke();
 
-      ctx.fillStyle = 'rgba(99, 102, 241, 0.35)';
-      ctx.strokeStyle = '#818cf8';
-      ctx.lineWidth = 1;
+      ctx.fillStyle = 'rgba(79, 70, 229, 0.15)';
+      ctx.strokeStyle = '#4f46e5';
+      ctx.lineWidth = 1.5;
 
       for (let i = 0; i < riemannN; i++) {
         const xi = a + i * dx;
@@ -376,8 +368,8 @@ export default function InteractiveVisualizer({ type }) {
         ctx.strokeRect(rx, ry, rw, rh);
       }
 
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 3;
       ctx.beginPath();
       for (let px = originX; px < width - 20; px += 2) {
         const x = (px - originX) / scaleX;
@@ -387,77 +379,40 @@ export default function InteractiveVisualizer({ type }) {
         else ctx.lineTo(px, py);
       }
       ctx.stroke();
-    } else {
-      const cx = width / 2;
-      const cy = height - 40;
-      const scaleX = 55;
-      const scaleY = 160;
-
-      const phi = (x) => (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * x * x);
-
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
-      ctx.beginPath();
-      ctx.moveTo(cx - 3.5 * scaleX, cy);
-      for (let x = -3.5; x <= normZ; x += 0.05) {
-        ctx.lineTo(cx + x * scaleX, cy - phi(x) * scaleY);
-      }
-      ctx.lineTo(cx + normZ * scaleX, cy);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.strokeStyle = '#34d399';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      for (let x = -3.5; x <= 3.5; x += 0.05) {
-        const px = cx + x * scaleX;
-        const py = cy - phi(x) * scaleY;
-        if (x === -3.5) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.stroke();
-
-      ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(cx + normZ * scaleX, cy);
-      ctx.lineTo(cx + normZ * scaleX, cy - phi(normZ) * scaleY);
-      ctx.stroke();
     }
   }, [type, slopeM, interceptB, trigAngleDeg, quadA, quadC, ux, uy, vx, vy, tanX, riemannN, normZ]);
 
   const radVal = ((trigAngleDeg * Math.PI) / 180).toFixed(2);
   const cosDisplay = Math.cos((trigAngleDeg * Math.PI) / 180).toFixed(2);
   const sinDisplay = Math.sin((trigAngleDeg * Math.PI) / 180).toFixed(2);
-
   const dotProduct = ux * vx + uy * vy;
   const mSlope = (1.5 * Math.pow(tanX, 2) - 2).toFixed(2);
-  const fVal = (0.5 * Math.pow(tanX, 3) - 2 * tanX).toFixed(2);
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
-        <div className="flex items-center gap-2 text-sm font-semibold text-slate-200">
-          <Sliders className="w-4 h-4 text-amber-400" />
-          <span>Laboratoire Visuel & Expérimentation</span>
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center gap-2 text-xs font-bold text-slate-800 uppercase tracking-wider">
+          <Sliders className="w-4 h-4 text-indigo-600" />
+          <span>Laboratoire Visuel Interactif</span>
         </div>
-        <span className="text-xs text-slate-400">Ajustez les paramètres en direct</span>
+        <span className="text-xs text-slate-500">Bouge les curseurs pour observer</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2 flex items-center justify-center bg-slate-950/70 rounded-lg p-2 border border-slate-800/60 overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="md:col-span-2 flex items-center justify-center bg-slate-50 rounded-xl p-3 border border-slate-200/80 overflow-hidden">
           <canvas
             ref={canvasRef}
             width={480}
             height={260}
-            className="w-full max-w-[480px] h-auto block"
+            className="w-full max-w-[480px] h-auto block rounded-lg shadow-2xs"
           />
         </div>
 
-        <div className="flex flex-col justify-between text-xs space-y-3 bg-slate-950/40 p-3 rounded-lg border border-slate-800/40">
+        <div className="flex flex-col justify-between text-xs space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200/80">
           {type === 'line' || type === 'fractions' ? (
             <div className="space-y-3">
               <div>
-                <label className="flex justify-between text-sky-400 font-medium mb-1">
+                <label className="flex justify-between text-sky-700 font-semibold mb-1">
                   <span>Pente m : {slopeM}</span>
                 </label>
                 <input
@@ -467,12 +422,12 @@ export default function InteractiveVisualizer({ type }) {
                   step="0.5"
                   value={slopeM}
                   onChange={(e) => setSlopeM(Number(e.target.value))}
-                  className="w-full accent-sky-500"
+                  className="w-full accent-sky-600"
                 />
               </div>
 
               <div>
-                <label className="flex justify-between text-rose-400 font-medium mb-1">
+                <label className="flex justify-between text-rose-700 font-semibold mb-1">
                   <span>Ordonnée à l'origine b : {interceptB}</span>
                 </label>
                 <input
@@ -482,27 +437,23 @@ export default function InteractiveVisualizer({ type }) {
                   step="1"
                   value={interceptB}
                   onChange={(e) => setInterceptB(Number(e.target.value))}
-                  className="w-full accent-rose-500"
+                  className="w-full accent-rose-600"
                 />
               </div>
 
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="flex justify-between text-indigo-300 font-bold">
-                  <span>Équation :</span>
-                  <span>y = {slopeM}x {interceptB >= 0 ? `+ ${interceptB}` : `- ${Math.abs(interceptB)}`}</span>
+              <div className="pt-2 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                <div className="font-bold text-indigo-700">
+                  y = {slopeM}x {interceptB >= 0 ? `+ ${interceptB}` : `- ${Math.abs(interceptB)}`}
                 </div>
-                <div className="text-[11px] text-slate-400">
-                  {slopeM > 0 ? '↗ Droite croissante (monte)' : slopeM < 0 ? '↘ Droite décroissante (descend)' : '→ Droite horizontale (constante)'}
-                </div>
-                <div className="text-[10px] text-amber-300">
-                  Le point rouge est (0, b), le vert est (1, m+b).
+                <div className="text-[11px] text-slate-500">
+                  {slopeM > 0 ? '↗ Droite croissante' : slopeM < 0 ? '↘ Droite décroissante' : '→ Droite horizontale'}
                 </div>
               </div>
             </div>
           ) : type === 'trigcircle' ? (
             <div className="space-y-3">
               <div>
-                <label className="flex justify-between text-amber-400 font-medium mb-1">
+                <label className="flex justify-between text-amber-800 font-semibold mb-1">
                   <span>Angle θ : {trigAngleDeg}° ({radVal} rad)</span>
                 </label>
                 <input
@@ -512,135 +463,20 @@ export default function InteractiveVisualizer({ type }) {
                   step="5"
                   value={trigAngleDeg}
                   onChange={(e) => setTrigAngleDeg(Number(e.target.value))}
-                  className="w-full accent-amber-500"
+                  className="w-full accent-amber-600"
                 />
               </div>
 
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="flex justify-between text-sky-400">
-                  <span>cos(θ) [horizontal] :</span>
-                  <span className="font-bold">{cosDisplay}</span>
-                </div>
-                <div className="flex justify-between text-emerald-400">
-                  <span>sin(θ) [vertical] :</span>
-                  <span className="font-bold">{sinDisplay}</span>
-                </div>
-                <div className="text-[10px] text-slate-400 pt-1">
-                  Sur le cercle unité, tout angle θ donne un point de coordonnées (cos θ, sin θ).
-                </div>
-              </div>
-            </div>
-          ) : type === 'parabola' ? (
-            <div className="space-y-3">
-              <div>
-                <label className="flex justify-between text-amber-400 font-medium mb-1">
-                  <span>Courbure a : {quadA}</span>
-                </label>
-                <input
-                  type="range"
-                  min="-2"
-                  max="2"
-                  step="0.5"
-                  value={quadA}
-                  onChange={(e) => setQuadA(Number(e.target.value))}
-                  className="w-full accent-amber-500"
-                />
-              </div>
-
-              <div>
-                <label className="flex justify-between text-rose-400 font-medium mb-1">
-                  <span>Hauteur c : {quadC}</span>
-                </label>
-                <input
-                  type="range"
-                  min="-6"
-                  max="6"
-                  step="1"
-                  value={quadC}
-                  onChange={(e) => setQuadC(Number(e.target.value))}
-                  className="w-full accent-rose-500"
-                />
-              </div>
-
-              <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-300 font-mono">
-                <div>y = {quadA}x² {quadC >= 0 ? `+ ${quadC}` : `- ${Math.abs(quadC)}`}</div>
-                <div className="text-slate-400 text-[10px] mt-1">
-                  {quadA > 0 ? 'U Parabole vers le haut (minimum)' : quadA < 0 ? '∩ Parabole vers le bas (maximum)' : 'Droite'}
-                </div>
-              </div>
-            </div>
-          ) : type === 'vector2d' || type === 'vector3d' || type === 'planes' ? (
-            <div className="space-y-3">
-              <div>
-                <label className="flex justify-between text-emerald-400 font-medium mb-1">
-                  <span>Vecteur u : ({ux}, {uy})</span>
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="range"
-                    min="-5"
-                    max="5"
-                    step="1"
-                    value={ux}
-                    onChange={(e) => setUx(Number(e.target.value))}
-                    className="w-1/2 accent-emerald-500"
-                  />
-                  <input
-                    type="range"
-                    min="-5"
-                    max="5"
-                    step="1"
-                    value={uy}
-                    onChange={(e) => setUy(Number(e.target.value))}
-                    className="w-1/2 accent-emerald-500"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="flex justify-between text-sky-400 font-medium mb-1">
-                  <span>Vecteur v : ({vx}, {vy})</span>
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="range"
-                    min="-5"
-                    max="5"
-                    step="1"
-                    value={vx}
-                    onChange={(e) => setVx(Number(e.target.value))}
-                    className="w-1/2 accent-sky-500"
-                  />
-                  <input
-                    type="range"
-                    min="-5"
-                    max="5"
-                    step="1"
-                    value={vy}
-                    onChange={(e) => setVy(Number(e.target.value))}
-                    className="w-1/2 accent-sky-500"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="flex justify-between">
-                  <span className="text-slate-400">u · v :</span>
-                  <span className={`font-bold ${dotProduct === 0 ? 'text-amber-400' : 'text-slate-200'}`}>
-                    {dotProduct} {dotProduct === 0 && '(Orthogonaux !)'}
-                  </span>
-                </div>
-                <div className="flex justify-between text-amber-300 text-[11px]">
-                  <span>Vecteur jaune :</span>
-                  <span>Projection proj_v(u)</span>
-                </div>
+              <div className="pt-2 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                <div className="text-sky-700">cos(θ) : <b>{cosDisplay}</b> (horizontal)</div>
+                <div className="text-emerald-700">sin(θ) : <b>{sinDisplay}</b> (vertical)</div>
               </div>
             </div>
           ) : type === 'tangent' || type === 'limit' || type === 'derivatives' || type === 'optimization' ? (
             <div className="space-y-3">
               <div>
-                <label className="flex justify-between text-sky-400 font-medium mb-1">
-                  <span>Point x₀ : {tanX.toFixed(2)}</span>
+                <label className="flex justify-between text-sky-700 font-semibold mb-1">
+                  <span>Position x₀ : {tanX.toFixed(2)}</span>
                 </label>
                 <input
                   type="range"
@@ -649,35 +485,32 @@ export default function InteractiveVisualizer({ type }) {
                   step="0.05"
                   value={tanX}
                   onChange={(e) => setTanX(Number(e.target.value))}
-                  className="w-full accent-sky-500"
+                  className="w-full accent-sky-600"
                 />
               </div>
 
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Pente f'(x₀) :</span>
-                  <span className={`font-bold ${Math.abs(Number(mSlope)) < 0.1 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    {mSlope}
-                  </span>
+              <div className="pt-2 border-t border-slate-200 font-mono text-slate-700">
+                <span>Pente de la tangente f'(x₀) : </span>
+                <b className="text-rose-600">{mSlope}</b>
+              </div>
+            </div>
+          ) : type === 'vector2d' || type === 'vector3d' || type === 'planes' ? (
+            <div className="space-y-3">
+              <div>
+                <label className="text-emerald-700 font-semibold block mb-1">Vecteur u : ({ux}, {uy})</label>
+                <div className="flex gap-2">
+                  <input type="range" min="-5" max="5" value={ux} onChange={(e) => setUx(Number(e.target.value))} className="w-1/2 accent-emerald-600" />
+                  <input type="range" min="-5" max="5" value={uy} onChange={(e) => setUy(Number(e.target.value))} className="w-1/2 accent-emerald-600" />
                 </div>
+              </div>
+              <div className="pt-2 border-t border-slate-200 font-mono text-slate-700">
+                u · v = <b>{dotProduct}</b> {dotProduct === 0 && '(Orthogonaux !)'}
               </div>
             </div>
           ) : (
             <div className="space-y-3">
-              <div>
-                <label className="flex justify-between text-indigo-400 font-medium mb-1">
-                  <span>Rectangles N : {riemannN}</span>
-                </label>
-                <input
-                  type="range"
-                  min="2"
-                  max="30"
-                  step="1"
-                  value={riemannN}
-                  onChange={(e) => setRiemannN(Number(e.target.value))}
-                  className="w-full accent-indigo-500"
-                />
-              </div>
+              <label className="text-indigo-700 font-semibold block mb-1">Rectangles N : {riemannN}</label>
+              <input type="range" min="2" max="30" value={riemannN} onChange={(e) => setRiemannN(Number(e.target.value))} className="w-full accent-indigo-600" />
             </div>
           )}
         </div>
