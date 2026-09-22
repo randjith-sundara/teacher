@@ -225,6 +225,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.11.0",
+            "date": "2026-09-22",
+            "title": "Note de Brouillon Flottante, Déplaçable & Tracé Persistant",
+            "tag": "Expérience Tactile & Brouillon",
+            "description": "Refonte du brouillon en fenêtre/note flottante déplaçable (draggable) n'obstruant plus les énoncés d'exercices. L'utilisateur peut déplacer la note n'importe où sur l'écran (avec stylet ou doigt), la redimensionner ou la passer en plein écran. Sauvegarde automatique et permanente du tracé manuscrit dans le navigateur (localStorage) : les calculs ne s'effacent plus à la fermeture, lors d'un rafraîchissement ou d'un changement de chapitre."
+        },
+        {
             "version": "1.10.0",
             "date": "2026-09-22",
             "title": "Différenciation Complète des Exercices & Autonomie Pédagogique",
