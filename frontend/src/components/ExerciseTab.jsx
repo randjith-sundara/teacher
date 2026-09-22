@@ -7,14 +7,22 @@ import {
   Eye,
   ChevronRight,
   Sparkles,
-  PenLine
+  PenLine,
+  CheckCircle2,
+  Award
 } from 'lucide-react';
 
 export default function ExerciseTab({
   courseId,
+  courseTitle = '',
   moduleId,
   exercises = [],
   courseProgress = {},
+  nextModule,
+  nextCourse,
+  onGoToNextModule,
+  onGoToNextCourse,
+  onGoToExam,
   onExerciseCompleted,
   onOpenTutorWithContext,
   onOpenScratchpad
@@ -68,6 +76,13 @@ export default function ExerciseTab({
     (courseProgress[exId]?.is_correct
       ? { correct: true, message: 'Exercice validé avec succès.' }
       : null);
+
+  const hasNextEx = activeExIndex < exercises.length - 1;
+  const isModuleFullyCompleted =
+    exercises.length > 0 &&
+    exercises.every(
+      (ex) => verifications[ex.id]?.correct || courseProgress[ex.id]?.is_correct
+    );
 
   const handleVerify = async () => {
     if (!currentAnswer.trim() || loadingVerify) return;
@@ -276,25 +291,37 @@ export default function ExerciseTab({
         {/* Résultat SymPy ou état validé */}
         {effectiveVerif && (
           <div
-            className={`p-4 rounded-xl border flex items-start gap-3 transition-all ${
+            className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all ${
               effectiveVerif.correct
                 ? 'bg-emerald-50 border-emerald-300 text-emerald-950'
                 : 'bg-rose-50 border-rose-300 text-rose-950'
             }`}
           >
-            {effectiveVerif.correct ? (
-              <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-            ) : (
-              <X className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
-            )}
-            <div className="text-sm">
-              <span className="font-bold block">
-                {effectiveVerif.correct ? 'Bravo ! Réponse exacte.' : 'Ce n\'est pas tout à fait ça.'}
-              </span>
-              <span className="text-xs text-slate-700">
-                {effectiveVerif.details || effectiveVerif.message}
-              </span>
+            <div className="flex items-start gap-3">
+              {effectiveVerif.correct ? (
+                <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+              ) : (
+                <X className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+              )}
+              <div className="text-sm">
+                <span className="font-bold block">
+                  {effectiveVerif.correct ? 'Bravo ! Réponse exacte.' : 'Ce n\'est pas tout à fait ça.'}
+                </span>
+                <span className="text-xs text-slate-700">
+                  {effectiveVerif.details || effectiveVerif.message}
+                </span>
+              </div>
             </div>
+
+            {effectiveVerif.correct && hasNextEx && (
+              <button
+                onClick={() => setActiveExIndex((prev) => prev + 1)}
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer"
+              >
+                <span>Exercice suivant</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
           </div>
         )}
 
@@ -369,6 +396,63 @@ export default function ExerciseTab({
           </div>
         )}
       </div>
+
+      {/* Proposition de transition après complétion du chapitre ou du cours */}
+      {isModuleFullyCompleted && (
+        <div className="bg-white border-2 border-emerald-200/90 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div className="flex items-start sm:items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 shrink-0">
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-slate-900">
+                {nextModule
+                  ? 'Chapitre validé avec succès !'
+                  : 'Félicitations ! Tous les exercices de ce cours sont terminés !'}
+              </div>
+              <div className="text-xs text-slate-500 mt-0.5">
+                {nextModule
+                  ? `Passe au chapitre suivant : « ${nextModule.title} »`
+                  : 'Valide tes compétences à l\'examen blanc ou continue directement avec le cours universitaire suivant.'}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            {nextModule ? (
+              <button
+                onClick={onGoToNextModule}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+              >
+                <span>Chapitre suivant ({nextModule.title})</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <>
+                {onGoToExam && (
+                  <button
+                    onClick={onGoToExam}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+                  >
+                    <Award className="w-4 h-4" />
+                    <span>Passer l'Examen Blanc</span>
+                  </button>
+                )}
+
+                {nextCourse && onGoToNextCourse && (
+                  <button
+                    onClick={onGoToNextCourse}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+                  >
+                    <span>Cours suivant : {nextCourse.code}</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -15,12 +15,26 @@ import {
 
 export default function CourseView({
   course,
+  courses = [],
+  onSelectCourse,
   onBackToHome,
   onOpenTutorWithContext,
 }) {
   const [activeTab, setActiveTab] = useState('theory'); // 'theory' | 'exercises' | 'exam'
   const [activeModuleId, setActiveModuleId] = useState(course.modules[0]?.id);
   const [scratchpadOpen, setScratchpadOpen] = useState(false);
+
+  const currentCourseIndex = courses.findIndex((c) => c.id === course.id);
+  const nextCourse =
+    currentCourseIndex >= 0 && currentCourseIndex < courses.length - 1
+      ? courses[currentCourseIndex + 1]
+      : null;
+
+  const currentModuleIndex = course.modules.findIndex((m) => m.id === activeModuleId);
+  const nextModule =
+    currentModuleIndex >= 0 && currentModuleIndex < course.modules.length - 1
+      ? course.modules[currentModuleIndex + 1]
+      : null;
 
   // État de progression des exercices (initialisé depuis le cache local)
   const [courseProgress, setCourseProgress] = useState(() => {
@@ -230,9 +244,15 @@ export default function CourseView({
         ) : activeTab === 'exercises' ? (
           <ExerciseTab
             courseId={course.id}
+            courseTitle={course.title}
             moduleId={activeModuleId}
             exercises={activeModule?.exercises || []}
             courseProgress={courseProgress}
+            nextModule={nextModule}
+            nextCourse={nextCourse}
+            onGoToNextModule={nextModule ? () => setActiveModuleId(nextModule.id) : null}
+            onGoToNextCourse={nextCourse && onSelectCourse ? () => onSelectCourse(nextCourse.id) : null}
+            onGoToExam={() => setActiveTab('exam')}
             onExerciseCompleted={handleExerciseCompleted}
             onOpenTutorWithContext={onOpenTutorWithContext}
             onOpenScratchpad={() => setScratchpadOpen(true)}

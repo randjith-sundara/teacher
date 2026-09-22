@@ -225,6 +225,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.8.0",
+            "date": "2026-09-22",
+            "title": "Navigation & Enchaînement Fluide (Exercice, Chapitre & Cours Suivant)",
+            "tag": "Expérience Utilisateur & Navigation",
+            "description": "Fluidification du parcours d'apprentissage : bouton 'Exercice suivant' immédiat dès qu'une réponse est validée avec succès, bandeau sobre de réussite lors de la complétion d'un chapitre proposant le passage direct au chapitre suivant, et propositions d'enchaînement avec l'examen blanc ou le cours universitaire suivant (FOND-0100 -> MAT-0130 -> MAT-0150 -> MAT-0250) à l'achèvement de la matière."
+        },
+        {
             "version": "1.7.0",
             "date": "2026-09-22",
             "title": "Persistance Hybride (BDD SQLite & Cache Local) des Exercices",

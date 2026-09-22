@@ -99,6 +99,8 @@ export default function App() {
         ) : (
           <CourseView
             course={selectedCourse}
+            courses={courses}
+            onSelectCourse={(id) => setSelectedCourseId(id)}
             onBackToHome={() => setSelectedCourseId(null)}
             onOpenTutorWithContext={handleOpenTutorWithContext}
           />
