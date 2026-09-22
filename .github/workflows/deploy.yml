@@ -61,31 +61,16 @@ jobs:
             # PM2 restart or start
             pm2 restart teacher --update-env || pm2 start "/var/www/teacher/.venv/bin/python -m uvicorn backend.main:app --host 0.0.0.0 --port 8005" --name "teacher"
 
-            # Certificat SSL et Nginx
-            if [ ! -d "/etc/letsencrypt/live/teacher.rsundara.ca" ]; then
-              echo "Génération initiale du certificat SSL pour teacher.rsundara.ca via Certbot..."
-              sudo tee /etc/nginx/sites-available/teacher << 'EOF'
-server {
-    listen 80;
-    server_name teacher.rsundara.ca;
-
-    location / {
-        proxy_pass http://127.0.0.1:8005;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-EOF
+            # Provisioning SSL Let's Encrypt si le certificat n'existe pas encore
+            if [ ! -f "/etc/letsencrypt/live/teacher.rsundara.ca/fullchain.pem" ]; then
+              echo "Certificat absent : configuration HTTP temporaire et appel Certbot..."
+              sudo cp nginx_teacher_init.conf /etc/nginx/sites-available/teacher
               sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
               sudo nginx -t && sudo systemctl reload nginx
-              sudo certbot --nginx -d teacher.rsundara.ca --non-interactive --agree-tos -m randjith.sundara@gmail.com --redirect || true
+              sudo certbot --nginx -d teacher.rsundara.ca --non-interactive --agree-tos -m randjith.sundara@gmail.com --redirect
             fi
 
-            # Déploiement de la configuration complète Nginx
-            if [ -f "nginx_teacher.conf" ]; then
-              sudo cp nginx_teacher.conf /etc/nginx/sites-available/teacher
-              sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
-              sudo nginx -t && sudo systemctl reload nginx
-            fi
+            # Déploiement de la configuration Nginx complète HTTPS
+            sudo cp nginx_teacher.conf /etc/nginx/sites-available/teacher
+            sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
+            sudo nginx -t && sudo systemctl reload nginx
