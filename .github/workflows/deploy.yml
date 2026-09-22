@@ -67,8 +67,10 @@ jobs:
             npm run build
             cd ..
 
-            # PM2 restart or start
-            pm2 restart teacher --update-env || pm2 start "/var/www/teacher/.venv/bin/python -m uvicorn backend.main:app --host 0.0.0.0 --port 8005" --name "teacher"
+            # PM2 restart propre avec l'interpréteur Python du venv
+            pm2 delete teacher || true
+            pm2 start /var/www/teacher/run.py --name "teacher" --cwd /var/www/teacher --interpreter /var/www/teacher/.venv/bin/python3
+            pm2 save
 
             # Provisioning SSL Let's Encrypt si le certificat n'existe pas encore
             if [ ! -f "/etc/letsencrypt/live/teacher.rsundara.ca/fullchain.pem" ]; then
