@@ -26,7 +26,7 @@ async def chat_with_tutor(messages: List[Dict[str, str]], context: str = "") -> 
     if not GEMINI_API_KEY:
         return "⚠️ La clé GEMINI_API_KEY n'est pas configurée. Le mode professeur IA requiert une clé valide."
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={GEMINI_API_KEY}"
 
     contents = []
     
@@ -59,8 +59,8 @@ async def chat_with_tutor(messages: List[Dict[str, str]], context: str = "") -> 
         async with httpx.AsyncClient(timeout=30.0) as client:
             resp = await client.post(url, json=payload)
             if resp.status_code != 200:
-                # Fallback to gemini-2.0-flash
-                fallback_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+                # Fallback to gemini-flash-lite-latest
+                fallback_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key={GEMINI_API_KEY}"
                 resp2 = await client.post(fallback_url, json=payload)
                 if resp2.status_code != 200:
                     return f"Erreur de communication avec le professeur IA ({resp.status_code}): {resp.text}"
