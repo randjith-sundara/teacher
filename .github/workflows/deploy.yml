@@ -27,26 +27,13 @@ jobs:
           envs: GEMINI_API_KEY
           script: |
             export PATH=$PATH:/usr/bin:/usr/local/bin:$HOME/.local/bin
-
-            # Nettoyage immédiat de tout lien orphelin Nginx
-            sudo rm -f /etc/nginx/sites-enabled/teacher
-
-            mkdir -p /var/www/teacher
             cd /var/www/teacher
 
-            # Si le code n'est pas encore présent (premier déploiement ou .git vide)
-            if [ ! -f "requirements.txt" ]; then
-              rm -rf .git /tmp/teacher_clone
-              git clone https://github.com/randjith-sundara/teacher.git /tmp/teacher_clone
-              cp -a /tmp/teacher_clone/. /var/www/teacher/
-              rm -rf /tmp/teacher_clone
-            else
-              git remote set-url origin https://github.com/randjith-sundara/teacher.git
-              git fetch origin main
-              git reset --hard origin/main
-            fi
+            # 1. Mise à jour du code
+            git fetch origin main
+            git reset --hard origin/main
 
-            # .env
+            # 2. Variables d'environnement
             printf "%s\n" \
               "GEMINI_API_KEY=$GEMINI_API_KEY" \
               "PORT=8005" \
@@ -54,34 +41,20 @@ jobs:
               "ENV=production" > .env
             chmod 600 .env
 
-            # Python Virtual Environment
-            if [ ! -d ".venv" ]; then
-              python3 -m venv .venv
-            fi
-            .venv/bin/pip install --upgrade pip
+            # 3. Dépendances Python
             .venv/bin/pip install -r requirements.txt
 
-            # Frontend build
+            # 4. Build Frontend
             cd frontend
             npm install
             npm run build
             cd ..
 
-            # PM2 restart propre avec l'interpréteur Python du venv
-            pm2 delete teacher || true
-            pm2 start /var/www/teacher/run.py --name "teacher" --cwd /var/www/teacher --interpreter /var/www/teacher/.venv/bin/python3
-            pm2 save
+            # 5. Redémarrage propre PM2
+            pm2 restart teacher --update-env
 
-            # Provisioning SSL Let's Encrypt si le certificat n'existe pas encore
-            if [ ! -f "/etc/letsencrypt/live/teacher.rsundara.ca/fullchain.pem" ]; then
-              echo "Certificat absent : configuration HTTP temporaire et appel Certbot..."
-              sudo cp nginx_teacher_init.conf /etc/nginx/sites-available/teacher
-              sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
-              sudo nginx -t && sudo systemctl reload nginx
-              sudo certbot --nginx -d teacher.rsundara.ca --non-interactive --agree-tos -m randjith.sundara@gmail.com --redirect
-            fi
-
-            # Déploiement de la configuration Nginx complète HTTPS
+            # 6. Déploiement de la configuration Nginx & reload
             sudo cp nginx_teacher.conf /etc/nginx/sites-available/teacher
             sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
             sudo nginx -t && sudo systemctl reload nginx
+
