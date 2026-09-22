@@ -225,6 +225,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.10.0",
+            "date": "2026-09-22",
+            "title": "Différenciation Complète des Exercices & Autonomie Pédagogique",
+            "tag": "Contenu & Pédagogie",
+            "description": "Renouvellement intégral de tous les exercices qui reprenaient les équations des exemples du cours (FOND-0100 chapitres 2, 3 et 4). Les exercices proposent désormais des équations, racines, pentes, points d'intersections et équations exponentielles/logarithmiques 100% originaux et distincts de la théorie pour tester la réelle autonomie de calcul de l'étudiant."
+        },
+        {
             "version": "1.9.0",
             "date": "2026-09-22",
             "title": "Anti-Rebond des Raccourcis Tactiles & Énoncés Sans Spoiler",

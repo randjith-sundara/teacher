@@ -236,16 +236,16 @@ COURSES_DATA = [
                     },
                     {
                         "id": "fond-ex6",
-                        "title": "Racine cubique en puissance fractionnaire",
+                        "title": "Racine cinquième en puissance fractionnaire",
                         "difficulty": 2,
-                        "question_latex": "Écrivez $\\sqrt[3]{x^2}$ sous la forme $x^p$ (donnez l'expression avec exposant).",
+                        "question_latex": "Écrivez $\\sqrt[5]{x^3}$ sous la forme $x^p$ (donnez l'expression avec exposant).",
                         "input_type": "math_expr",
-                        "expected_solution": "x^(2/3)",
+                        "expected_solution": "x^(3/5)",
                         "hints": [
                             "Dans $x^{m/n}$, la puissance de $x$ va au numérateur et l'indice de la racine va au dénominateur.",
-                            "Ici $m = 2$ et l'indice de la racine cubique est $n = 3$."
+                            "Ici $m = 3$ et l'indice de la racine est $n = 5$."
                         ],
-                        "full_solution_latex": "\\sqrt[3]{x^2} = x^{2/3}."
+                        "full_solution_latex": "\\sqrt[5]{x^3} = x^{3/5}."
                     },
                     {
                         "id": "fond-ex7",
@@ -264,40 +264,40 @@ COURSES_DATA = [
                         "id": "fond-ex8",
                         "title": "Équation quadratique par mise en évidence",
                         "difficulty": 2,
-                        "question_latex": "Trouvez la racine NON NULLE de l'équation $x^2 - 7x = 0$.",
+                        "question_latex": "Trouvez la racine NON NULLE de l'équation $x^2 - 9x = 0$.",
                         "input_type": "math_expr",
-                        "expected_solution": "7",
+                        "expected_solution": "9",
                         "hints": [
-                            "Mettez $x$ en facteur commun : $x(x - 7) = 0$.",
-                            "Un produit est nul si l'un de ses facteurs est nul : $x = 0$ ou $x - 7 = 0$."
+                            "Mettez $x$ en facteur commun : $x(x - 9) = 0$.",
+                            "Un produit est nul si l'un de ses facteurs est nul : $x = 0$ ou $x - 9 = 0$."
                         ],
-                        "full_solution_latex": "x^2 - 7x = 0 \\implies x(x - 7) = 0 \\implies x = 0 \\text{ ou } x = 7. \\text{ La racine non nulle est } 7."
+                        "full_solution_latex": "x^2 - 9x = 0 \\implies x(x - 9) = 0 \\implies x = 0 \\text{ ou } x = 9. \\text{ La racine non nulle est } 9."
                     },
                     {
                         "id": "fond-ex9",
                         "title": "Équation du second degré par factorisation",
                         "difficulty": 2,
-                        "question_latex": "Trouvez la PLUS PETITE racine de l'équation $x^2 - 8x + 15 = 0$.",
+                        "question_latex": "Trouvez la PLUS PETITE racine de l'équation $x^2 - 7x + 12 = 0$.",
                         "input_type": "math_expr",
                         "expected_solution": "3",
                         "hints": [
-                            "Cherchez deux entiers dont le produit vaut 15 et la somme vaut 8 : ce sont 3 et 5.",
-                            "Factorisez sous la forme $(x - 3)(x - 5) = 0$."
+                            "Cherchez deux entiers dont le produit vaut 12 et la somme vaut 7 : ce sont 3 et 4.",
+                            "Factorisez sous la forme $(x - 3)(x - 4) = 0$."
                         ],
-                        "full_solution_latex": "x^2 - 8x + 15 = (x - 3)(x - 5) = 0 \\implies x = 3 \\text{ ou } x = 5. \\text{ La plus petite racine est } 3."
+                        "full_solution_latex": "x^2 - 7x + 12 = (x - 3)(x - 4) = 0 \\implies x = 3 \\text{ ou } x = 4. \\text{ La plus petite racine est } 3."
                     },
                     {
                         "id": "fond-ex10",
                         "title": "Formule quadratique générale",
                         "difficulty": 3,
-                        "question_latex": "Trouvez la PLUS GRANDE racine de l'équation $2x^2 - 5x + 2 = 0$.",
+                        "question_latex": "Trouvez la PLUS GRANDE racine de l'équation $2x^2 - 7x + 3 = 0$.",
                         "input_type": "math_expr",
-                        "expected_solution": "2",
+                        "expected_solution": "3",
                         "hints": [
-                            "Calculez le discriminant : $\\Delta = (-5)^2 - 4(2)(2) = 25 - 16 = 9$.",
-                            "Appliquez la formule : $x = \\frac{5 \\pm \\sqrt{9}}{2 \\times 2} = \\frac{5 \\pm 3}{4}$."
+                            "Calculez le discriminant : $\\Delta = (-7)^2 - 4(2)(3) = 49 - 24 = 25$.",
+                            "Appliquez la formule : $x = \\frac{7 \\pm \\sqrt{25}}{2 \\times 2} = \\frac{7 \\pm 5}{4}$."
                         ],
-                        "full_solution_latex": "x = \\frac{5 \\pm 3}{4} \\implies x_1 = \\frac{8}{4} = 2 \\quad \\text{et} \\quad x_2 = \\frac{2}{4} = 0.5. \\text{ La plus grande racine est } 2."
+                        "full_solution_latex": "x = \\frac{7 \\pm 5}{4} \\implies x_1 = \\frac{12}{4} = 3 \\quad \\text{et} \\quad x_2 = \\frac{2}{4} = 0.5. \\text{ La plus grande racine est } 3."
                     }
                 ]
             },
@@ -352,39 +352,39 @@ COURSES_DATA = [
                         "id": "fond-ex11",
                         "title": "Calcul de pente avec coordonnées négatives",
                         "difficulty": 1,
-                        "question_latex": "Calculez la pente $m$ de la droite reliant les points $A(-2, 3)$ et $B(4, -9)$.",
+                        "question_latex": "Calculez la pente $m$ de la droite reliant les points $A(-1, 5)$ et $B(3, -7)$.",
                         "input_type": "math_expr",
-                        "expected_solution": "-2",
+                        "expected_solution": "-3",
                         "hints": [
                             "Appliquez $m = \\frac{y_2 - y_1}{x_2 - x_1}$.",
-                            "Au numérateur : $-9 - 3 = -12$. Au dénominateur : $4 - (-2) = 6$."
+                            "Au numérateur : $-7 - 5 = -12$. Au dénominateur : $3 - (-1) = 4$."
                         ],
-                        "full_solution_latex": "m = \\frac{-9 - 3}{4 - (-2)} = \\frac{-12}{6} = -2."
+                        "full_solution_latex": "m = \\frac{-7 - 5}{3 - (-1)} = \\frac{-12}{4} = -3."
                     },
                     {
                         "id": "fond-ex12",
                         "title": "Calcul de l'ordonnée à l'origine b",
                         "difficulty": 1,
-                        "question_latex": "Une droite a pour pente $m = 4$ et passe par le point $P(3, 10)$. Quelle est son ordonnée à l'origine $b$ ?",
+                        "question_latex": "Une droite a pour pente $m = 3$ et passe par le point $P(2, 11)$. Quelle est son ordonnée à l'origine $b$ ?",
                         "input_type": "math_expr",
-                        "expected_solution": "-2",
+                        "expected_solution": "5",
                         "hints": [
-                            "Partez de $y = mx + b$ et injectez les valeurs : $10 = 4(3) + b$.",
-                            "$10 = 12 + b \\implies b = 10 - 12$."
+                            "Partez de $y = mx + b$ et injectez les valeurs : $11 = 3(2) + b$.",
+                            "$11 = 6 + b \\implies b = 11 - 6$."
                         ],
-                        "full_solution_latex": "y = 4x + b \\implies 10 = 4(3) + b \\implies 10 = 12 + b \\implies b = -2."
+                        "full_solution_latex": "y = 3x + b \\implies 11 = 3(2) + b \\implies 11 = 6 + b \\implies b = 5."
                     },
                     {
                         "id": "fond-ex13",
                         "title": "Équation cartésienne complète",
                         "difficulty": 2,
-                        "question_latex": "Donnez l'expression de $y$ (sous la forme $mx + b$) pour la droite ayant une pente $m = -3$ et une ordonnée à l'origine $b = 5$.",
+                        "question_latex": "Donnez l'expression de $y$ (sous la forme $mx + b$) pour la droite ayant une pente $m = -4$ et une ordonnée à l'origine $b = 9$.",
                         "input_type": "math_expr",
-                        "expected_solution": "-3*x + 5",
+                        "expected_solution": "-4*x + 9",
                         "hints": [
-                            "Remplacez $m$ par $-3$ et $b$ par $5$ dans $y = mx + b$."
+                            "Remplacez $m$ par $-4$ et $b$ par $9$ dans $y = mx + b$."
                         ],
-                        "full_solution_latex": "y = -3x + 5."
+                        "full_solution_latex": "y = -4x + 9."
                     },
                     {
                         "id": "fond-ex14",
@@ -403,14 +403,14 @@ COURSES_DATA = [
                         "id": "fond-ex15",
                         "title": "Abscisse d'intersection de deux droites",
                         "difficulty": 2,
-                        "question_latex": "Trouvez la coordonnée $x$ du point d'intersection des deux droites $y = 3x - 1$ et $y = -x + 11$.",
+                        "question_latex": "Trouvez la coordonnée $x$ du point d'intersection des deux droites $y = 2x - 3$ et $y = -3x + 17$.",
                         "input_type": "math_expr",
-                        "expected_solution": "3",
+                        "expected_solution": "4",
                         "hints": [
-                            "Égalisez les deux équations : $3x - 1 = -x + 11$.",
-                            "Ajoutez $x$ de chaque côté et ajoutez 1 de chaque côté : $4x = 12$."
+                            "Égalisez les deux équations : $2x - 3 = -3x + 17$.",
+                            "Ajoutez $3x$ de chaque côté et ajoutez 3 de chaque côté : $5x = 20$."
                         ],
-                        "full_solution_latex": "3x - 1 = -x + 11 \\implies 4x = 12 \\implies x = 3."
+                        "full_solution_latex": "2x - 3 = -3x + 17 \\implies 5x = 20 \\implies x = 4."
                     },
                     {
                         "id": "fond-ex16",
@@ -490,27 +490,27 @@ COURSES_DATA = [
                         "id": "fond-ex17",
                         "title": "Conversion degrés en radians",
                         "difficulty": 1,
-                        "question_latex": "Convertissez l'angle de $60^\\circ$ en radians sous forme exacte (exprimez en fonction de pi, ex: pi/3).",
+                        "question_latex": "Convertissez l'angle de $45^\\circ$ en radians sous forme exacte (exprimez en fonction de pi, ex: pi/4).",
                         "input_type": "math_expr",
-                        "expected_solution": "pi/3",
+                        "expected_solution": "pi/4",
                         "hints": [
                             "Multipliez la valeur en degrés par $\\frac{\\pi}{180}$.",
-                            "$\\frac{60\\pi}{180} = \\frac{6\\pi}{18} = \\frac{\\pi}{3}$."
+                            "$\\frac{45\\pi}{180} = \\frac{\\pi}{4}$."
                         ],
-                        "full_solution_latex": "60^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{\\pi}{3} \\text{ rad}."
+                        "full_solution_latex": "45^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{\\pi}{4} \\text{ rad}."
                     },
                     {
                         "id": "fond-ex18",
-                        "title": "Valeur remarquable du cosinus",
+                        "title": "Valeur remarquable du sinus",
                         "difficulty": 1,
-                        "question_latex": "Quelle est la valeur exacte de $\\cos(\\pi/3)$ sous forme de fraction irréductible ?",
+                        "question_latex": "Quelle est la valeur exacte de $\\sin(\\pi/6)$ sous forme de fraction irréductible ?",
                         "input_type": "math_expr",
                         "expected_solution": "1/2",
                         "hints": [
-                            "$\\pi/3$ correspond à $60^\\circ$.",
-                            "Sur le cercle unité, l'abscisse en cet angle vaut la moitié du rayon : $\\frac{1}{2}$."
+                            "$\\pi/6$ correspond à $30^\\circ$.",
+                            "Sur le cercle unité, l'ordonnée en cet angle vaut la moitié du rayon : $\\frac{1}{2}$."
                         ],
-                        "full_solution_latex": "\\cos(\\pi/3) = \\frac{1}{2}."
+                        "full_solution_latex": "\\sin(\\pi/6) = \\frac{1}{2}."
                     },
                     {
                         "id": "fond-ex19",
@@ -542,40 +542,40 @@ COURSES_DATA = [
                         "id": "fond-ex21",
                         "title": "Condensation d'une soustraction de logarithmes",
                         "difficulty": 2,
-                        "question_latex": "Condensez $\\ln(12) - \\ln(3)$ en un seul logarithme $\\ln(k)$ (donnez l'expression exacte).",
+                        "question_latex": "Condensez $\\ln(18) - \\ln(2)$ en un seul logarithme $\\ln(k)$ (donnez l'expression exacte).",
                         "input_type": "math_expr",
-                        "expected_solution": "ln(4)",
+                        "expected_solution": "ln(9)",
                         "hints": [
                             "Appliquez la propriété $\\ln(a) - \\ln(b) = \\ln(a/b)$.",
-                            "Calculez le rapport $\\frac{12}{3} = 4$."
+                            "Calculez le rapport $\\frac{18}{2} = 9$."
                         ],
-                        "full_solution_latex": "\\ln(12) - \\ln(3) = \\ln\\left(\\frac{12}{3}\\right) = \\ln(4)."
+                        "full_solution_latex": "\\ln(18) - \\ln(2) = \\ln\\left(\\frac{18}{2}\\right) = \\ln(9)."
                     },
                     {
                         "id": "fond-ex22",
                         "title": "Résolution d'équation exponentielle",
                         "difficulty": 2,
-                        "question_latex": "Résolvez pour $x$ l'équation $e^{2x} = 7$ (donnez la solution exacte en fonction de ln).",
+                        "question_latex": "Résolvez pour $x$ l'équation $e^{3x} = 5$ (donnez la solution exacte en fonction de ln).",
                         "input_type": "math_expr",
-                        "expected_solution": "ln(7)/2",
+                        "expected_solution": "ln(5)/3",
                         "hints": [
-                            "Appliquez $\\ln$ de chaque côté : $\\ln(e^{2x}) = \\ln(7)$.",
-                            "$2x = \\ln(7) \\implies x = \\frac{\\ln(7)}{2}$."
+                            "Appliquez $\\ln$ de chaque côté : $\\ln(e^{3x}) = \\ln(5)$.",
+                            "$3x = \\ln(5) \\implies x = \\frac{\\ln(5)}{3}$."
                         ],
-                        "full_solution_latex": "e^{2x} = 7 \\implies \\ln(e^{2x}) = \\ln(7) \\implies 2x = \\ln(7) \\implies x = \\frac{\\ln(7)}{2}."
+                        "full_solution_latex": "e^{3x} = 5 \\implies \\ln(e^{3x}) = \\ln(5) \\implies 3x = \\ln(5) \\implies x = \\frac{\\ln(5)}{3}."
                     },
                     {
                         "id": "fond-ex23",
                         "title": "Résolution d'équation logarithmique",
                         "difficulty": 2,
-                        "question_latex": "Résolvez pour $x$ l'équation $\\ln(x) = 3$ (donnez la valeur exacte en fonction de e).",
+                        "question_latex": "Résolvez pour $x$ l'équation $\\ln(x) = 5$ (donnez la valeur exacte en fonction de e).",
                         "input_type": "math_expr",
-                        "expected_solution": "e^3",
+                        "expected_solution": "e^5",
                         "hints": [
-                            "Appliquez la fonction exponentielle des deux côtés : $e^{\\ln(x)} = e^3$.",
+                            "Appliquez la fonction exponentielle des deux côtés : $e^{\\ln(x)} = e^5$.",
                             "Puisque $e^{\\ln(x)} = x$, on obtient directement la solution."
                         ],
-                        "full_solution_latex": "\\ln(x) = 3 \\implies e^{\\ln(x)} = e^3 \\implies x = e^3."
+                        "full_solution_latex": "\\ln(x) = 5 \\implies e^{\\ln(x)} = e^5 \\implies x = e^5."
                     }
                 ]
             }
