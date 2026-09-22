@@ -251,7 +251,7 @@ COURSES_DATA = [
                         "id": "fond-ex7",
                         "title": "Simplification d'un radical",
                         "difficulty": 2,
-                        "question_latex": "Simplifiez $\\sqrt{50}$ sous la forme $k\\sqrt{2}$ (donnez l'expression exacte).",
+                        "question_latex": "Simplifiez au maximum le radical $\\sqrt{50}$ sous la forme irréductible $a\\sqrt{b}$ (avec $b$ le plus petit entier positif possible).",
                         "input_type": "math_expr",
                         "expected_solution": "5*sqrt(2)",
                         "hints": [

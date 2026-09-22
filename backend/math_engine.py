@@ -81,7 +81,32 @@ def verify_symbolic_equivalence(user_input: str, solution: str) -> dict:
         sol_sym = parse_math_expression(solution)
 
         diff = sp.simplify(user_sym - sol_sym)
+
+        # Si la différence n'est pas nulle, tenter avec normalisation de casse (ex: X majuscule sur mobile au lieu de x)
+        if diff != 0:
+            try:
+                user_lower_sym = parse_math_expression(user_input.lower())
+                sol_lower_sym = parse_math_expression(solution.lower())
+                if sp.simplify(user_lower_sym - sol_lower_sym) == 0:
+                    diff = 0
+            except Exception:
+                pass
+
         if diff == 0:
+            # Garde-fou pédagogique : détection d'un radical non simplifié (ex: sqrt(50) au lieu de 5*sqrt(2))
+            clean_u = sanitize_latex_or_text(user_input).replace(" ", "")
+            clean_s = sanitize_latex_or_text(solution).replace(" ", "")
+            u_sqrts = [int(n) for n in re.findall(r"sqrt\((\d+)\)", clean_u)]
+            s_sqrts = [int(n) for n in re.findall(r"sqrt\((\d+)\)", clean_s)]
+            if u_sqrts and s_sqrts:
+                for u_rad in u_sqrts:
+                    for s_rad in s_sqrts:
+                        if u_rad > s_rad and u_rad % s_rad == 0:
+                            return {
+                                "correct": False,
+                                "message": f"L'expression est équivalente mais le radical sqrt({u_rad}) n'est pas entièrement simplifié. Extrayez les carrés parfaits sous la forme a*sqrt(b)."
+                            }
+
             return {"correct": True, "details": "Équivalence symbolique vérifiée."}
 
         # Tentative trigonométrique

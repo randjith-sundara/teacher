@@ -225,6 +225,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.9.0",
+            "date": "2026-09-22",
+            "title": "Anti-Rebond des Raccourcis Tactiles & Énoncés Sans Spoiler",
+            "tag": "Ergonomie & Moteur Mathématique",
+            "description": "Correction de la sensibilité des touches de raccourcis mathématiques sur tablette (verrouillage anti-rebond et événement unique pointerdown empêchant les insertions multiples involontaires). Neutralisation de l'auto-majuscule iOS et tolérance de casse pour les variables algébriques. Reformulation des énoncés de radicaux sans spoiler la factorisation (ex: sqrt(50)), accompagnée d'une détection dans le moteur SymPy signalant les radicaux non entièrement simplifiés."
+        },
+        {
             "version": "1.8.0",
             "date": "2026-09-22",
             "title": "Navigation & Enchaînement Fluide (Exercice, Chapitre & Cours Suivant)",

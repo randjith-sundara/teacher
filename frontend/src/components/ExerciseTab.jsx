@@ -34,6 +34,7 @@ export default function ExerciseTab({
   const [revealedHints, setRevealedHints] = useState({});
   const [revealedSolutions, setRevealedSolutions] = useState({});
   const inputRef = useRef(null);
+  const lastInsertRef = useRef(0);
 
   // Réinitialiser l'index à 0 lors du changement de chapitre
   useEffect(() => {
@@ -143,8 +144,15 @@ export default function ExerciseTab({
       e.preventDefault();
       e.stopPropagation();
     }
+
+    const now = Date.now();
+    if (now - lastInsertRef.current < 200) {
+      return;
+    }
+    lastInsertRef.current = now;
+
     const input = inputRef.current;
-    const currentVal = answers[exId] || '';
+    const currentVal = answers[exId] !== undefined ? answers[exId] : '';
 
     let start = currentVal.length;
     let end = currentVal.length;
@@ -237,18 +245,14 @@ export default function ExerciseTab({
             Ta réponse :
           </label>
 
-          {/* Raccourcis symboles tactiles pour iPad (garde le clavier ouvert) */}
+          {/* Raccourcis symboles tactiles pour iPad (garde le clavier ouvert, 1 appui = 1 insertion) */}
           <div className="flex flex-wrap gap-2 pb-1">
             {['sqrt(', '^2', '^', 'pi', 'e', '/', '*', '+', '-', '(', ')', ', '].map((sym) => (
               <button
                 key={sym}
                 type="button"
-                onMouseDown={(e) => insertSymbol(sym, e)}
-                onTouchStart={(e) => insertSymbol(sym, e)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  insertSymbol(sym, e);
-                }}
+                onPointerDown={(e) => insertSymbol(sym, e)}
+                onClick={(e) => e.preventDefault()}
                 className="min-h-[40px] px-3.5 py-2 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-800 font-mono text-sm font-semibold rounded-xl border border-slate-200 transition-all cursor-pointer shadow-2xs select-none"
               >
                 {sym}
@@ -260,6 +264,9 @@ export default function ExerciseTab({
             <input
               ref={inputRef}
               type="text"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               value={currentAnswer}
               onChange={(e) => setAnswers({ ...answers, [exId]: e.target.value })}
               onKeyDown={(e) => e.key === 'Enter' && handleVerify()}
