@@ -31,11 +31,10 @@ jobs:
             cd /var/www/teacher
 
             if [ ! -d ".git" ]; then
-              git init
-              git remote add origin git@github.com:randjith-sundara/teacher.git || git remote set-url origin git@github.com:randjith-sundara/teacher.git
-              git fetch origin main
-              git reset --hard origin/main
-              git branch -M main
+              rm -rf /tmp/teacher_clone
+              git clone git@github.com:randjith-sundara/teacher.git /tmp/teacher_clone
+              cp -a /tmp/teacher_clone/. /var/www/teacher/
+              rm -rf /tmp/teacher_clone
             else
               git fetch origin main
               git reset --hard origin/main
@@ -64,6 +63,9 @@ jobs:
 
             # PM2 restart or start
             pm2 restart teacher --update-env || pm2 start "/var/www/teacher/.venv/bin/python -m uvicorn backend.main:app --host 0.0.0.0 --port 8005" --name "teacher"
+
+            # Nettoyage préalable d'un lien symbolique orphelin éventuel
+            sudo rm -f /etc/nginx/sites-enabled/teacher
 
             # Provisioning SSL Let's Encrypt si le certificat n'existe pas encore
             if [ ! -f "/etc/letsencrypt/live/teacher.rsundara.ca/fullchain.pem" ]; then
