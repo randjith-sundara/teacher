@@ -199,10 +199,28 @@ export default function InteractiveVisualizer({ type }) {
       }
       ctx.stroke();
 
+      // Sommet (rouge)
       ctx.fillStyle = '#e11d48';
       ctx.beginPath();
       ctx.arc(cx, cy - quadC * scaleY, 6, 0, Math.PI * 2);
       ctx.fill();
+
+      // Racines / Intersections avec l'axe x (vert)
+      if (-quadC / quadA > 0) {
+        const rootVal = Math.sqrt(-quadC / quadA);
+        ctx.fillStyle = '#059669';
+        ctx.beginPath();
+        ctx.arc(cx - rootVal * scaleX, cy, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(cx + rootVal * scaleX, cy, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (-quadC / quadA === 0) {
+        ctx.fillStyle = '#059669';
+        ctx.beginPath();
+        ctx.arc(cx, cy, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
     } else if (type === 'vector2d' || type === 'vector3d' || type === 'planes') {
       const cx = width / 2;
       const cy = height / 2;
@@ -470,6 +488,68 @@ export default function InteractiveVisualizer({ type }) {
               <div className="pt-2 border-t border-slate-200 space-y-1 font-mono text-slate-700">
                 <div className="text-sky-700">cos(θ) : <b>{cosDisplay}</b> (horizontal)</div>
                 <div className="text-emerald-700">sin(θ) : <b>{sinDisplay}</b> (vertical)</div>
+              </div>
+            </div>
+          ) : type === 'parabola' ? (
+            <div className="space-y-3">
+              <div>
+                <label className="flex justify-between text-amber-800 font-semibold mb-1">
+                  <span>Courbure a : {quadA}</span>
+                  <span className="text-[11px] font-normal text-slate-500">
+                    {quadA > 0 ? '∪ Convexe (haut)' : '∩ Concave (bas)'}
+                  </span>
+                </label>
+                <input
+                  type="range"
+                  min="-3"
+                  max="3"
+                  step="0.5"
+                  value={quadA}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    setQuadA(val === 0 ? 0.5 : val);
+                  }}
+                  className="w-full accent-amber-600"
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-rose-700 font-semibold mb-1">
+                  <span>Hauteur / Sommet c : {quadC}</span>
+                </label>
+                <input
+                  type="range"
+                  min="-6"
+                  max="6"
+                  step="1"
+                  value={quadC}
+                  onChange={(e) => setQuadC(Number(e.target.value))}
+                  className="w-full accent-rose-600"
+                />
+              </div>
+
+              <div className="pt-2 border-t border-slate-200 space-y-1 font-mono text-slate-700">
+                <div className="font-bold text-indigo-700">
+                  y = {quadA === 1 ? '' : quadA === -1 ? '-' : `${quadA}`}x² {quadC >= 0 ? `+ ${quadC}` : `- ${Math.abs(quadC)}`}
+                </div>
+                <div className="text-[11px] text-slate-600">
+                  Sommet : (0, {quadC})
+                </div>
+                <div className="text-[11px]">
+                  {-quadC / quadA > 0 ? (
+                    <span className="text-emerald-700 font-semibold">
+                      Racines : x = ±{(Math.sqrt(-quadC / quadA)).toFixed(2)}
+                    </span>
+                  ) : -quadC / quadA === 0 ? (
+                    <span className="text-emerald-700 font-semibold">
+                      Racine double : x = 0
+                    </span>
+                  ) : (
+                    <span className="text-slate-400 italic">
+                      Aucune racine réelle (Δ &lt; 0)
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ) : type === 'tangent' || type === 'limit' || type === 'derivatives' || type === 'optimization' ? (

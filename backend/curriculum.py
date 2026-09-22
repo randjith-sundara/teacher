@@ -90,189 +90,365 @@ COURSES_DATA = [
             {
                 "id": "m2-exposants-equations",
                 "title": "Exposants, Racines & Équations",
-                "subtitle": "Puissances, radicaux et formule quadratique",
+                "subtitle": "Puissances négatives et fractionnaires, simplification des radicaux et résolution du second degré",
                 "viz_type": "parabola",
                 "theory": {
-                    "summary": "Comprendre que $\\sqrt{x} = x^{1/2}$ et $\\frac{1}{x} = x^{-1}$ est le secret qui rend le calcul différentiel et intégral simple et naturel.",
+                    "summary": "Comprendre que la racine carrée est une puissance fractionnaire (\\(\\sqrt{x} = x^{1/2}\\)) et qu'une division par x est une puissance négative (\\(\\frac{1}{x} = x^{-1}\\)) est le secret qui rend le calcul différentiel et intégral simple et naturel. La formule quadratique permet quant à elle de trouver les racines de n'importe quelle parabole.",
                     "key_formulas": [
                         {"name": "Multiplication de puissances", "latex": "x^a \\cdot x^b = x^{a+b}"},
+                        {"name": "Division de puissances", "latex": "\\frac{x^a}{x^b} = x^{a-b}"},
+                        {"name": "Puissance d'une puissance", "latex": "(x^a)^b = x^{a \\cdot b}"},
                         {"name": "Exposant négatif", "latex": "x^{-n} = \\frac{1}{x^n}"},
-                        {"name": "Exposant fractionnaire", "latex": "x^{m/n} = \\sqrt[n]{x^m}"},
-                        {"name": "Formule quadratique", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}
+                        {"name": "Exposant fractionnaire", "latex": "x^{m/n} = \\sqrt[n]{x^m} = (\\sqrt[n]{x})^m"},
+                        {"name": "Formule quadratique universelle", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}
                     ],
                     "sections": [
                         {
-                            "title": "1. Règles d'or des exposants",
-                            "content": "• $(x^a)^b = x^{a \\cdot b}$\n• $\\frac{x^a}{x^b} = x^{a - b}$\n• $(xy)^a = x^a y^a$\n• $x^0 = 1$ (pour tout $x \\neq 0$)."
+                            "title": "1. Maîtriser les puissances et exposants négatifs",
+                            "content": "• Un exposant négatif n'a RIEN à voir avec un signe moins devant le nombre : il indique simplement une inversion de position dans la fraction. Par exemple : $x^{-1} = \\frac{1}{x}$ et $x^{-3} = \\frac{1}{x^3}$.\n• Règle de bascule : pour faire disparaître un exposant négatif au dénominateur, on le monte au numérateur : $\\frac{1}{x^{-4}} = x^4$.\n• Attention aux constantes : dans l'expression $\\frac{5}{x^2}$, le 5 reste en haut : $\\frac{5}{x^2} = 5x^{-2}$."
                         },
                         {
-                            "title": "2. Racines et simplification",
-                            "content": "Pour simplifier une racine carrée, on extrait les carrés parfaits : $\\sqrt{48} = \\sqrt{16 \\times 3} = \\sqrt{16} \\times \\sqrt{3} = 4\\sqrt{3}$."
+                            "title": "2. Exposants fractionnaires et simplification des radicaux",
+                            "content": "• Le dénominateur de la fraction représente l'indice de la racine : $x^{1/2} = \\sqrt{x}$, $x^{1/3} = \\sqrt[3]{x}$, et $x^{2/3} = \\sqrt[3]{x^2}$.\n• Pour simplifier une racine carrée comme $\\sqrt{72}$ : on cherche le plus grand carré parfait diviseur (ici $36$) : $\\sqrt{72} = \\sqrt{36 \\times 2} = \\sqrt{36} \\times \\sqrt{2} = 6\\sqrt{2}$."
                         },
                         {
-                            "title": "3. Équations du second degré",
-                            "content": "Toute équation $ax^2 + bx + c = 0$ se résout avec le discriminant $\\Delta = b^2 - 4ac$. Si $\\Delta > 0$, il y a deux solutions réelles distinctes."
+                            "title": "3. Les 3 méthodes pour résoudre une équation du 2nd degré (ax² + bx + c = 0)",
+                            "content": "• Méthode 1 (Sans terme c) : Mise en évidence immédiate. Exemple : $x^2 - 7x = 0 \\implies x(x - 7) = 0 \\implies x = 0 \\text{ ou } x = 7$.\n• Méthode 2 (Factorisation produit-somme) : Si $a = 1$, chercher deux nombres dont le produit vaut $c$ et la somme vaut $b$. Exemple : $x^2 - 8x + 15 = 0 \\implies (x - 3)(x - 5) = 0 \\implies x = 3 \\text{ ou } x = 5$.\n• Méthode 3 (Formule générale avec discriminant $\\Delta$) : Calculer $\\Delta = b^2 - 4ac$. Si $\\Delta > 0$, 2 racines distinctes $x = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$. Si $\\Delta = 0$, 1 racine double $x = \\frac{-b}{2a}$. Si $\\Delta < 0$, aucune racine réelle."
                         }
                     ],
-                    "pitfall": "Attention : $\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$ ! Exemple : $\\sqrt{9 + 16} = \\sqrt{25} = 5$, alors que $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$.",
-                    "method": "Pour résoudre $x^2 - 5x + 6 = 0$ : 1. Identifie $a=1, b=-5, c=6$. 2. Calcule $\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1$. 3. $x = \\frac{5 \\pm 1}{2}$, soit $x = 3$ ou $x = 2$."
+                    "pitfall": "Attention aux deux pièges classiques : 1. $\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$ (test : $\\sqrt{9 + 16} = 5 \\neq 3 + 4$). 2. Ne confondez pas $(-3)^2 = 9$ et $-3^2 = -9$. Les parenthèses englobent le signe !",
+                    "method": "Résoudre $2x^2 - 5x + 2 = 0$ avec le discriminant : 1. Identifie $a=2, b=-5, c=2$. 2. $\\Delta = (-5)^2 - 4(2)(2) = 25 - 16 = 9$. 3. $\\sqrt{\\Delta} = 3$. 4. $x = \\frac{5 \\pm 3}{2(2)} = \\frac{5 \\pm 3}{4}$. Les deux solutions sont $x = \\frac{8}{4} = 2$ et $x = \\frac{2}{4} = 1/2$."
                 },
                 "exercises": [
                     {
                         "id": "fond-ex4",
-                        "title": "Lois des puissances",
+                        "title": "Lois des puissances combinées",
                         "difficulty": 1,
-                        "question_latex": "Simplifiez $\\frac{x^3 \\cdot x^4}{x^2}$ en une seule puissance de $x$.",
+                        "question_latex": "Simplifiez $\\frac{x^4 \\cdot x^5}{x^3}$ sous forme d'une unique puissance $x^p$.",
                         "input_type": "math_expr",
-                        "expected_solution": "x^5",
+                        "expected_solution": "x^6",
                         "hints": [
-                            "Numérateur : $x^3 \\cdot x^4 = x^{3+4} = x^7$.",
-                            "Division : $x^7 / x^2 = x^{7-2} = x^5$."
+                            "Au numérateur, additionnez les exposants : $4 + 5 = 9$.",
+                            "Lors de la division, soustrayez l'exposant du bas : $9 - 3 = 6$."
                         ],
-                        "full_solution_latex": "\\frac{x^3 \\cdot x^4}{x^2} = \\frac{x^7}{x^2} = x^{7 - 2} = x^5."
+                        "full_solution_latex": "\\frac{x^4 \\cdot x^5}{x^3} = \\frac{x^{4+5}}{x^3} = \\frac{x^9}{x^3} = x^{9-3} = x^6."
                     },
                     {
                         "id": "fond-ex5",
-                        "title": "Exposant fractionnaire",
-                        "difficulty": 2,
-                        "question_latex": "Écrivez $\\frac{1}{\\sqrt{x}}$ sous la forme $x^p$ (donnez la valeur de $x^p$).",
+                        "title": "Conversion en exposant négatif",
+                        "difficulty": 1,
+                        "question_latex": "Écrivez $\\frac{3}{x^4}$ sous la forme $3x^p$ (donnez l'expression complète).",
                         "input_type": "math_expr",
-                        "expected_solution": "x^(-1/2)",
+                        "expected_solution": "3*x^(-4)",
                         "hints": [
-                            "Rappelez-vous : $\\sqrt{x} = x^{1/2}$.",
-                            "Rappelez-vous : $\\frac{1}{A} = A^{-1}$."
+                            "Le coefficient 3 reste devant.",
+                            "Rappelez-vous la règle : $\\frac{1}{x^n} = x^{-n}$."
                         ],
-                        "full_solution_latex": "\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}."
+                        "full_solution_latex": "\\frac{3}{x^4} = 3 \\cdot \\frac{1}{x^4} = 3x^{-4}."
                     },
                     {
                         "id": "fond-ex6",
-                        "title": "Résolution quadratique",
+                        "title": "Racine cubique en puissance fractionnaire",
                         "difficulty": 2,
-                        "question_latex": "Trouvez la PLUS GRANDE racine de l'équation $x^2 - 5x + 6 = 0$.",
+                        "question_latex": "Écrivez $\\sqrt[3]{x^2}$ sous la forme $x^p$ (donnez l'expression avec exposant).",
+                        "input_type": "math_expr",
+                        "expected_solution": "x^(2/3)",
+                        "hints": [
+                            "Dans $x^{m/n}$, la puissance de $x$ va au numérateur et l'indice de la racine va au dénominateur.",
+                            "Ici $m = 2$ et l'indice de la racine cubique est $n = 3$."
+                        ],
+                        "full_solution_latex": "\\sqrt[3]{x^2} = x^{2/3}."
+                    },
+                    {
+                        "id": "fond-ex7",
+                        "title": "Simplification d'un radical",
+                        "difficulty": 2,
+                        "question_latex": "Simplifiez $\\sqrt{50}$ sous la forme $k\\sqrt{2}$ (donnez l'expression exacte).",
+                        "input_type": "math_expr",
+                        "expected_solution": "5*sqrt(2)",
+                        "hints": [
+                            "Décomposez 50 en produit faisant apparaître un carré parfait : $50 = 25 \\times 2$.",
+                            "Extrayez la racine de 25 : $\\sqrt{25} = 5$."
+                        ],
+                        "full_solution_latex": "\\sqrt{50} = \\sqrt{25 \\times 2} = \\sqrt{25} \\times \\sqrt{2} = 5\\sqrt{2}."
+                    },
+                    {
+                        "id": "fond-ex8",
+                        "title": "Équation quadratique par mise en évidence",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez la racine NON NULLE de l'équation $x^2 - 7x = 0$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "7",
+                        "hints": [
+                            "Mettez $x$ en facteur commun : $x(x - 7) = 0$.",
+                            "Un produit est nul si l'un de ses facteurs est nul : $x = 0$ ou $x - 7 = 0$."
+                        ],
+                        "full_solution_latex": "x^2 - 7x = 0 \\implies x(x - 7) = 0 \\implies x = 0 \\text{ ou } x = 7. \\text{ La racine non nulle est } 7."
+                    },
+                    {
+                        "id": "fond-ex9",
+                        "title": "Équation du second degré par factorisation",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez la PLUS PETITE racine de l'équation $x^2 - 8x + 15 = 0$.",
                         "input_type": "math_expr",
                         "expected_solution": "3",
                         "hints": [
-                            "Factorisez sous la forme $(x - p)(x - q) = 0$.",
-                            "Trouvez deux nombres dont le produit vaut 6 et la somme vaut 5 : ce sont 2 et 3."
+                            "Cherchez deux entiers dont le produit vaut 15 et la somme vaut 8 : ce sont 3 et 5.",
+                            "Factorisez sous la forme $(x - 3)(x - 5) = 0$."
                         ],
-                        "full_solution_latex": "x^2 - 5x + 6 = (x - 2)(x - 3) = 0 \\implies x = 2 \\text{ ou } x = 3. \\text{ La plus grande est } 3."
+                        "full_solution_latex": "x^2 - 8x + 15 = (x - 3)(x - 5) = 0 \\implies x = 3 \\text{ ou } x = 5. \\text{ La plus petite racine est } 3."
+                    },
+                    {
+                        "id": "fond-ex10",
+                        "title": "Formule quadratique générale",
+                        "difficulty": 3,
+                        "question_latex": "Trouvez la PLUS GRANDE racine de l'équation $2x^2 - 5x + 2 = 0$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "Calculez le discriminant : $\\Delta = (-5)^2 - 4(2)(2) = 25 - 16 = 9$.",
+                            "Appliquez la formule : $x = \\frac{5 \\pm \\sqrt{9}}{2 \\times 2} = \\frac{5 \\pm 3}{4}$."
+                        ],
+                        "full_solution_latex": "x = \\frac{5 \\pm 3}{4} \\implies x_1 = \\frac{8}{4} = 2 \\quad \\text{et} \\quad x_2 = \\frac{2}{4} = 0.5. \\text{ La plus grande racine est } 2."
                     }
                 ]
             },
             {
                 "id": "m3-fonctions-droites",
                 "title": "Fonctions, Droites & Géométrie Plane",
-                "subtitle": "Pente m, ordonnée à l'origine b et équation de droite",
+                "subtitle": "Pente Delta y / Delta x, équation cartésienne, droites parallèles/perpendiculaires et intersections",
                 "viz_type": "line",
                 "theory": {
-                    "summary": "Une fonction décrit la relation entre deux variables. La droite est le modèle de variation le plus intuitif : sa pente représente le taux de variation constant.",
+                    "summary": "Une droite est le modèle fondamental de variation linéaire continue. Sa pente m représente son taux de variation constant (l'ancêtre direct de la dérivée), tandis que b fixe le point d'ancrage vertical.",
                     "key_formulas": [
-                        {"name": "Équation cartésienne d'une droite", "latex": "y = mx + b"},
-                        {"name": "Formule de la pente", "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{\\Delta y}{\\Delta x}"},
-                        {"name": "Droites perpendiculaires", "latex": "m_1 \\cdot m_2 = -1 \\implies m_2 = -\\frac{1}{m_1}"}
+                        {"name": "Formule universelle de la pente", "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{\\Delta y}{\\Delta x}"},
+                        {"name": "Forme explicite (pente-ordonnée)", "latex": "y = mx + b"},
+                        {"name": "Forme point-pente", "latex": "y - y_1 = m(x - x_1)"},
+                        {"name": "Droites parallèles", "latex": "m_1 = m_2"},
+                        {"name": "Droites perpendiculaires", "latex": "m_1 \\cdot m_2 = -1 \\iff m_2 = -\\frac{1}{m_1}"}
                     ],
                     "sections": [
                         {
-                            "title": "1. Sens physique de la pente m",
-                            "content": "La pente $m$ indique l'inclinaison de la droite : si $m > 0$ la droite monte, si $m < 0$ la droite descend, si $m = 0$ la droite est horizontale. Plus $|m|$ est grand, plus la montée est raide."
+                            "title": "1. Le sens physique et concret de la pente m",
+                            "content": "• La pente $m$ répond à la question : « Quand j'avance de 1 unité vers la droite sur l'axe x, de combien monté-je ou descendé-je sur l'axe y ? »\n• Si $m > 0$ : la droite est strictement croissante (elle monte).\n• Si $m < 0$ : la droite est strictement décroissante (elle descend).\n• Si $m = 0$ : la droite est parfaitement horizontale ($y = b$)."
                         },
                         {
-                            "title": "2. L'ordonnée à l'origine b",
-                            "content": "La valeur $b$ est le point où la droite coupe l'axe vertical des $y$ (en $x = 0$)."
+                            "title": "2. Trouver l'équation d'une droite pas à pas",
+                            "content": "• Étape 1 : Calculer la pente $m = \\frac{y_2 - y_1}{x_2 - x_1}$.\n• Étape 2 : Écrire le squelette $y = mx + b$.\n• Étape 3 : Remplacer $(x, y)$ par les coordonnées de l'un des points connus pour isoler $b$ : $b = y - mx$."
                         },
                         {
-                            "title": "3. Qu'est-ce qu'une fonction f(x) ?",
-                            "content": "Une fonction associe à chaque $x$ une image unique $f(x)$. Si $f(x) = 2x + 1$, alors $f(3) = 2(3) + 1 = 7$."
+                            "title": "3. Parallélisme, perpendicularité et intersection",
+                            "content": "• Deux droites parallèles ne se coupent jamais car elles ont la même pente ($m_1 = m_2$).\n• Deux droites perpendiculaires se coupent à angle droit : la pente de la seconde est l'opposée de l'inverse de la première ($m_2 = -1/m_1$). Exemple : si $m_1 = 2$, alors $m_2 = -1/2$.\n• Point d'intersection : pour trouver où deux droites $y_1 = m_1 x + b_1$ et $y_2 = m_2 x + b_2$ se croisent, on égalise : $m_1 x + b_1 = m_2 x + b_2$ et on résout pour $x$."
                         }
                     ],
-                    "pitfall": "Attention à l'ordre des coordonnées dans le calcul de la pente : $m = \\frac{y_2 - y_1}{x_2 - x_1}$, et non $\\frac{x_2 - x_1}{y_2 - y_1}$ !",
-                    "method": "Pour trouver l'équation d'une droite passant par $A(1, 3)$ et $B(4, 9)$ : 1. Calcule $m = \\frac{9 - 3}{4 - 1} = \\frac{6}{3} = 2$. 2. Écris $y = 2x + b$. 3. Injecte le point $A$ : $3 = 2(1) + b \\implies b = 1$. L'équation est $y = 2x + 1$."
+                    "pitfall": "Attention aux coordonnées négatives dans le calcul de la pente : $m = \\frac{y_2 - y_1}{x_2 - x_1}$. Avec $A(-2, 3)$ et $B(4, -9)$, on a $x_2 - x_1 = 4 - (-2) = 4 + 2 = 6$, et NON $4 - 2 = 2$ !",
+                    "method": "Trouver le point d'intersection de $y = 3x - 1$ et $y = -x + 11$ : 1. Égalise : $3x - 1 = -x + 11$. 2. Regroupe les $x$ : $3x + x = 11 + 1 \\implies 4x = 12 \\implies x = 3$. 3. Calcule $y$ : $y = 3(3) - 1 = 8$. Le point de rencontre est $(3, 8)$."
                 },
                 "exercises": [
                     {
-                        "id": "fond-ex7",
-                        "title": "Calcul de pente d'une droite",
+                        "id": "fond-ex11",
+                        "title": "Calcul de pente avec coordonnées négatives",
                         "difficulty": 1,
-                        "question_latex": "Calculez la pente $m$ de la droite passant par les points $A(1, 2)$ et $B(5, 10)$.",
+                        "question_latex": "Calculez la pente $m$ de la droite reliant les points $A(-2, 3)$ et $B(4, -9)$.",
                         "input_type": "math_expr",
-                        "expected_solution": "2",
+                        "expected_solution": "-2",
                         "hints": [
                             "Appliquez $m = \\frac{y_2 - y_1}{x_2 - x_1}$.",
-                            "$m = \\frac{10 - 2}{5 - 1} = \\frac{8}{4}$."
+                            "Au numérateur : $-9 - 3 = -12$. Au dénominateur : $4 - (-2) = 6$."
                         ],
-                        "full_solution_latex": "m = \\frac{10 - 2}{5 - 1} = \\frac{8}{4} = 2."
+                        "full_solution_latex": "m = \\frac{-9 - 3}{4 - (-2)} = \\frac{-12}{6} = -2."
                     },
                     {
-                        "id": "fond-ex8",
-                        "title": "Ordonnée à l'origine",
-                        "difficulty": 2,
-                        "question_latex": "Une droite a une pente $m = 3$ et passe par le point $P(2, 7)$. Quelle est la valeur de son ordonnée à l'origine $b$ ?",
+                        "id": "fond-ex12",
+                        "title": "Calcul de l'ordonnée à l'origine b",
+                        "difficulty": 1,
+                        "question_latex": "Une droite a pour pente $m = 4$ et passe par le point $P(3, 10)$. Quelle est son ordonnée à l'origine $b$ ?",
                         "input_type": "math_expr",
-                        "expected_solution": "1",
+                        "expected_solution": "-2",
                         "hints": [
-                            "Partez de $y = mx + b \\implies 7 = 3(2) + b$.",
-                            "$7 = 6 + b \\implies b = 7 - 6$."
+                            "Partez de $y = mx + b$ et injectez les valeurs : $10 = 4(3) + b$.",
+                            "$10 = 12 + b \\implies b = 10 - 12$."
                         ],
-                        "full_solution_latex": "y = 3x + b \\implies 7 = 3(2) + b \\implies 7 = 6 + b \\implies b = 1."
+                        "full_solution_latex": "y = 4x + b \\implies 10 = 4(3) + b \\implies 10 = 12 + b \\implies b = -2."
+                    },
+                    {
+                        "id": "fond-ex13",
+                        "title": "Équation cartésienne complète",
+                        "difficulty": 2,
+                        "question_latex": "Donnez l'expression de $y$ (sous la forme $mx + b$) pour la droite ayant une pente $m = -3$ et une ordonnée à l'origine $b = 5$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "-3*x + 5",
+                        "hints": [
+                            "Remplacez $m$ par $-3$ et $b$ par $5$ dans $y = mx + b$."
+                        ],
+                        "full_solution_latex": "y = -3x + 5."
+                    },
+                    {
+                        "id": "fond-ex14",
+                        "title": "Pente d'une droite perpendiculaire",
+                        "difficulty": 2,
+                        "question_latex": "Une droite a une pente $m_1 = \\frac{2}{3}$. Quelle est la pente $m_2$ de la droite qui lui est perpendiculaire ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "-3/2",
+                        "hints": [
+                            "La condition d'orthogonalité est $m_1 \\cdot m_2 = -1$.",
+                            "Prenez l'inverse de la fraction et changez son signe : $-\\frac{1}{2/3} = -\\frac{3}{2}$."
+                        ],
+                        "full_solution_latex": "m_2 = -\\frac{1}{m_1} = -\\frac{1}{2/3} = -\\frac{3}{2}."
+                    },
+                    {
+                        "id": "fond-ex15",
+                        "title": "Abscisse d'intersection de deux droites",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez la coordonnée $x$ du point d'intersection des deux droites $y = 3x - 1$ et $y = -x + 11$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3",
+                        "hints": [
+                            "Égalisez les deux équations : $3x - 1 = -x + 11$.",
+                            "Ajoutez $x$ de chaque côté et ajoutez 1 de chaque côté : $4x = 12$."
+                        ],
+                        "full_solution_latex": "3x - 1 = -x + 11 \\implies 4x = 12 \\implies x = 3."
+                    },
+                    {
+                        "id": "fond-ex16",
+                        "title": "Évaluation d'une fonction affine",
+                        "difficulty": 1,
+                        "question_latex": "Soit la fonction linéaire $f(x) = -2x + 7$. Calculez la valeur de $f(4)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "-1",
+                        "hints": [
+                            "Remplacez simplement $x$ par 4 dans l'expression : $-2(4) + 7$.",
+                            "Priorité au produit : $-8 + 7$."
+                        ],
+                        "full_solution_latex": "f(4) = -2(4) + 7 = -8 + 7 = -1."
                     }
                 ]
             },
             {
                 "id": "m4-trigo-exp-log",
                 "title": "Trigonométrie, Exponentielles & Logarithmes",
-                "subtitle": "Triangle rectangle, cercle trigo et logarithme népérien",
+                "subtitle": "Cercle unité, radians, identités trigonométriques, puissances de e et propriétés de ln",
                 "viz_type": "trigcircle",
                 "theory": {
-                    "summary": "La trigonométrie mesure les angles et les rotations, tandis que l'exponentielle ($e^x$) et le logarithme ($\\\\ln$) décrivent les lois de croissance et décroissance continues.",
+                    "summary": "La trigonométrie mesure les rotations et les variations cycliques. L'exponentielle (e^x) et le logarithme népérien (ln) sont deux fonctions miroirs (inverses l'une de l'autre) qui modélisent les lois de croissance et décroissance continues.",
                     "key_formulas": [
-                        {"name": "Relations trigonométriques", "latex": "\\sin(\\theta) = \\frac{\\text{Opp}}{\\text{Hyp}}, \\quad \\cos(\\theta) = \\frac{\\text{Adj}}{\\text{Hyp}}"},
+                        {"name": "Conversion Degrés / Radians", "latex": "180^\\circ = \\pi \\text{ rad} \\iff 1^\\circ = \\frac{\\pi}{180}"},
+                        {"name": "Coordonnées sur le cercle unité", "latex": "(x, y) = (\\cos\\theta, \\sin\\theta)"},
                         {"name": "Identité pythagoricienne", "latex": "\\cos^2(\\theta) + \\sin^2(\\theta) = 1"},
-                        {"name": "Propriétés du logarithme", "latex": "\\ln(ab) = \\ln(a) + \\ln(b), \\quad \\ln(a^k) = k \\ln(a)"},
-                        {"name": "Inverses e et ln", "latex": "e^{\\ln(x)} = x, \\quad \\ln(e^x) = x"}
+                        {"name": "Définition de la tangente", "latex": "\\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}"},
+                        {"name": "Addition logarithmique", "latex": "\\ln(a \\cdot b) = \\ln(a) + \\ln(b)"},
+                        {"name": "Soustraction logarithmique", "latex": "\\ln(a / b) = \\ln(a) - \\ln(b)"},
+                        {"name": "Descente de puissance", "latex": "\\ln(a^k) = k \\ln(a)"},
+                        {"name": "Identités réciproques e et ln", "latex": "e^{\\ln(x)} = x \\quad (x > 0), \\quad \\ln(e^x) = x"}
                     ],
                     "sections": [
                         {
-                            "title": "1. Les radians simplifiés",
-                            "content": "En sciences et à l'université, on compte toujours les angles en radians : un demi-tour ($180^\\circ$) correspond à $\\pi$ radians. Un angle droit ($90^\\circ$) vaut $\\pi/2$, et $45^\\circ$ vaut $\\pi/4$."
+                            "title": "1. Le cercle trigonométrique et les radians",
+                            "content": "• Pourquoi les radians ? Un angle en radians mesure directement la longueur parcourue sur un cercle de rayon 1. Un tour complet mesure $2\\pi$ radians ($360^\\circ$), un demi-tour vaut $\\pi$ radians ($180^\\circ$).\n• Les angles clés à connaître par cœur :\n  - $0^\\circ = 0$ : $\\cos(0) = 1, \\sin(0) = 0$\n  - $90^\\circ = \\pi/2$ : $\\cos(\\pi/2) = 0, \\sin(\\pi/2) = 1$\n  - $180^\\circ = \\pi$ : $\\cos(\\pi) = -1, \\sin(\\pi) = 0$\n  - $60^\\circ = \\pi/3$ : $\\cos(\\pi/3) = 1/2, \\sin(\\pi/3) = \\sqrt{3}/2$"
                         },
                         {
-                            "title": "2. Les coordonnées sur le cercle unité",
-                            "content": "Sur le cercle de rayon 1, les coordonnées d'un point à un angle $\\theta$ sont simplement $(x, y) = (\\cos\\theta, \\sin\\theta)$."
+                            "title": "2. L'identité fondamentale cos²(θ) + sin²(θ) = 1",
+                            "content": "• C'est simplement le théorème de Pythagore dans le triangle rectangle formé dans le cercle unité : $(\\text{côté horizontal})^2 + (\\text{côté vertical})^2 = (\\text{hypoténuse})^2 = 1^2$.\n• Si vous connaissez $\\cos(\\theta)$, vous pouvez immédiatement trouver $\\sin(\\theta) = \\pm \\sqrt{1 - \\cos^2(\\theta)}$."
                         },
                         {
-                            "title": "3. Le logarithme népérien ln",
-                            "content": "$\\ln(x)$ est l'opération miroir de l'exponentielle $e^x$. Il transforme les multiplications en additions : $\\ln(x \\cdot y) = \\ln(x) + \\ln(y)$."
+                            "title": "3. L'exponentielle e^x et le logarithme népérien ln(x)",
+                            "content": "• $e \\approx 2.71828$ est la base naturelle de la croissance exponentielle. $e^x$ est TOUJOURS strictement positif ($e^x > 0$).\n• $\\ln(x)$ est l'inverse exact de $e^x$. Il permet de descendre un exposant inconnu : si $e^{ax} = C$, alors $\\ln(e^{ax}) = \\ln(C) \\implies ax = \\ln(C) \\implies x = \\frac{\\ln(C)}{a}$."
                         }
                     ],
-                    "pitfall": "Ne confondez pas : $\\ln(a + b) \\neq \\ln(a) + \\ln(b)$ ! C'est $\\ln(a \\times b)$ qui devient $\\ln(a) + \\ln(b)$.",
-                    "method": "Pour résoudre $e^{2x} = 5$ : applique le logarithme népérien $\\ln$ de chaque côté : $\\ln(e^{2x}) = \\ln(5) \\implies 2x = \\ln(5) \\implies x = \\frac{\\ln(5)}{2}$."
+                    "pitfall": "Attention : 1. $\\ln(a + b) \\neq \\ln(a) + \\ln(b)$ ! C'est $\\ln(ab)$ qui donne une somme. 2. $\\ln(0)$ et le logarithme d'un nombre négatif sont impossibles dans les nombres réels.",
+                    "method": "Résoudre $e^{2x} = 7$ : 1. Applique le logarithme $\\ln$ des deux côtés : $\\ln(e^{2x}) = \\ln(7)$. 2. Puisque $\\ln(e^u) = u$, le membre de gauche devient simplement $2x$. 3. On a donc $2x = \\ln(7) \\implies x = \\frac{\\ln(7)}{2}$."
                 },
                 "exercises": [
                     {
-                        "id": "fond-ex9",
-                        "title": "Valeur trigonométrique remarquable",
+                        "id": "fond-ex17",
+                        "title": "Conversion degrés en radians",
                         "difficulty": 1,
-                        "question_latex": "Quelle est la valeur exacte de $\\sin(\\pi/2)$ ?",
+                        "question_latex": "Convertissez l'angle de $60^\\circ$ en radians sous forme exacte (exprimez en fonction de pi, ex: pi/3).",
                         "input_type": "math_expr",
-                        "expected_solution": "1",
+                        "expected_solution": "pi/3",
                         "hints": [
-                            "$\\pi/2$ radians correspond à un angle de $90^\\circ$ (le sommet du cercle trigonométrique).",
-                            "L'ordonnée $y$ tout en haut du cercle de rayon 1 est 1."
+                            "Multipliez la valeur en degrés par $\\frac{\\pi}{180}$.",
+                            "$\\frac{60\\pi}{180} = \\frac{6\\pi}{18} = \\frac{\\pi}{3}$."
                         ],
-                        "full_solution_latex": "\\sin(\\pi/2) = 1."
+                        "full_solution_latex": "60^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{\\pi}{3} \\text{ rad}."
                     },
                     {
-                        "id": "fond-ex10",
-                        "title": "Simplification avec ln et exponentielle",
-                        "difficulty": 2,
-                        "question_latex": "Simplifiez l'expression $\\ln(e^4)$.",
+                        "id": "fond-ex18",
+                        "title": "Valeur remarquable du cosinus",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la valeur exacte de $\\cos(\\pi/3)$ sous forme de fraction irréductible ?",
                         "input_type": "math_expr",
-                        "expected_solution": "4",
+                        "expected_solution": "1/2",
                         "hints": [
-                            "Rappelez-vous que $\\ln(e^x) = x$.",
-                            "La fonction $\\ln$ et l'exponentielle s'annulent mutuellement."
+                            "$\\pi/3$ correspond à $60^\\circ$.",
+                            "Sur le cercle unité, l'abscisse en cet angle vaut la moitié du rayon : $\\frac{1}{2}$."
                         ],
-                        "full_solution_latex": "\\ln(e^4) = 4 \\ln(e) = 4(1) = 4."
+                        "full_solution_latex": "\\cos(\\pi/3) = \\frac{1}{2}."
+                    },
+                    {
+                        "id": "fond-ex19",
+                        "title": "Valeur du sinus à un demi-tour",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la valeur exacte de $\\sin(\\pi)$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "0",
+                        "hints": [
+                            "$\\pi$ radians correspond à un angle de $180^\\circ$ (à l'extrémité gauche du cercle).",
+                            "Le sinus représente la coordonnée verticale $y$ : le point est sur l'axe horizontal, donc $y = 0$."
+                        ],
+                        "full_solution_latex": "\\sin(\\pi) = 0."
+                    },
+                    {
+                        "id": "fond-ex20",
+                        "title": "Application de l'identité pythagoricienne",
+                        "difficulty": 2,
+                        "question_latex": "Sachant que $\\cos(\\theta) = \\frac{4}{5}$ et que $\\theta$ est dans le premier quadrant ($\\\\sin\\\\theta > 0$), calculez la valeur exacte de $\\sin(\\theta)$ sous forme de fraction.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3/5",
+                        "hints": [
+                            "Utilisez $\\cos^2(\\theta) + \\sin^2(\\theta) = 1$.",
+                            "$\\sin^2(\\theta) = 1 - (4/5)^2 = 1 - \\frac{16}{25} = \\frac{9}{25}$."
+                        ],
+                        "full_solution_latex": "\\sin(\\theta) = \\sqrt{1 - \\left(\\frac{4}{5}\\right)^2} = \\sqrt{1 - \\frac{16}{25}} = \\sqrt{\\frac{9}{25}} = \\frac{3}{5}."
+                    },
+                    {
+                        "id": "fond-ex21",
+                        "title": "Condensation d'une soustraction de logarithmes",
+                        "difficulty": 2,
+                        "question_latex": "Condensez $\\ln(12) - \\ln(3)$ en un seul logarithme $\\ln(k)$ (donnez l'expression exacte).",
+                        "input_type": "math_expr",
+                        "expected_solution": "ln(4)",
+                        "hints": [
+                            "Appliquez la propriété $\\ln(a) - \\ln(b) = \\ln(a/b)$.",
+                            "Calculez le rapport $\\frac{12}{3} = 4$."
+                        ],
+                        "full_solution_latex": "\\ln(12) - \\ln(3) = \\ln\\left(\\frac{12}{3}\\right) = \\ln(4)."
+                    },
+                    {
+                        "id": "fond-ex22",
+                        "title": "Résolution d'équation exponentielle",
+                        "difficulty": 2,
+                        "question_latex": "Résolvez pour $x$ l'équation $e^{2x} = 7$ (donnez la solution exacte en fonction de ln).",
+                        "input_type": "math_expr",
+                        "expected_solution": "ln(7)/2",
+                        "hints": [
+                            "Appliquez $\\ln$ de chaque côté : $\\ln(e^{2x}) = \\ln(7)$.",
+                            "$2x = \\ln(7) \\implies x = \\frac{\\ln(7)}{2}$."
+                        ],
+                        "full_solution_latex": "e^{2x} = 7 \\implies \\ln(e^{2x}) = \\ln(7) \\implies 2x = \\ln(7) \\implies x = \\frac{\\ln(7)}{2}."
+                    },
+                    {
+                        "id": "fond-ex23",
+                        "title": "Résolution d'équation logarithmique",
+                        "difficulty": 2,
+                        "question_latex": "Résolvez pour $x$ l'équation $\\ln(x) = 3$ (donnez la valeur exacte en fonction de e).",
+                        "input_type": "math_expr",
+                        "expected_solution": "e^3",
+                        "hints": [
+                            "Appliquez la fonction exponentielle des deux côtés : $e^{\\ln(x)} = e^3$.",
+                            "Puisque $e^{\\ln(x)} = x$, on obtient directement la solution."
+                        ],
+                        "full_solution_latex": "\\ln(x) = 3 \\implies e^{\\ln(x)} = e^3 \\implies x = e^3."
                     }
                 ]
             }

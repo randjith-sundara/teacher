@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.4.0",
+            "date": "2026-09-22",
+            "title": "Laboratoire Parabole & Refonte Pédagogique FOND-0100 (Cours 2, 3, 4)",
+            "tag": "Contenu & Pédagogie",
+            "description": "Correction des contrôles du laboratoire interactif pour la parabole (courbure a, hauteur c, détection en direct du sommet et des racines réelles). Enrichissement théorique en profondeur des cours 2, 3 et 4 pour les reprises d'études (exposants négatifs/fractionnaires, radicaux, méthode du discriminant, pente Delta y / Delta x, droites orthogonales et cercle trigo avec identités pythagoriciennes). Ajout d'une batterie de 20 nouveaux exercices variés avec indices progressifs et solutions complètes vérifiées par SymPy."
+        },
+        {
             "version": "1.3.0",
             "date": "2026-09-22",
             "title": "Optimisation Ergonomique iPad, Apple Pencil & Mode PWA",
