@@ -1,0 +1,69 @@
+name: Deploy Teacher to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-teacher-vps
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH and Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          envs: GEMINI_API_KEY
+          script: |
+            export PATH=$PATH:/usr/bin:/usr/local/bin:$HOME/.local/bin
+            mkdir -p /var/www/teacher
+            cd /var/www/teacher
+
+            if [ ! -d ".git" ]; then
+              git clone git@github.com:randjith-sundara/teacher.git .
+            else
+              git fetch origin main
+              git reset --hard origin/main
+            fi
+
+            # .env
+            printf "%s\n" \
+              "GEMINI_API_KEY=$GEMINI_API_KEY" \
+              "PORT=8005" \
+              "HOST=0.0.0.0" \
+              "ENV=production" > .env
+            chmod 600 .env
+
+            # Python Virtual Environment
+            if [ ! -d ".venv" ]; then
+              python3 -m venv .venv
+            fi
+            .venv/bin/pip install --upgrade pip
+            .venv/bin/pip install -r requirements.txt
+
+            # Frontend build
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+
+            # Nginx config if present
+            if [ -f "nginx_teacher.conf" ]; then
+              sudo cp nginx_teacher.conf /etc/nginx/sites-available/teacher
+              sudo ln -sf /etc/nginx/sites-available/teacher /etc/nginx/sites-enabled/teacher
+              sudo nginx -t && sudo systemctl reload nginx
+            fi
+
+            # PM2 restart or start
+            pm2 restart teacher --update-env || pm2 start "/var/www/teacher/.venv/bin/python -m uvicorn backend.main:app --host 0.0.0.0 --port 8005" --name "teacher"
