@@ -220,6 +220,13 @@ def get_releases():
     """Notes de version (Release Notes) systématiques."""
     return [
         {
+            "version": "1.1.0",
+            "date": "2026-09-22",
+            "title": "Cours FOND-0100 : Remise à Niveau & Fondations (De Zéro)",
+            "tag": "Nouvelle Matière & Pédagogie",
+            "description": "Ajout du cours complet de remise à niveau pour les personnes reprenant les mathématiques après plusieurs années : fractions, factorisation, lois des exposants, équations du 2nd degré, droites (y=mx+b), cercle trigonométrique et logarithmes. Ajout de 2 nouveaux laboratoires visuels interactifs et adaptation du tuteur IA."
+        },
+        {
             "version": "1.0.0",
             "date": "2026-09-22",
             "title": "Lancement officiel de la plateforme Teacher",

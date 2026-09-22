@@ -17,9 +17,9 @@ import {
 
 export default function App() {
   const [courses, setCourses] = useState([]);
-  const [activeCourseId, setActiveCourseId] = useState('mat0150');
+  const [activeCourseId, setActiveCourseId] = useState('fond0100');
   const [courseDetails, setCourseDetails] = useState(null);
-  const [activeModuleId, setActiveModuleId] = useState('m1-limites');
+  const [activeModuleId, setActiveModuleId] = useState('m1-algebre-base');
   const [activeTab, setActiveTab] = useState('theory'); // 'theory' | 'exercises' | 'exam'
   const [loading, setLoading] = useState(true);
 

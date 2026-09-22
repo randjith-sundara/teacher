@@ -7,6 +7,339 @@ Banque de cours, modules, exercices interactifs et examens universitaires pour :
 
 COURSES_DATA = [
     {
+        "id": "fond0100",
+        "code": "FOND-0100",
+        "title": "Remise à Niveau & Fondations",
+        "category": "Fondations & Pré-requis",
+        "color": "amber",
+        "description": "Revue pas-à-pas des bases indispensables : fractions, factorisation, lois des exposants, équations du 2nd degré, droites, trigonométrie et logarithmes.",
+        "prerequisites": "Aucun prérequis — Conçu spécialement pour repartir de zéro",
+        "estimated_hours": 30,
+        "modules": [
+            {
+                "id": "m1-algebre-base",
+                "title": "Algèbre & Calcul Fondamental",
+                "subtitle": "Fractions, distributivité et factorisation",
+                "viz_type": "fractions",
+                "theory": {
+                    "summary": "L'algèbre est le langage fondamental des mathématiques. Savoir simplifier des fractions et factoriser rapidement permet d'aborder sans stress le calcul différentiel.",
+                    "key_formulas": [
+                        {"name": "Addition de fractions", "latex": "\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}"},
+                        {"name": "Différence de carrés", "latex": "a^2 - b^2 = (a - b)(a + b)"},
+                        {"name": "Carré d'un binôme", "latex": "(a + b)^2 = a^2 + 2ab + b^2"}
+                    ],
+                    "sections": [
+                        {
+                            "title": "1. Priorités opératoires (PEMDAS)",
+                            "content": "L'ordre strict des opérations est : 1. Parenthèses, 2. Exposants, 3. Multiplication et Division (de gauche à droite), 4. Addition et Soustraction. Exemple : $2 + 3 \\times 4 = 2 + 12 = 14$ et NON $(2+3) \\times 4 = 20$."
+                        },
+                        {
+                            "title": "2. Manipuler les fractions avec sérénité",
+                            "content": "Pour additionner deux fractions, on trouve un dénominateur commun : $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$. Pour multiplier, on multiplie en ligne droite : $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$."
+                        },
+                        {
+                            "title": "3. Factorisation : l'art de simplifier",
+                            "content": "Factoriser, c'est transformer une somme en produit. 1. Mise en évidence : $4x + 8 = 4(x + 2)$. 2. Différence de carrés : $x^2 - 25 = (x - 5)(x + 5)$."
+                        }
+                    ],
+                    "pitfall": "Attention : $(a + b)^2 \\neq a^2 + b^2$ ! Ne jamais oublier le terme croisé $2ab$. Exemple : $(x + 3)^2 = x^2 + 6x + 9$.",
+                    "method": "Pour simplifier une fraction algébrique comme $\\frac{x^2 - 9}{x - 3}$ : 1. Factorise le numérateur : $(x - 3)(x + 3)$. 2. Simplifie le facteur commun $(x - 3)$. Résultat : $x + 3$."
+                },
+                "exercises": [
+                    {
+                        "id": "fond-ex1",
+                        "title": "Addition de fractions simples",
+                        "difficulty": 1,
+                        "question_latex": "Calculez $\\frac{2}{3} + \\frac{1}{4}$ sous forme de fraction irréductible.",
+                        "input_type": "math_expr",
+                        "expected_solution": "11/12",
+                        "hints": [
+                            "Trouvez le dénominateur commun entre 3 et 4 : c'est 12.",
+                            "Convertissez : $\\frac{2}{3} = \\frac{8}{12}$ et $\\frac{1}{4} = \\frac{3}{12}$."
+                        ],
+                        "full_solution_latex": "\\frac{2}{3} + \\frac{1}{4} = \\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}."
+                    },
+                    {
+                        "id": "fond-ex2",
+                        "title": "Développement d'un carré",
+                        "difficulty": 1,
+                        "question_latex": "Développez l'expression $(x + 5)^2$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "x^2 + 10*x + 25",
+                        "hints": [
+                            "Appliquez $(a + b)^2 = a^2 + 2ab + b^2$ avec $a = x$ et $b = 5$.",
+                            "Le double produit vaut $2 \\times x \\times 5 = 10x$."
+                        ],
+                        "full_solution_latex": "(x + 5)^2 = x^2 + 2(x)(5) + 5^2 = x^2 + 10x + 25."
+                    },
+                    {
+                        "id": "fond-ex3",
+                        "title": "Différence de deux carrés",
+                        "difficulty": 2,
+                        "question_latex": "Factorisez l'expression $x^2 - 16$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "(x - 4)*(x + 4)",
+                        "hints": [
+                            "Remarquez que $16 = 4^2$.",
+                            "Appliquez $a^2 - b^2 = (a - b)(a + b)$."
+                        ],
+                        "full_solution_latex": "x^2 - 16 = x^2 - 4^2 = (x - 4)(x + 4)."
+                    }
+                ]
+            },
+            {
+                "id": "m2-exposants-equations",
+                "title": "Exposants, Racines & Équations",
+                "subtitle": "Puissances, radicaux et formule quadratique",
+                "viz_type": "parabola",
+                "theory": {
+                    "summary": "Comprendre que $\\sqrt{x} = x^{1/2}$ et $\\frac{1}{x} = x^{-1}$ est le secret qui rend le calcul différentiel et intégral simple et naturel.",
+                    "key_formulas": [
+                        {"name": "Multiplication de puissances", "latex": "x^a \\cdot x^b = x^{a+b}"},
+                        {"name": "Exposant négatif", "latex": "x^{-n} = \\frac{1}{x^n}"},
+                        {"name": "Exposant fractionnaire", "latex": "x^{m/n} = \\sqrt[n]{x^m}"},
+                        {"name": "Formule quadratique", "latex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}
+                    ],
+                    "sections": [
+                        {
+                            "title": "1. Règles d'or des exposants",
+                            "content": "• $(x^a)^b = x^{a \\cdot b}$\n• $\\frac{x^a}{x^b} = x^{a - b}$\n• $(xy)^a = x^a y^a$\n• $x^0 = 1$ (pour tout $x \\neq 0$)."
+                        },
+                        {
+                            "title": "2. Racines et simplification",
+                            "content": "Pour simplifier une racine carrée, on extrait les carrés parfaits : $\\sqrt{48} = \\sqrt{16 \\times 3} = \\sqrt{16} \\times \\sqrt{3} = 4\\sqrt{3}$."
+                        },
+                        {
+                            "title": "3. Équations du second degré",
+                            "content": "Toute équation $ax^2 + bx + c = 0$ se résout avec le discriminant $\\Delta = b^2 - 4ac$. Si $\\Delta > 0$, il y a deux solutions réelles distinctes."
+                        }
+                    ],
+                    "pitfall": "Attention : $\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$ ! Exemple : $\\sqrt{9 + 16} = \\sqrt{25} = 5$, alors que $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$.",
+                    "method": "Pour résoudre $x^2 - 5x + 6 = 0$ : 1. Identifie $a=1, b=-5, c=6$. 2. Calcule $\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1$. 3. $x = \\frac{5 \\pm 1}{2}$, soit $x = 3$ ou $x = 2$."
+                },
+                "exercises": [
+                    {
+                        "id": "fond-ex4",
+                        "title": "Lois des puissances",
+                        "difficulty": 1,
+                        "question_latex": "Simplifiez $\\frac{x^3 \\cdot x^4}{x^2}$ en une seule puissance de $x$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "x^5",
+                        "hints": [
+                            "Numérateur : $x^3 \\cdot x^4 = x^{3+4} = x^7$.",
+                            "Division : $x^7 / x^2 = x^{7-2} = x^5$."
+                        ],
+                        "full_solution_latex": "\\frac{x^3 \\cdot x^4}{x^2} = \\frac{x^7}{x^2} = x^{7 - 2} = x^5."
+                    },
+                    {
+                        "id": "fond-ex5",
+                        "title": "Exposant fractionnaire",
+                        "difficulty": 2,
+                        "question_latex": "Écrivez $\\frac{1}{\\sqrt{x}}$ sous la forme $x^p$ (donnez la valeur de $x^p$).",
+                        "input_type": "math_expr",
+                        "expected_solution": "x^(-1/2)",
+                        "hints": [
+                            "Rappelez-vous : $\\sqrt{x} = x^{1/2}$.",
+                            "Rappelez-vous : $\\frac{1}{A} = A^{-1}$."
+                        ],
+                        "full_solution_latex": "\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}."
+                    },
+                    {
+                        "id": "fond-ex6",
+                        "title": "Résolution quadratique",
+                        "difficulty": 2,
+                        "question_latex": "Trouvez la PLUS GRANDE racine de l'équation $x^2 - 5x + 6 = 0$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "3",
+                        "hints": [
+                            "Factorisez sous la forme $(x - p)(x - q) = 0$.",
+                            "Trouvez deux nombres dont le produit vaut 6 et la somme vaut 5 : ce sont 2 et 3."
+                        ],
+                        "full_solution_latex": "x^2 - 5x + 6 = (x - 2)(x - 3) = 0 \\implies x = 2 \\text{ ou } x = 3. \\text{ La plus grande est } 3."
+                    }
+                ]
+            },
+            {
+                "id": "m3-fonctions-droites",
+                "title": "Fonctions, Droites & Géométrie Plane",
+                "subtitle": "Pente m, ordonnée à l'origine b et équation de droite",
+                "viz_type": "line",
+                "theory": {
+                    "summary": "Une fonction décrit la relation entre deux variables. La droite est le modèle de variation le plus intuitif : sa pente représente le taux de variation constant.",
+                    "key_formulas": [
+                        {"name": "Équation cartésienne d'une droite", "latex": "y = mx + b"},
+                        {"name": "Formule de la pente", "latex": "m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{\\Delta y}{\\Delta x}"},
+                        {"name": "Droites perpendiculaires", "latex": "m_1 \\cdot m_2 = -1 \\implies m_2 = -\\frac{1}{m_1}"}
+                    ],
+                    "sections": [
+                        {
+                            "title": "1. Sens physique de la pente m",
+                            "content": "La pente $m$ indique l'inclinaison de la droite : si $m > 0$ la droite monte, si $m < 0$ la droite descend, si $m = 0$ la droite est horizontale. Plus $|m|$ est grand, plus la montée est raide."
+                        },
+                        {
+                            "title": "2. L'ordonnée à l'origine b",
+                            "content": "La valeur $b$ est le point où la droite coupe l'axe vertical des $y$ (en $x = 0$)."
+                        },
+                        {
+                            "title": "3. Qu'est-ce qu'une fonction f(x) ?",
+                            "content": "Une fonction associe à chaque $x$ une image unique $f(x)$. Si $f(x) = 2x + 1$, alors $f(3) = 2(3) + 1 = 7$."
+                        }
+                    ],
+                    "pitfall": "Attention à l'ordre des coordonnées dans le calcul de la pente : $m = \\frac{y_2 - y_1}{x_2 - x_1}$, et non $\\frac{x_2 - x_1}{y_2 - y_1}$ !",
+                    "method": "Pour trouver l'équation d'une droite passant par $A(1, 3)$ et $B(4, 9)$ : 1. Calcule $m = \\frac{9 - 3}{4 - 1} = \\frac{6}{3} = 2$. 2. Écris $y = 2x + b$. 3. Injecte le point $A$ : $3 = 2(1) + b \\implies b = 1$. L'équation est $y = 2x + 1$."
+                },
+                "exercises": [
+                    {
+                        "id": "fond-ex7",
+                        "title": "Calcul de pente d'une droite",
+                        "difficulty": 1,
+                        "question_latex": "Calculez la pente $m$ de la droite passant par les points $A(1, 2)$ et $B(5, 10)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "2",
+                        "hints": [
+                            "Appliquez $m = \\frac{y_2 - y_1}{x_2 - x_1}$.",
+                            "$m = \\frac{10 - 2}{5 - 1} = \\frac{8}{4}$."
+                        ],
+                        "full_solution_latex": "m = \\frac{10 - 2}{5 - 1} = \\frac{8}{4} = 2."
+                    },
+                    {
+                        "id": "fond-ex8",
+                        "title": "Ordonnée à l'origine",
+                        "difficulty": 2,
+                        "question_latex": "Une droite a une pente $m = 3$ et passe par le point $P(2, 7)$. Quelle est la valeur de son ordonnée à l'origine $b$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "1",
+                        "hints": [
+                            "Partez de $y = mx + b \\implies 7 = 3(2) + b$.",
+                            "$7 = 6 + b \\implies b = 7 - 6$."
+                        ],
+                        "full_solution_latex": "y = 3x + b \\implies 7 = 3(2) + b \\implies 7 = 6 + b \\implies b = 1."
+                    }
+                ]
+            },
+            {
+                "id": "m4-trigo-exp-log",
+                "title": "Trigonométrie, Exponentielles & Logarithmes",
+                "subtitle": "Triangle rectangle, cercle trigo et logarithme népérien",
+                "viz_type": "trigcircle",
+                "theory": {
+                    "summary": "La trigonométrie mesure les angles et les rotations, tandis que l'exponentielle ($e^x$) et le logarithme ($\\\\ln$) décrivent les lois de croissance et décroissance continues.",
+                    "key_formulas": [
+                        {"name": "Relations trigonométriques", "latex": "\\sin(\\theta) = \\frac{\\text{Opp}}{\\text{Hyp}}, \\quad \\cos(\\theta) = \\frac{\\text{Adj}}{\\text{Hyp}}"},
+                        {"name": "Identité pythagoricienne", "latex": "\\cos^2(\\theta) + \\sin^2(\\theta) = 1"},
+                        {"name": "Propriétés du logarithme", "latex": "\\ln(ab) = \\ln(a) + \\ln(b), \\quad \\ln(a^k) = k \\ln(a)"},
+                        {"name": "Inverses e et ln", "latex": "e^{\\ln(x)} = x, \\quad \\ln(e^x) = x"}
+                    ],
+                    "sections": [
+                        {
+                            "title": "1. Les radians simplifiés",
+                            "content": "En sciences et à l'université, on compte toujours les angles en radians : un demi-tour ($180^\\circ$) correspond à $\\pi$ radians. Un angle droit ($90^\\circ$) vaut $\\pi/2$, et $45^\\circ$ vaut $\\pi/4$."
+                        },
+                        {
+                            "title": "2. Les coordonnées sur le cercle unité",
+                            "content": "Sur le cercle de rayon 1, les coordonnées d'un point à un angle $\\theta$ sont simplement $(x, y) = (\\cos\\theta, \\sin\\theta)$."
+                        },
+                        {
+                            "title": "3. Le logarithme népérien ln",
+                            "content": "$\\ln(x)$ est l'opération miroir de l'exponentielle $e^x$. Il transforme les multiplications en additions : $\\ln(x \\cdot y) = \\ln(x) + \\ln(y)$."
+                        }
+                    ],
+                    "pitfall": "Ne confondez pas : $\\ln(a + b) \\neq \\ln(a) + \\ln(b)$ ! C'est $\\ln(a \\times b)$ qui devient $\\ln(a) + \\ln(b)$.",
+                    "method": "Pour résoudre $e^{2x} = 5$ : applique le logarithme népérien $\\ln$ de chaque côté : $\\ln(e^{2x}) = \\ln(5) \\implies 2x = \\ln(5) \\implies x = \\frac{\\ln(5)}{2}$."
+                },
+                "exercises": [
+                    {
+                        "id": "fond-ex9",
+                        "title": "Valeur trigonométrique remarquable",
+                        "difficulty": 1,
+                        "question_latex": "Quelle est la valeur exacte de $\\sin(\\pi/2)$ ?",
+                        "input_type": "math_expr",
+                        "expected_solution": "1",
+                        "hints": [
+                            "$\\pi/2$ radians correspond à un angle de $90^\\circ$ (le sommet du cercle trigonométrique).",
+                            "L'ordonnée $y$ tout en haut du cercle de rayon 1 est 1."
+                        ],
+                        "full_solution_latex": "\\sin(\\pi/2) = 1."
+                    },
+                    {
+                        "id": "fond-ex10",
+                        "title": "Simplification avec ln et exponentielle",
+                        "difficulty": 2,
+                        "question_latex": "Simplifiez l'expression $\\ln(e^4)$.",
+                        "input_type": "math_expr",
+                        "expected_solution": "4",
+                        "hints": [
+                            "Rappelez-vous que $\\ln(e^x) = x$.",
+                            "La fonction $\\ln$ et l'exponentielle s'annulent mutuellement."
+                        ],
+                        "full_solution_latex": "\\ln(e^4) = 4 \\ln(e) = 4(1) = 4."
+                    }
+                ]
+            }
+        ],
+        "exam": {
+            "title": "Examen Diagnostique — FOND-0100 (Validation des Fondations)",
+            "duration_minutes": 45,
+            "passing_grade": 60,
+            "questions": [
+                {
+                    "id": "q1",
+                    "points": 15,
+                    "title": "Fractions",
+                    "question_latex": "Calculez $\\frac{3}{4} - \\frac{1}{6}$ sous forme de fraction simplifiée.",
+                    "input_type": "math_expr",
+                    "expected_solution": "7/12",
+                    "explanation": "\\frac{9}{12} - \\frac{2}{12} = \\frac{7}{12}."
+                },
+                {
+                    "id": "q2",
+                    "points": 15,
+                    "title": "Factorisation",
+                    "question_latex": "Factorisez complètement $x^2 - 49$.",
+                    "input_type": "math_expr",
+                    "expected_solution": "(x - 7)*(x + 7)",
+                    "explanation": "Différence de carrés : x^2 - 7^2 = (x - 7)(x + 7)."
+                },
+                {
+                    "id": "q3",
+                    "points": 15,
+                    "title": "Puissances",
+                    "question_latex": "Simplifiez $(x^4)^3 \\cdot x^{-2}$ en une seule puissance de $x$.",
+                    "input_type": "math_expr",
+                    "expected_solution": "x^10",
+                    "explanation": "x^{12} \\cdot x^{-2} = x^{12 - 2} = x^{10}."
+                },
+                {
+                    "id": "q4",
+                    "points": 20,
+                    "title": "Équation quadratique",
+                    "question_latex": "Trouvez la PLUS GRANDE solution de l'équation $x^2 - 7x + 12 = 0$.",
+                    "input_type": "math_expr",
+                    "expected_solution": "4",
+                    "explanation": "(x - 3)(x - 4) = 0 \\implies x = 3 \\text{ ou } x = 4. La plus grande est 4."
+                },
+                {
+                    "id": "q5",
+                    "points": 20,
+                    "title": "Pente de droite",
+                    "question_latex": "Quelle est la pente de la droite passant par $(2, 5)$ et $(6, 17)$ ?",
+                    "input_type": "math_expr",
+                    "expected_solution": "3",
+                    "explanation": "m = \\frac{17 - 5}{6 - 2} = \\frac{12}{4} = 3."
+                },
+                {
+                    "id": "q6",
+                    "points": 15,
+                    "title": "Logarithme",
+                    "question_latex": "Calculez $\\ln(e^5) - \\ln(e^2)$.",
+                    "input_type": "math_expr",
+                    "expected_solution": "3",
+                    "explanation": "5 - 2 = 3."
+                }
+            ]
+        }
+    },
+    {
         "id": "mat0130",
         "code": "MAT-0130",
         "title": "Algèbre vectorielle",

@@ -3,19 +3,30 @@ import MathView from './MathView';
 import { Sliders, RotateCcw } from 'lucide-react';
 
 export default function InteractiveVisualizer({ type }) {
-  // Mode Vecteurs
+  // Mode Droite (FOND-0100)
+  const [slopeM, setSlopeM] = useState(2);
+  const [interceptB, setInterceptB] = useState(1);
+
+  // Mode Cercle Trigonométrique (FOND-0100)
+  const [trigAngleDeg, setTrigAngleDeg] = useState(45);
+
+  // Mode Parabole (FOND-0100)
+  const [quadA, setQuadA] = useState(1);
+  const [quadC, setQuadC] = useState(-4);
+
+  // Mode Vecteurs (MAT-0130)
   const [ux, setUx] = useState(4);
   const [uy, setUy] = useState(2);
   const [vx, setVx] = useState(3);
   const [vy, setVy] = useState(1);
 
-  // Mode Dérivée / Tangente
+  // Mode Dérivée / Tangente (MAT-0150)
   const [tanX, setTanX] = useState(1.0);
 
-  // Mode Intégrale / Riemann
+  // Mode Intégrale / Riemann (MAT-0250)
   const [riemannN, setRiemannN] = useState(6);
 
-  // Mode Loi Normale
+  // Mode Loi Normale (MAT-0250)
   const [normZ, setNormZ] = useState(1.0);
 
   const canvasRef = useRef(null);
@@ -29,8 +40,176 @@ export default function InteractiveVisualizer({ type }) {
 
     ctx.clearRect(0, 0, width, height);
 
-    if (type === 'vector2d' || type === 'vector3d' || type === 'planes') {
-      // Repère cartésien centré
+    if (type === 'line' || type === 'fractions') {
+      // Visualisation de la droite y = mx + b
+      const cx = width / 2;
+      const cy = height / 2;
+      const scale = 28;
+
+      // Grille
+      ctx.strokeStyle = '#1e293b';
+      ctx.lineWidth = 1;
+      for (let x = cx % scale; x < width; x += scale) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = cy % scale; y < height; y += scale) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Axes
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, cy);
+      ctx.lineTo(width, cy);
+      ctx.moveTo(cx, 0);
+      ctx.lineTo(cx, height);
+      ctx.stroke();
+
+      // Droite y = m*x + b
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      const xLeft = -8;
+      const xRight = 8;
+      const yLeft = slopeM * xLeft + interceptB;
+      const yRight = slopeM * xRight + interceptB;
+      ctx.moveTo(cx + xLeft * scale, cy - yLeft * scale);
+      ctx.lineTo(cx + xRight * scale, cy - yRight * scale);
+      ctx.stroke();
+
+      // Point ordonnée à l'origine (0, b)
+      ctx.fillStyle = '#f43f5e';
+      ctx.beginPath();
+      ctx.arc(cx, cy - interceptB * scale, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Point en x = 1 (1, m + b) pour visualiser la pente
+      const x1 = 1;
+      const y1 = slopeM * x1 + interceptB;
+      ctx.fillStyle = '#34d399';
+      ctx.beginPath();
+      ctx.arc(cx + x1 * scale, cy - y1 * scale, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Triangle de pente
+      ctx.strokeStyle = '#fbbf24';
+      ctx.setLineDash([3, 3]);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - interceptB * scale);
+      ctx.lineTo(cx + scale, cy - interceptB * scale);
+      ctx.lineTo(cx + scale, cy - y1 * scale);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    } else if (type === 'trigcircle') {
+      // Cercle trigonométrique unitaire
+      const cx = width / 2;
+      const cy = height / 2;
+      const radius = 90;
+
+      // Axes
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, cy);
+      ctx.lineTo(width, cy);
+      ctx.moveTo(cx, 0);
+      ctx.lineTo(cx, height);
+      ctx.stroke();
+
+      // Cercle de rayon 1
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      const rad = (trigAngleDeg * Math.PI) / 180;
+      const cosVal = Math.cos(rad);
+      const sinVal = Math.sin(rad);
+
+      const px = cx + cosVal * radius;
+      const py = cy - sinVal * radius;
+
+      // Projection Cosinus (horizontal en cyan)
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(px, cy);
+      ctx.stroke();
+
+      // Projection Sinus (vertical en émeraude)
+      ctx.strokeStyle = '#34d399';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(px, cy);
+      ctx.lineTo(px, py);
+      ctx.stroke();
+
+      // Rayon vers le point (ambre)
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(px, py);
+      ctx.stroke();
+
+      // Point sur le cercle
+      ctx.fillStyle = '#f43f5e';
+      ctx.beginPath();
+      ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Arc d'angle
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 25, 0, -rad, rad > 0 ? true : false);
+      ctx.stroke();
+    } else if (type === 'parabola') {
+      // Parabole y = ax^2 + c
+      const cx = width / 2;
+      const cy = height / 2 + 30;
+      const scaleX = 40;
+      const scaleY = 20;
+
+      // Axes
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, cy);
+      ctx.lineTo(width, cy);
+      ctx.moveTo(cx, 0);
+      ctx.lineTo(cx, height);
+      ctx.stroke();
+
+      // Tracé y = a*x^2 + c
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let px = 0; px < width; px += 2) {
+        const x = (px - cx) / scaleX;
+        const y = quadA * x * x + quadC;
+        const py = cy - y * scaleY;
+        if (px === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      // Sommet (0, c)
+      ctx.fillStyle = '#f43f5e';
+      ctx.beginPath();
+      ctx.arc(cx, cy - quadC * scaleY, 5, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (type === 'vector2d' || type === 'vector3d' || type === 'planes') {
       const cx = width / 2;
       const cy = height / 2;
       const scale = 32;
@@ -61,7 +240,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx, height);
       ctx.stroke();
 
-      // Flèche helper
       const drawArrow = (fromX, fromY, toX, toY, color, width = 2.5) => {
         const headlen = 8;
         const dx = toX - fromX;
@@ -82,17 +260,14 @@ export default function InteractiveVisualizer({ type }) {
         ctx.fill();
       };
 
-      // Vecteur v (bleu)
       const vEndX = cx + vx * scale;
       const vEndY = cy - vy * scale;
       drawArrow(cx, cy, vEndX, vEndY, '#38bdf8', 3);
 
-      // Vecteur u (émeraude)
       const uEndX = cx + ux * scale;
       const uEndY = cy - uy * scale;
       drawArrow(cx, cy, uEndX, uEndY, '#34d399', 3);
 
-      // Calcul de la projection orthogonale
       const dot = ux * vx + uy * vy;
       const normVSq = vx * vx + vy * vy;
       if (normVSq > 0) {
@@ -102,7 +277,6 @@ export default function InteractiveVisualizer({ type }) {
         const pEndX = cx + px * scale;
         const pEndY = cy - py * scale;
 
-        // Ligne pointillée de u à proj
         ctx.strokeStyle = '#94a3b8';
         ctx.setLineDash([4, 4]);
         ctx.lineWidth = 1.5;
@@ -112,17 +286,14 @@ export default function InteractiveVisualizer({ type }) {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // Vecteur projection (ambre)
         drawArrow(cx, cy, pEndX, pEndY, '#fbbf24', 3);
       }
     } else if (type === 'tangent' || type === 'limit' || type === 'derivatives' || type === 'optimization') {
-      // Graphique f(x) = x^3 - 3x / 2 ou f(x) = x^2 - 2x
       const cx = width / 2;
       const cy = height / 2 + 30;
       const scaleX = 70;
       const scaleY = 35;
 
-      // Axes
       ctx.strokeStyle = '#334155';
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -132,7 +303,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx, height);
       ctx.stroke();
 
-      // Fonction f(x) = 0.5 * x^3 - 2 * x
       const f = (x) => 0.5 * Math.pow(x, 3) - 2 * x;
       const fPrime = (x) => 1.5 * Math.pow(x, 2) - 2;
 
@@ -148,12 +318,10 @@ export default function InteractiveVisualizer({ type }) {
       }
       ctx.stroke();
 
-      // Tangente en tanX
       const x0 = tanX;
       const y0 = f(x0);
       const m = fPrime(x0);
 
-      // Droite tangente : y - y0 = m * (x - x0)
       ctx.strokeStyle = '#f43f5e';
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -166,7 +334,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx + xRight * scaleX, cy - yRight * scaleY);
       ctx.stroke();
 
-      // Point de contact (x0, y0)
       const ptX = cx + x0 * scaleX;
       const ptY = cy - y0 * scaleY;
       ctx.fillStyle = '#f43f5e';
@@ -174,7 +341,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.arc(ptX, ptY, 5, 0, Math.PI * 2);
       ctx.fill();
     } else if (type === 'riemann' || type === 'primitive' || type === 'techniques') {
-      // Somme de Riemann sous f(x) = 0.3 * x^2 + 0.5
       const originX = 60;
       const originY = height - 50;
       const scaleX = 80;
@@ -185,7 +351,6 @@ export default function InteractiveVisualizer({ type }) {
       const b = 3.5;
       const dx = (b - a) / riemannN;
 
-      // Axes
       ctx.strokeStyle = '#334155';
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -195,14 +360,13 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(originX, originY + 20);
       ctx.stroke();
 
-      // Rectangles de Riemann
       ctx.fillStyle = 'rgba(99, 102, 241, 0.35)';
       ctx.strokeStyle = '#818cf8';
       ctx.lineWidth = 1;
 
       for (let i = 0; i < riemannN; i++) {
         const xi = a + i * dx;
-        const rectH = f(xi + dx / 2); // point milieu
+        const rectH = f(xi + dx / 2);
         const rx = originX + xi * scaleX;
         const rw = dx * scaleX;
         const ry = originY - rectH * scaleY;
@@ -212,7 +376,6 @@ export default function InteractiveVisualizer({ type }) {
         ctx.strokeRect(rx, ry, rw, rh);
       }
 
-      // Courbe réelle
       ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
@@ -225,16 +388,13 @@ export default function InteractiveVisualizer({ type }) {
       }
       ctx.stroke();
     } else {
-      // Distribution normale N(0, 1)
       const cx = width / 2;
       const cy = height - 40;
       const scaleX = 55;
       const scaleY = 160;
 
-      // Courbe en cloche
       const phi = (x) => (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * x * x);
 
-      // Aire colorée P(X <= normZ)
       ctx.fillStyle = 'rgba(16, 185, 129, 0.35)';
       ctx.beginPath();
       ctx.moveTo(cx - 3.5 * scaleX, cy);
@@ -245,7 +405,6 @@ export default function InteractiveVisualizer({ type }) {
       ctx.closePath();
       ctx.fill();
 
-      // Tracé courbe
       ctx.strokeStyle = '#34d399';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
@@ -257,7 +416,6 @@ export default function InteractiveVisualizer({ type }) {
       }
       ctx.stroke();
 
-      // Ligne verticale au seuil Z
       ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -265,15 +423,13 @@ export default function InteractiveVisualizer({ type }) {
       ctx.lineTo(cx + normZ * scaleX, cy - phi(normZ) * scaleY);
       ctx.stroke();
     }
-  }, [type, ux, uy, vx, vy, tanX, riemannN, normZ]);
+  }, [type, slopeM, interceptB, trigAngleDeg, quadA, quadC, ux, uy, vx, vy, tanX, riemannN, normZ]);
 
-  // Valeurs calculées en temps réel
+  const radVal = ((trigAngleDeg * Math.PI) / 180).toFixed(2);
+  const cosDisplay = Math.cos((trigAngleDeg * Math.PI) / 180).toFixed(2);
+  const sinDisplay = Math.sin((trigAngleDeg * Math.PI) / 180).toFixed(2);
+
   const dotProduct = ux * vx + uy * vy;
-  const normU = Math.hypot(ux, uy).toFixed(2);
-  const normV = Math.hypot(vx, vy).toFixed(2);
-  const cosTheta = (dotProduct / (normU * normV || 1)).toFixed(3);
-  const angleDeg = (Math.acos(Math.max(-1, Math.min(1, cosTheta))) * 180 / Math.PI).toFixed(1);
-
   const mSlope = (1.5 * Math.pow(tanX, 2) - 2).toFixed(2);
   const fVal = (0.5 * Math.pow(tanX, 3) - 2 * tanX).toFixed(2);
 
@@ -281,14 +437,13 @@ export default function InteractiveVisualizer({ type }) {
     <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg">
       <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
         <div className="flex items-center gap-2 text-sm font-semibold text-slate-200">
-          <Sliders className="w-4 h-4 text-emerald-400" />
-          <span>Laboratoire Interactif & Visualisation</span>
+          <Sliders className="w-4 h-4 text-amber-400" />
+          <span>Laboratoire Visuel & Expérimentation</span>
         </div>
-        <span className="text-xs text-slate-400">Modifiez les curseurs en temps réel</span>
+        <span className="text-xs text-slate-400">Ajustez les paramètres en direct</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Canevas */}
         <div className="md:col-span-2 flex items-center justify-center bg-slate-950/70 rounded-lg p-2 border border-slate-800/60 overflow-hidden">
           <canvas
             ref={canvasRef}
@@ -298,9 +453,123 @@ export default function InteractiveVisualizer({ type }) {
           />
         </div>
 
-        {/* Panneau de contrôle */}
         <div className="flex flex-col justify-between text-xs space-y-3 bg-slate-950/40 p-3 rounded-lg border border-slate-800/40">
-          {type === 'vector2d' || type === 'vector3d' || type === 'planes' ? (
+          {type === 'line' || type === 'fractions' ? (
+            <div className="space-y-3">
+              <div>
+                <label className="flex justify-between text-sky-400 font-medium mb-1">
+                  <span>Pente m : {slopeM}</span>
+                </label>
+                <input
+                  type="range"
+                  min="-4"
+                  max="4"
+                  step="0.5"
+                  value={slopeM}
+                  onChange={(e) => setSlopeM(Number(e.target.value))}
+                  className="w-full accent-sky-500"
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-rose-400 font-medium mb-1">
+                  <span>Ordonnée à l'origine b : {interceptB}</span>
+                </label>
+                <input
+                  type="range"
+                  min="-5"
+                  max="5"
+                  step="1"
+                  value={interceptB}
+                  onChange={(e) => setInterceptB(Number(e.target.value))}
+                  className="w-full accent-rose-500"
+                />
+              </div>
+
+              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
+                <div className="flex justify-between text-indigo-300 font-bold">
+                  <span>Équation :</span>
+                  <span>y = {slopeM}x {interceptB >= 0 ? `+ ${interceptB}` : `- ${Math.abs(interceptB)}`}</span>
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  {slopeM > 0 ? '↗ Droite croissante (monte)' : slopeM < 0 ? '↘ Droite décroissante (descend)' : '→ Droite horizontale (constante)'}
+                </div>
+                <div className="text-[10px] text-amber-300">
+                  Le point rouge est (0, b), le vert est (1, m+b).
+                </div>
+              </div>
+            </div>
+          ) : type === 'trigcircle' ? (
+            <div className="space-y-3">
+              <div>
+                <label className="flex justify-between text-amber-400 font-medium mb-1">
+                  <span>Angle θ : {trigAngleDeg}° ({radVal} rad)</span>
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  step="5"
+                  value={trigAngleDeg}
+                  onChange={(e) => setTrigAngleDeg(Number(e.target.value))}
+                  className="w-full accent-amber-500"
+                />
+              </div>
+
+              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
+                <div className="flex justify-between text-sky-400">
+                  <span>cos(θ) [horizontal] :</span>
+                  <span className="font-bold">{cosDisplay}</span>
+                </div>
+                <div className="flex justify-between text-emerald-400">
+                  <span>sin(θ) [vertical] :</span>
+                  <span className="font-bold">{sinDisplay}</span>
+                </div>
+                <div className="text-[10px] text-slate-400 pt-1">
+                  Sur le cercle unité, tout angle θ donne un point de coordonnées (cos θ, sin θ).
+                </div>
+              </div>
+            </div>
+          ) : type === 'parabola' ? (
+            <div className="space-y-3">
+              <div>
+                <label className="flex justify-between text-amber-400 font-medium mb-1">
+                  <span>Courbure a : {quadA}</span>
+                </label>
+                <input
+                  type="range"
+                  min="-2"
+                  max="2"
+                  step="0.5"
+                  value={quadA}
+                  onChange={(e) => setQuadA(Number(e.target.value))}
+                  className="w-full accent-amber-500"
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-rose-400 font-medium mb-1">
+                  <span>Hauteur c : {quadC}</span>
+                </label>
+                <input
+                  type="range"
+                  min="-6"
+                  max="6"
+                  step="1"
+                  value={quadC}
+                  onChange={(e) => setQuadC(Number(e.target.value))}
+                  className="w-full accent-rose-500"
+                />
+              </div>
+
+              <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-300 font-mono">
+                <div>y = {quadA}x² {quadC >= 0 ? `+ ${quadC}` : `- ${Math.abs(quadC)}`}</div>
+                <div className="text-slate-400 text-[10px] mt-1">
+                  {quadA > 0 ? 'U Parabole vers le haut (minimum)' : quadA < 0 ? '∩ Parabole vers le bas (maximum)' : 'Droite'}
+                </div>
+              </div>
+            </div>
+          ) : type === 'vector2d' || type === 'vector3d' || type === 'planes' ? (
             <div className="space-y-3">
               <div>
                 <label className="flex justify-between text-emerald-400 font-medium mb-1">
@@ -361,10 +630,6 @@ export default function InteractiveVisualizer({ type }) {
                     {dotProduct} {dotProduct === 0 && '(Orthogonaux !)'}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Angle θ :</span>
-                  <span>{angleDeg}°</span>
-                </div>
                 <div className="flex justify-between text-amber-300 text-[11px]">
                   <span>Vecteur jaune :</span>
                   <span>Projection proj_v(u)</span>
@@ -375,7 +640,7 @@ export default function InteractiveVisualizer({ type }) {
             <div className="space-y-3">
               <div>
                 <label className="flex justify-between text-sky-400 font-medium mb-1">
-                  <span>Point d'évaluation x₀ : {tanX.toFixed(2)}</span>
+                  <span>Point x₀ : {tanX.toFixed(2)}</span>
                 </label>
                 <input
                   type="range"
@@ -390,21 +655,14 @@ export default function InteractiveVisualizer({ type }) {
 
               <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">f(x₀) :</span>
-                  <span className="text-slate-200">{fVal}</span>
-                </div>
-                <div className="flex justify-between">
                   <span className="text-slate-400">Pente f'(x₀) :</span>
                   <span className={`font-bold ${Math.abs(Number(mSlope)) < 0.1 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    {mSlope} {Math.abs(Number(mSlope)) < 0.1 && '(Extremum !)'}
+                    {mSlope}
                   </span>
-                </div>
-                <div className="text-[11px] text-slate-400 italic pt-1">
-                  La tangente rouge montre le taux de variation instantané en ce point.
                 </div>
               </div>
             </div>
-          ) : type === 'riemann' || type === 'primitive' || type === 'techniques' ? (
+          ) : (
             <div className="space-y-3">
               <div>
                 <label className="flex justify-between text-indigo-400 font-medium mb-1">
@@ -419,39 +677,6 @@ export default function InteractiveVisualizer({ type }) {
                   onChange={(e) => setRiemannN(Number(e.target.value))}
                   className="w-full accent-indigo-500"
                 />
-              </div>
-
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="text-[11px] text-slate-400">
-                  Quand N → ∞, la somme des rectangles converge exactement vers l'intégrale définie ∫ f(x)dx.
-                </div>
-                <div className="flex justify-between text-emerald-400 font-semibold pt-1">
-                  <span>Précision :</span>
-                  <span>{riemannN > 15 ? 'Excellente' : 'Approximation'}</span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              <div>
-                <label className="flex justify-between text-emerald-400 font-medium mb-1">
-                  <span>Seuil standard Z : {normZ.toFixed(2)}</span>
-                </label>
-                <input
-                  type="range"
-                  min="-3"
-                  max="3"
-                  step="0.1"
-                  value={normZ}
-                  onChange={(e) => setNormZ(Number(e.target.value))}
-                  className="w-full accent-emerald-500"
-                />
-              </div>
-
-              <div className="pt-2 border-t border-slate-800 space-y-1.5 font-mono text-slate-300">
-                <div className="text-[11px] text-slate-400">
-                  L'aire verte sous la courbe correspond à la probabilité cumulée P(X ≤ Z).
-                </div>
               </div>
             </div>
           )}
